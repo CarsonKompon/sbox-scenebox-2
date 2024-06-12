@@ -1,0 +1,77 @@
+{
+  "RootObject": {
+    "__guid": "53356132-e6c5-46f3-90e7-8914ad69fce2",
+    "Flags": 0,
+    "Name": "knife_v",
+    "Tags": "player,viewmodel",
+    "Enabled": true,
+    "NetworkMode": 0,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Facepunch.ViewModel",
+        "__guid": "17a6a7f7-7ea8-4d8f-869d-21a15b2e858d",
+        "Arms": {
+          "_type": "component",
+          "component_id": "85b1f490-8fe5-4804-9843-b69b9901a5d8",
+          "go": "12635a27-971b-4bde-9ba3-13c7ca7996d7",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "IsThrowable": false,
+        "ModelRenderer": {
+          "_type": "component",
+          "component_id": "a65e9fbe-236a-4b92-a8b8-26400da3b536",
+          "go": "53356132-e6c5-46f3-90e7-8914ad69fce2",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "ThrowableType": "HEGrenade"
+      },
+      {
+        "__type": "Sandbox.SkinnedModelRenderer",
+        "__guid": "a65e9fbe-236a-4b92-a8b8-26400da3b536",
+        "BodyGroups": 18446744073709551615,
+        "CreateBoneObjects": false,
+        "Model": "models/weapons/sbox_melee_trenchknife/v_trenchknife.vmdl",
+        "RenderType": "Off",
+        "Tint": "1,1,1,1",
+        "UseAnimGraph": true
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "12635a27-971b-4bde-9ba3-13c7ca7996d7",
+        "Flags": 0,
+        "Name": "Object",
+        "Enabled": true,
+        "NetworkMode": 0,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "85b1f490-8fe5-4804-9843-b69b9901a5d8",
+            "BodyGroups": 18446744073709551383,
+            "BoneMergeTarget": {
+              "_type": "component",
+              "component_id": "a65e9fbe-236a-4b92-a8b8-26400da3b536",
+              "go": "53356132-e6c5-46f3-90e7-8914ad69fce2",
+              "component_type": "SkinnedModelRenderer"
+            },
+            "CreateBoneObjects": false,
+            "Model": "models/first_person/first_person_arms.vmdl",
+            "RenderType": "Off",
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "facepunch.v_trenchknife"
+  ],
+  "__version": 1
+}

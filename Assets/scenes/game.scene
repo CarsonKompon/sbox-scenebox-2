@@ -1,0 +1,98 @@
+{
+  "__guid": "493d58c2-7228-4471-a454-cd62f53b7d41",
+  "GameObjects": [
+    {
+      "__guid": "9d7e9196-6f6e-4de6-a95c-a3d0f74d3f66",
+      "Flags": 0,
+      "Name": "Game Manager",
+      "Position": "-131.6942,-107.1172,-4.868141",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.NetworkHelper",
+          "__guid": "79d33632-5533-4f32-b390-d68a809232bf",
+          "PlayerPrefab": {
+            "_type": "gameobject",
+            "prefab": "prefabs/player.prefab"
+          },
+          "SpawnPoints": [],
+          "StartServer": true
+        }
+      ]
+    },
+    {
+      "__guid": "9109cdf6-17dc-41f3-b0f7-c7c9bff8fcb9",
+      "Flags": 0,
+      "Name": "Main Camera",
+      "Position": "-300,0,100",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.CameraComponent",
+          "__guid": "03baf189-6a15-4cc7-9404-08457f4dc3a3",
+          "BackgroundColor": "0.33333,0.46275,0.52157,1",
+          "ClearFlags": "All",
+          "FieldOfView": 80,
+          "IsMainCamera": true,
+          "Orthographic": false,
+          "OrthographicHeight": 1204,
+          "Priority": 1,
+          "RenderExcludeTags": "",
+          "RenderTags": "",
+          "TargetEye": "None",
+          "Viewport": "0,0,1,1",
+          "ZFar": 10000,
+          "ZNear": 10
+        }
+      ]
+    },
+    {
+      "__guid": "faa84601-8c46-4370-a9bf-448c85dd166e",
+      "Flags": 0,
+      "Name": "Map Instance",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "dfa455ba-730e-4306-b07f-e13055d850ad",
+          "MapName": "facepunch.construct23",
+          "UseMapFromLaunch": true
+        }
+      ],
+      "Children": []
+    }
+  ],
+  "SceneProperties": {
+    "FixedUpdateFrequency": 50,
+    "MaxFixedUpdates": 5,
+    "NetworkFrequency": 30,
+    "NetworkInterpolation": true,
+    "ThreadedAnimation": true,
+    "TimeScale": 1,
+    "UseFixedUpdate": true,
+    "NavMesh": {
+      "Enabled": false,
+      "IncludeStaticBodies": true,
+      "IncludeKeyframedBodies": true,
+      "EditorAutoUpdate": true,
+      "AgentHeight": 64,
+      "AgentRadius": 16,
+      "AgentStepSize": 18,
+      "AgentMaxSlope": 40,
+      "ExcludedBodies": "",
+      "IncludedBodies": ""
+    }
+  },
+  "Title": "Carson\u0027s Mod",
+  "Description": "",
+  "LastSaved": "2024-06-12T19:32:21.7477561-04:00",
+  "ResourceVersion": 1,
+  "__references": [],
+  "__version": 1
+}
