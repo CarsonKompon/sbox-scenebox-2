@@ -60,6 +60,16 @@
         },
         "Volume": 1,
         "WorldspacePlayback": true
+      },
+      {
+        "__type": "Scenebox.PlayerDresser",
+        "__guid": "627a3b36-3f5e-4ae5-9a79-5134bd29a231",
+        "BodyRenderer": {
+          "_type": "component",
+          "component_id": "2f1a9d0d-d0ae-42b9-96e7-754642749f65",
+          "go": "612596a2-7b52-437f-807c-21925aa27997",
+          "component_type": "SkinnedModelRenderer"
+        }
       }
     ],
     "Children": [

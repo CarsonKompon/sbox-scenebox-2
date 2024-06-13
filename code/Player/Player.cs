@@ -23,11 +23,31 @@ public sealed class Player : Component
 	[Sync] public float Height { get; set; } = 1f;
 	public float CrouchHeight = 64f;
 
-	public bool IsFirstPerson = true;
+	public bool IsFirstPerson
+	{
+		get => _isFirstPerson;
+		set
+		{
+			_isFirstPerson = value;
+
+			var renderers = AnimationHelper.GameObject.Components.GetAll<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+			foreach ( var renderer in renderers )
+			{
+				renderer.RenderType = _isFirstPerson ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
+			}
+
+		}
+	}
+	bool _isFirstPerson = true;
 	[Sync] public bool IsCrouching { get; set; } = false;
 	[Sync] public bool IsSprinting { get; set; } = false;
 	[Sync] public Vector3 WishVelocity { get; set; } = Vector3.Zero;
 	[Sync] public Angles Direction { get; set; } = Angles.Zero;
+
+	protected override void OnStart()
+	{
+		IsFirstPerson = true;
+	}
 
 	protected override void OnUpdate()
 	{
@@ -128,7 +148,7 @@ public sealed class Player : Component
 		if ( !IsFirstPerson )
 		{
 			var camForward = eyeAngles.Forward;
-			var camTrace = Scene.Trace.Ray( camPos, camPos - (camForward * 250) )
+			var camTrace = Scene.Trace.Ray( camPos, camPos - (camForward * 150) )
 				.WithoutTags( "player", "trigger" )
 				.Run();
 
@@ -140,12 +160,6 @@ public sealed class Player : Component
 			{
 				camPos = camTrace.EndPosition;
 			}
-
-			AnimationHelper.Target.RenderType = ModelRenderer.ShadowRenderType.On;
-		}
-		else
-		{
-			AnimationHelper.Target.RenderType = ModelRenderer.ShadowRenderType.ShadowsOnly;
 		}
 
 		Scene.Camera.Transform.Position = camPos;
