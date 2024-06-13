@@ -1,0 +1,59 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@namespace Scenebox
+@attribute [StyleSheet]
+
+<root class="spawnpage columned">
+    <div class="search-container">
+        <TextEntry @ref="SearchEntry" onsubmit=@Search Placeholder="Search..." />
+        <div class="folderlist">
+
+        </div>
+    </div>
+    <div class="canvas">
+        @foreach (var model in ModelList)
+        {
+            <LocalModelEntry Model=@model />
+        }
+    </div>
+</root>
+
+@code
+{
+    TextEntry SearchEntry;
+    string SelectedFolder = "";
+    string SearchQuery = "";
+    List<Model> ModelList = new();
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        if (firstTime)
+        {
+            Search();
+        }
+    }
+
+    void Search()
+    {
+        SearchQuery = SearchEntry.Text;
+        ModelList.Clear();
+
+        var files = FileSystem.Mounted.FindFile(SelectedFolder, "*.vmdl_c", true);
+        foreach (var file in files)
+        {
+            if (string.IsNullOrWhiteSpace(file)) continue;
+            if (string.IsNullOrWhiteSpace(SearchQuery))
+            {
+                if (file.Contains("_lod0")) continue;
+                if (file.Contains("clothes")) continue;
+            }
+
+            var model = Model.Load(file);
+            if (model is not null)
+            {
+                ModelList.Add(model);
+            }
+        }
+    }
+}

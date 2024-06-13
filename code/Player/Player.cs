@@ -7,6 +7,19 @@ namespace Scenebox;
 
 public sealed class Player : Component
 {
+	public static Player Local
+	{
+		get
+		{
+			if ( !_local.IsValid() )
+			{
+				_local = Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault( x => x.Network.IsOwner );
+			}
+			return _local;
+		}
+	}
+	private static Player _local;
+
 	[RequireComponent] public CharacterController CharacterController { get; set; }
 	[RequireComponent] public Inventory Inventory { get; set; }
 
@@ -54,6 +67,7 @@ public sealed class Player : Component
 	[Sync] public Angles Direction { get; set; } = Angles.Zero;
 	[Sync] public CitizenAnimationHelper.HoldTypes CurrentHoldType { get; set; } = CitizenAnimationHelper.HoldTypes.None;
 
+	public bool CanMoveHead = true;
 	public ViewModel ViewModel => Components.Get<ViewModel>( FindMode.EverythingInSelfAndDescendants );
 
 	protected override void OnStart()
@@ -68,12 +82,19 @@ public sealed class Player : Component
 			IsSprinting = Input.Down( "Run" );
 			if ( Input.Pressed( "Jump" ) ) Jump();
 
+			if ( Inventory.CurrentWeapon is not null )
+			{
+				Inventory.CurrentWeapon.Update();
+			}
+
 			UpdateCamera();
 		}
 
 		UpdateCrouch();
 		UpdateAnimations();
 		RotateBody();
+
+		CanMoveHead = true;
 	}
 
 	protected override void OnFixedUpdate()
@@ -83,6 +104,11 @@ public sealed class Player : Component
 		if ( !IsProxy )
 		{
 			if ( Input.Pressed( "View" ) ) IsFirstPerson = !IsFirstPerson;
+
+			if ( Inventory.CurrentWeapon is not null )
+			{
+				Inventory.CurrentWeapon.FixedUpdate();
+			}
 
 			BuildWishVelocity();
 			Move();
@@ -124,7 +150,7 @@ public sealed class Player : Component
 
 		CharacterController.Punch( Vector3.Up * JumpForce );
 		OnJump?.Invoke();
-		BroadcastJump();
+		BroadcastJumpAnimation();
 	}
 
 	void BuildWishVelocity()
@@ -152,8 +178,11 @@ public sealed class Player : Component
 	{
 		var eyeAngles = Head.Transform.Rotation.Angles();
 		var sens = Preferences.Sensitivity;
-		eyeAngles.pitch += Input.MouseDelta.y * sens / 100f;
-		eyeAngles.yaw -= Input.MouseDelta.x * sens / 100f;
+		if ( CanMoveHead )
+		{
+			eyeAngles.pitch += Input.MouseDelta.y * sens / 100f;
+			eyeAngles.yaw -= Input.MouseDelta.x * sens / 100f;
+		}
 		eyeAngles.roll = 0f;
 		eyeAngles.pitch = eyeAngles.pitch.Clamp( -89.9f, 89.9f );
 		Head.Transform.Rotation = eyeAngles;
@@ -224,9 +253,22 @@ public sealed class Player : Component
 		}
 	}
 
-	[Authority]
-	void BroadcastJump()
+	[Broadcast]
+	public void BroadcastSetVelocity( Vector3 velocity )
+	{
+		if ( IsProxy ) return;
+		CharacterController.Velocity = velocity;
+	}
+
+	[Broadcast]
+	void BroadcastJumpAnimation()
 	{
 		AnimationHelper?.TriggerJump();
+	}
+
+	[Broadcast]
+	internal void BroadcastAttackAnimation()
+	{
+		AnimationHelper?.Target?.Set( "b_attack", true );
 	}
 }

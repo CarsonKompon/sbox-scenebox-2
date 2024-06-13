@@ -115,6 +115,7 @@ public sealed class Inventory : Component
 		Assert.True( !IsProxy );
 		if ( !Weapons.Contains( weapon ) ) return;
 
+		CurrentWeapon = weapon;
 		weapon.Equip();
 	}
 

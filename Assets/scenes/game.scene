@@ -11,14 +11,36 @@
       "NetworkInterpolation": true,
       "Components": [
         {
-          "__type": "Sandbox.NetworkHelper",
-          "__guid": "79d33632-5533-4f32-b390-d68a809232bf",
+          "__type": "Scenebox.GameManager",
+          "__guid": "33e40800-8030-4e51-a41a-7cd7a7119604",
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
           },
-          "SpawnPoints": [],
-          "StartServer": true
+          "SpawnPoints": []
+        }
+      ]
+    },
+    {
+      "__guid": "151ad676-4df2-4350-993b-280843c300c0",
+      "Flags": 0,
+      "Name": "Screen Panel",
+      "Position": "154.1167,45.1605,-35.97688",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "6d1480e3-db30-4eb3-acfe-70c22ac36d05",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 100
+        },
+        {
+          "__type": "Scenebox.SpawnMenu",
+          "__guid": "71e0612d-1db2-44f9-ae8e-db95980e82f2"
         }
       ]
     },
@@ -54,6 +76,7 @@
       "__guid": "faa84601-8c46-4370-a9bf-448c85dd166e",
       "Flags": 0,
       "Name": "Map Instance",
+      "Tags": "map",
       "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
@@ -66,6 +89,247 @@
         }
       ],
       "Children": []
+    },
+    {
+      "__guid": "eb39d886-6bf2-430e-a507-e871d33ba88f",
+      "Flags": 0,
+      "Name": "storage_box_01",
+      "Position": "319.8598,280.4172,7.997559",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "cd930185-0a89-4a6c-b667-1086e4d6f9c3",
+          "BodyGroups": 18446744073709551615,
+          "Health": 5,
+          "IsStatic": false,
+          "Model": "models/props/trim_sheets/storage/storage_box_01.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "f97710bb-2bff-491d-8d0b-b47f9e84a185",
+      "Flags": 0,
+      "Name": "aircon_unit_large_128x64_a",
+      "Position": "239.3916,-160.3107,8.098572",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "16975c76-22c8-4d3d-adbe-e1f831235113",
+          "BodyGroups": 18446744073709551615,
+          "CreateBoneObjects": false,
+          "Model": "models/sbox_props/aircon_unit_large/aircon_unit_large_128x64_a.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
+        },
+        {
+          "__type": "Sandbox.ModelPhysics",
+          "__guid": "77a381e5-0f95-4a81-9c37-75048b51dd28",
+          "Locking": {},
+          "Model": "models/sbox_props/aircon_unit_large/aircon_unit_large_128x64_a.vmdl",
+          "Renderer": {
+            "_type": "component",
+            "component_id": "16975c76-22c8-4d3d-adbe-e1f831235113",
+            "go": "f97710bb-2bff-491d-8d0b-b47f9e84a185",
+            "component_type": "SkinnedModelRenderer"
+          },
+          "RigidbodyFlags": 0
+        }
+      ]
+    },
+    {
+      "__guid": "d6ae9eee-dcdd-442a-aab7-2b6794b9799a",
+      "Flags": 0,
+      "Name": "modern_shelving_b1",
+      "Position": "733.8701,666.8625,7.997561",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "bd2e1811-e1d7-4a7c-9bd4-b09536b9d22a",
+          "BodyGroups": 18446744073709551615,
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/props/trim_sheets/shelving/modern_shelving/modern_shelving_b1.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "acdc19fb-6262-4690-a079-0c045284401a",
+      "Flags": 0,
+      "Name": "mattress",
+      "Position": "292.3029,48.4035,8.31748",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SkinnedModelRenderer",
+          "__guid": "0c885c43-cc7c-468a-bbec-357a4cb90998",
+          "BodyGroups": 18446744073709551615,
+          "CreateBoneObjects": false,
+          "Model": "models/sbox_props/mattress/mattress.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1",
+          "UseAnimGraph": true
+        },
+        {
+          "__type": "Sandbox.ModelPhysics",
+          "__guid": "ec338955-f2de-4cca-a0e2-30ae113d991c",
+          "Locking": {},
+          "Model": "models/sbox_props/mattress/mattress.vmdl",
+          "Renderer": {
+            "_type": "component",
+            "component_id": "0c885c43-cc7c-468a-bbec-357a4cb90998",
+            "go": "acdc19fb-6262-4690-a079-0c045284401a",
+            "component_type": "SkinnedModelRenderer"
+          },
+          "RigidbodyFlags": 0
+        }
+      ]
+    },
+    {
+      "__guid": "761ca9b6-cc36-4a90-b2db-6b48a5732cc7",
+      "Flags": 0,
+      "Name": "cardboard_box",
+      "Position": "357.1401,488.5619,8.116138",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "6b39364b-d5d7-4705-8dfa-613bc7f312e5",
+          "BodyGroups": 18446744073709551615,
+          "Health": 15,
+          "IsStatic": false,
+          "Model": "models/sbox_props/cardboard_box/cardboard_box.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "a9c35852-3b39-4beb-b8ee-6c3faf56eac5",
+      "Flags": 0,
+      "Name": "wooden_crate",
+      "Position": "1088.72,696.3549,7.99756",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "4df46785-c47f-4dd9-93ac-84ce4e9ed142",
+          "BodyGroups": 18446744073709551615,
+          "Health": 50,
+          "IsStatic": false,
+          "Model": "models/sbox_props/wooden_crate/wooden_crate.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "77512f49-46cc-48b0-934c-e95a56faf426",
+      "Flags": 0,
+      "Name": "wooden_crate",
+      "Position": "531.1934,244.3071,7.99756",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "73e72fb5-77b6-40d2-aee9-fdefa25e8293",
+          "BodyGroups": 18446744073709551615,
+          "Health": 50,
+          "IsStatic": false,
+          "Model": "models/sbox_props/wooden_crate/wooden_crate.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "fad0b6cf-f4b3-4dba-8eed-e2ce7bd6f72c",
+      "Flags": 0,
+      "Name": "wooden_crate",
+      "Position": "441.6329,183.7708,7.99756",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "4986204f-644d-440e-8b1f-1d46721717f6",
+          "BodyGroups": 18446744073709551615,
+          "Health": 50,
+          "IsStatic": false,
+          "Model": "models/sbox_props/wooden_crate/wooden_crate.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
+    },
+    {
+      "__guid": "f3fec559-1464-423d-8b5d-b326f9654221",
+      "Flags": 0,
+      "Name": "wooden_crate",
+      "Position": "482.5735,133.1926,7.997575",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ModelRenderer",
+          "__guid": "6c5f4167-420c-4a56-ad3e-51ec8061887f",
+          "BodyGroups": 18446744073709551615,
+          "Model": "models/sbox_props/wooden_crate/wooden_crate.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "Sandbox.ModelCollider",
+          "__guid": "53e82fb9-7c12-4ce7-b3f1-6e22b58b5146",
+          "IsTrigger": false,
+          "Model": "models/sbox_props/wooden_crate/wooden_crate.vmdl",
+          "Static": false
+        },
+        {
+          "__type": "Sandbox.ModelPhysics",
+          "__guid": "cdd6463f-90f8-4861-867a-3d5d0f6b03e0",
+          "Locking": {},
+          "Model": "models/sbox_props/wooden_crate/wooden_crate.vmdl",
+          "RigidbodyFlags": 0
+        }
+      ]
+    },
+    {
+      "__guid": "44a9ab43-d0ea-4116-bd16-afcfef4df34a",
+      "Flags": 0,
+      "Name": "citizen",
+      "Position": "513.2325,-7.826477,8.032873",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.Prop",
+          "__guid": "ef0feb3f-4612-4fea-b6bd-d81c04864cf0",
+          "BodyGroups": 341,
+          "Health": 0,
+          "IsStatic": false,
+          "Model": "models/citizen/citizen.vmdl",
+          "Tint": "1,1,1,1"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -89,10 +353,17 @@
       "IncludedBodies": ""
     }
   },
-  "Title": "Carson\u0027s Mod",
+  "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-12T22:42:38.2791274-04:00",
+  "LastSaved": "2024-06-13T11:09:38.7990007-04:00",
   "ResourceVersion": 1,
-  "__references": [],
+  "__references": [
+    "facepunch.aircon_unit_large_128x64_a",
+    "facepunch.cardboard_box",
+    "facepunch.mattress",
+    "facepunch.modern_shelving_b1",
+    "facepunch.storage_box_01",
+    "facepunch.wooden_crate"
+  ],
   "__version": 1
 }

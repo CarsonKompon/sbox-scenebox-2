@@ -1,0 +1,30 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@namespace Scenebox
+
+<root class="cell" onclick=@Spawn Tooltip=@Model.ResourceName>
+    <Image Texture=@ThumbnailCache.Get(Model) />
+</root>
+
+@code
+{
+    public Model Model { get; set; }
+
+    void Spawn()
+    {
+        var localPlayer = Player.Local;
+
+        var tr = Scene.Trace.Ray(new Ray(localPlayer.Head.Transform.Position, localPlayer.Direction.Forward), 10_000)
+        .IgnoreGameObject(localPlayer.GameObject.Root)
+        .WithoutTags("trigger")
+        .Run();
+
+        var position = tr.Hit ? (tr.HitPosition + tr.Normal * Model.Bounds.Size.Length / 2f) : tr.EndPosition;
+        var rotation = Rotation.From(0, localPlayer.Direction.yaw, 0);
+
+        GameManager.Instance.SpawnModel(Model, position, rotation);
+    }
+
+    protected override int BuildHash() => System.HashCode.Combine(ThumbnailCache.Get(Model));
+}

@@ -1,0 +1,58 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Scenebox
+
+<root class="@(IsVisible ? "open" : "")">
+	<div class="left">
+		<div class="tabs">
+			<button onclick=@(() => SetActive(LocalModelsPanel)) class="@(SelectedPanel == LocalModelsPanel ? "active" : "")">
+				<img src="ui/silkicons/application_view_tile.png" />
+				Local Models
+			</button>
+			<button onclick=@(() => SetActive(CloudModelsPanel)) class="@(SelectedPanel == CloudModelsPanel ? "active" : "")">
+				<img src="ui/silkicons/brick.png" />
+				Cloud Models
+			</button>
+			<button onclick=@(() => SetActive(CloudPrefabsPanel)) class="@(SelectedPanel == CloudPrefabsPanel ? "active" : "")">
+				<img src="ui/silkicons/bricks.png" />
+				Cloud Prefabs
+			</button>
+		</div>
+		<div class="body">
+			<LocalModelList @ref="LocalModelsPanel" />
+			<div @ref="CloudModelsPanel" />
+			<div @ref="CloudPrefabsPanel" />
+		</div>
+	</div>
+	<div class="right">
+
+	</div>
+</root>
+
+@code
+{
+
+	Panel LocalModelsPanel;
+	Panel CloudModelsPanel;
+	Panel CloudPrefabsPanel;
+
+	Panel SelectedPanel;
+
+	public bool IsVisible => Input.Down("Menu");
+
+	protected override void OnTreeFirstBuilt()
+	{
+		SelectedPanel = LocalModelsPanel;
+	}
+
+	void SetActive(Panel panel)
+	{
+		LocalModelsPanel.SetClass("hidden", LocalModelsPanel != panel);
+		CloudModelsPanel.SetClass("hidden", CloudModelsPanel != panel);
+		CloudPrefabsPanel.SetClass("hidden", CloudPrefabsPanel != panel);
+		SelectedPanel = panel;
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine(SelectedPanel, IsVisible);
+}

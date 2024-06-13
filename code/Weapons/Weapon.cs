@@ -55,6 +55,16 @@ public class Weapon : Component
             OnUnequip();
     }
 
+    public virtual void Update()
+    {
+
+    }
+
+    public virtual void FixedUpdate()
+    {
+        
+    }
+
     [Authority]
     public void Equip()
     {
