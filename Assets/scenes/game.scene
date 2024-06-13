@@ -61,7 +61,7 @@
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "dfa455ba-730e-4306-b07f-e13055d850ad",
-          "MapName": "facepunch.construct23",
+          "MapName": "robitussin.gm_flatgrass",
           "UseMapFromLaunch": true
         }
       ],
@@ -91,7 +91,7 @@
   },
   "Title": "Carson\u0027s Mod",
   "Description": "",
-  "LastSaved": "2024-06-12T19:32:21.7477561-04:00",
+  "LastSaved": "2024-06-12T20:15:44.4178165-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

@@ -3,6 +3,7 @@
     "__guid": "ec129907-216d-4f31-8944-32757a4e87fa",
     "Flags": 0,
     "Name": "player",
+    "Tags": "player",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
@@ -27,8 +28,8 @@
           "go": "95c037f7-2b69-4506-8007-d46329234109"
         },
         "JumpForce": 400,
-        "RunSpeed": 290,
-        "Speed": 160,
+        "RunSpeed": 340,
+        "Speed": 180,
         "WalkSpeed": 90
       },
       {
@@ -92,6 +93,16 @@
             "HeadWeight": 1,
             "LookAtEnabled": false,
             "Target": {
+              "_type": "component",
+              "component_id": "2f1a9d0d-d0ae-42b9-96e7-754642749f65",
+              "go": "612596a2-7b52-437f-807c-21925aa27997",
+              "component_type": "SkinnedModelRenderer"
+            }
+          },
+          {
+            "__type": "Scenebox.FootstepSounds",
+            "__guid": "791132f1-97cc-456e-8b36-964a814541b5",
+            "Source": {
               "_type": "component",
               "component_id": "2f1a9d0d-d0ae-42b9-96e7-754642749f65",
               "go": "612596a2-7b52-437f-807c-21925aa27997",

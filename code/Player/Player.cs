@@ -1,3 +1,4 @@
+using System;
 using System.Net.Http;
 using Sandbox;
 using Sandbox.Citizen;
@@ -19,6 +20,9 @@ public sealed class Player : Component
 	[Property, Group( "Movement" )] public float WalkSpeed { get; set; } = 90f;
 	[Property, Group( "Movement" )] public float JumpForce { get; set; } = 400f;
 
+	[Sync] public float Height { get; set; } = 1f;
+	public float CrouchHeight = 64f;
+
 	public bool IsFirstPerson = true;
 	[Sync] public bool IsCrouching { get; set; } = false;
 	[Sync] public bool IsSprinting { get; set; } = false;
@@ -29,17 +33,25 @@ public sealed class Player : Component
 	{
 		if ( !IsProxy )
 		{
-			IsCrouching = Input.Down( "Duck" );
 			IsSprinting = Input.Down( "Run" );
+			if ( Input.Pressed( "Jump" ) ) Jump();
 
 			UpdateCamera();
+			UpdateCrouch();
 		}
+
+		UpdateAnimations();
+		RotateBody();
 	}
 
 	protected override void OnFixedUpdate()
 	{
+		CharacterController.Height = CrouchHeight * Height;
+
 		if ( !IsProxy )
 		{
+			if ( Input.Pressed( "View" ) ) IsFirstPerson = !IsFirstPerson;
+
 			BuildWishVelocity();
 			Move();
 		}
@@ -72,6 +84,14 @@ public sealed class Player : Component
 		{
 			CharacterController.Velocity += gravity * Time.Delta * 0.5f;
 		}
+	}
+
+	void Jump()
+	{
+		if ( !CharacterController.IsOnGround ) return;
+
+		CharacterController.Punch( Vector3.Up * JumpForce );
+		BroadcastJump();
 	}
 
 	void BuildWishVelocity()
@@ -131,5 +151,48 @@ public sealed class Player : Component
 		Scene.Camera.Transform.Position = camPos;
 		Scene.Camera.Transform.Rotation = eyeAngles;
 		Direction = eyeAngles;
+	}
+
+	void UpdateCrouch()
+	{
+		IsCrouching = Input.Down( "Duck" );
+		CrouchHeight = CrouchHeight.LerpTo( IsCrouching ? 32f : 64f, 1f - MathF.Pow( 0.5f, Time.Delta * 25f ) );
+		Head.Transform.LocalPosition = Head.Transform.LocalPosition.WithZ( CrouchHeight );
+	}
+
+	void UpdateAnimations()
+	{
+		if ( AnimationHelper is null ) return;
+
+		AnimationHelper.WithWishVelocity( WishVelocity );
+		AnimationHelper.WithVelocity( CharacterController.Velocity );
+		AnimationHelper.AimAngle = Head.Transform.Rotation;
+		AnimationHelper.IsGrounded = CharacterController.IsOnGround;
+		AnimationHelper.WithLook( Head.Transform.Rotation.Forward );
+		AnimationHelper.MoveStyle = CitizenAnimationHelper.MoveStyles.Run;
+		AnimationHelper.DuckLevel = IsCrouching ? 1f : 0f;
+	}
+
+	void RotateBody()
+	{
+		if ( Body is null ) return;
+
+		var targetAngle = new Angles( 0, Head.Transform.Rotation.Yaw(), 0 ).ToRotation();
+		float rotateDiff = Body.Transform.Rotation.Distance( targetAngle );
+
+		if ( rotateDiff > 50f || CharacterController.Velocity.Length > 10f )
+		{
+			Body.Transform.Rotation = Rotation.Lerp( Body.Transform.Rotation, targetAngle, Time.Delta * 10f );
+		}
+		else
+		{
+			Body.Transform.Rotation = targetAngle;
+		}
+	}
+
+	[Broadcast]
+	void BroadcastJump()
+	{
+		AnimationHelper?.TriggerJump();
 	}
 }
