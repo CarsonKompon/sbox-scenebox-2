@@ -54,6 +54,8 @@ public sealed class Player : Component
 	[Sync] public Angles Direction { get; set; } = Angles.Zero;
 	[Sync] public CitizenAnimationHelper.HoldTypes CurrentHoldType { get; set; } = CitizenAnimationHelper.HoldTypes.None;
 
+	public ViewModel ViewModel => Components.Get<ViewModel>( FindMode.EverythingInSelfAndDescendants );
+
 	protected override void OnStart()
 	{
 		IsFirstPerson = true;

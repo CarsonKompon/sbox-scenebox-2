@@ -4,9 +4,17 @@
   "Slot": 1,
   "HasAmmo": true,
   "ClipSize": 16,
-  "MainPrefab": null,
-  "ViewModelPrefab": null,
-  "WorldModel": null,
-  "__references": [],
+  "MainPrefab": {
+    "_type": "gameobject",
+    "prefab": "weapons/physgun/physgun_w.prefab"
+  },
+  "ViewModelPrefab": {
+    "_type": "gameobject",
+    "prefab": "weapons/physgun/physgun_v.prefab"
+  },
+  "WorldModel": "models/weapons/sbox_pistol_usp/w_usp.vmdl",
+  "__references": [
+    "facepunch.w_usp"
+  ],
   "__version": 0
 }

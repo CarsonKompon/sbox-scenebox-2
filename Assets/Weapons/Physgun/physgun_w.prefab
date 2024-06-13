@@ -3,14 +3,20 @@
     "__guid": "56fffd4a-7058-4879-b0c9-efc3e3bbce84",
     "Flags": 0,
     "Name": "physgun_w",
-    "Tags": "player",
+    "Tags": "player,particles",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Scenebox.Weapon",
-        "__guid": "9737bf89-fd3f-4e7a-b8ce-18e1cb51f58b",
+        "__type": "Scenebox.Physgun",
+        "__guid": "e7ee153b-0747-4668-804c-8e028bc0fd25",
+        "BeamParticles": {
+          "_type": "component",
+          "component_id": "eef0237a-e580-4473-8c57-6abbaff10fe1",
+          "go": "56fffd4a-7058-4879-b0c9-efc3e3bbce84",
+          "component_type": "LegacyParticleSystem"
+        },
         "HoldType": "Pistol",
         "ModelRenderer": {
           "_type": "component",
@@ -23,6 +29,24 @@
           "go": "d9f05d0a-08b1-4dd3-8945-728406235242"
         },
         "Resource": "weapons/physgun/physgun.weapon"
+      },
+      {
+        "__type": "Sandbox.LegacyParticleSystem",
+        "__guid": "eef0237a-e580-4473-8c57-6abbaff10fe1",
+        "__enabled": false,
+        "ControlPoints": [
+          {
+            "Value": "Vector3",
+            "StringCP": "0"
+          },
+          {
+            "Value": "Vector3",
+            "StringCP": "1"
+          }
+        ],
+        "Looped": false,
+        "Particles": "particles/physgun_beam.vpcf",
+        "PlaybackSpeed": 1
       }
     ],
     "Children": [
