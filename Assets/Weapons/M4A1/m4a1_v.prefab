@@ -35,6 +35,22 @@
         "ThrowableType": "HEGrenade"
       },
       {
+        "__type": "Scenebox.ViewModel",
+        "__guid": "9d9a8092-76bb-4863-be96-1a9f047971fe",
+        "Arms": {
+          "_type": "component",
+          "component_id": "fb235c71-917c-40f4-8b6e-e19cf3e75210",
+          "go": "719d259a-f296-4a92-ae85-7c7930cced26",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "ModelRenderer": {
+          "_type": "component",
+          "component_id": "b383d63d-87b2-4a34-9552-25f6781c5dd6",
+          "go": "f53ff74d-59ef-40fc-bae0-3ffc3c86d32e",
+          "component_type": "SkinnedModelRenderer"
+        }
+      },
+      {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "b383d63d-87b2-4a34-9552-25f6781c5dd6",
         "BodyGroups": 5203,
@@ -943,7 +959,8 @@
         "NetworkMode": 2,
         "NetworkInterpolation": true
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

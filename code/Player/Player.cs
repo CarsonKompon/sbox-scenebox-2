@@ -53,11 +53,8 @@ public sealed class Player : Component
 				renderer.RenderType = _isFirstPerson ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
 			}
 
-			var viewModel = Components.Get<ViewModel>( FindMode.EnabledInSelfAndDescendants );
-			if ( viewModel.IsValid() )
-			{
-				viewModel.SetVisible( _isFirstPerson );
-			}
+			if ( _isFirstPerson ) Inventory.CurrentWeapon.CreateViewModel();
+			else Inventory.CurrentWeapon.ClearViewModel();
 		}
 	}
 	bool _isFirstPerson = true;
@@ -82,7 +79,7 @@ public sealed class Player : Component
 			IsSprinting = Input.Down( "Run" );
 			if ( Input.Pressed( "Jump" ) ) Jump();
 
-			if ( Inventory.CurrentWeapon is not null )
+			if ( Inventory.CurrentWeapon.IsValid() )
 			{
 				Inventory.CurrentWeapon.Update();
 			}
@@ -105,7 +102,7 @@ public sealed class Player : Component
 		{
 			if ( Input.Pressed( "View" ) ) IsFirstPerson = !IsFirstPerson;
 
-			if ( Inventory.CurrentWeapon is not null )
+			if ( Inventory.CurrentWeapon.IsValid() )
 			{
 				Inventory.CurrentWeapon.FixedUpdate();
 			}

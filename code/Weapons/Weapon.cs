@@ -20,8 +20,7 @@ public class Weapon : Component
     public Player Owner => Scene.Directory.FindComponentByGuid( OwnerId ) as Player;
     [Sync] public Guid OwnerId { get; set; }
 
-    [Sync, Change( nameof( OnIsEquippedChanged ) )]
-    public bool IsEquipped { get; private set; }
+    [Sync] public bool IsEquipped { get; private set; }
 
     public int Ammo { get; set; } = 0;
     public int AmmoReserve { get; set; } = 0;
@@ -40,13 +39,10 @@ public class Weapon : Component
         }
     }
     private ViewModel _viewModel;
-
-    bool _wasEquipped = false;
     bool _hasStarted = false;
 
     protected override void OnStart()
     {
-        _wasEquipped = IsEquipped;
         _hasStarted = true;
 
         if ( IsEquipped )
@@ -55,15 +51,8 @@ public class Weapon : Component
             OnUnequip();
     }
 
-    public virtual void Update()
-    {
-
-    }
-
-    public virtual void FixedUpdate()
-    {
-        
-    }
+    public virtual void Update() { }
+    public virtual void FixedUpdate() { }
 
     [Authority]
     public void Equip()
@@ -82,6 +71,9 @@ public class Weapon : Component
 
         IsEquipped = true;
         Player.CurrentHoldType = HoldType;
+        GameObject.Enabled = true;
+
+        OnEquip();
     }
 
     [Authority]
@@ -90,24 +82,9 @@ public class Weapon : Component
         if ( !IsEquipped ) return;
 
         IsEquipped = false;
-    }
+        GameObject.Enabled = false;
 
-    private void OnIsEquippedChanged( bool oldValue, bool newValue )
-    {
-        if ( !_hasStarted ) return;
-        if ( IsEquipped == _wasEquipped ) return;
-
-        switch ( _wasEquipped )
-        {
-            case false when IsEquipped:
-                OnEquip();
-                break;
-            case true when !IsEquipped:
-                OnUnequip();
-                break;
-        }
-
-        _wasEquipped = IsEquipped;
+        OnUnequip();
     }
 
     public void ClearViewModel()

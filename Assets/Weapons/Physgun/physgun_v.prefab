@@ -13,14 +13,14 @@
         "__guid": "afe23018-c3b4-40da-a841-3e93ddda1cd1",
         "Arms": {
           "_type": "component",
-          "component_id": "1d9e3841-ac90-4825-9169-86d69c1483cd",
-          "go": "8a589723-0322-4c54-b3a5-bd743b1d0fc1",
+          "component_id": "3dc32fe0-9427-4f3f-92ff-3d9089931712",
+          "go": "cbcb29e0-67a4-45a6-9720-7a8a501e08bd",
           "component_type": "SkinnedModelRenderer"
         },
         "ModelRenderer": {
           "_type": "component",
-          "component_id": "3dc32fe0-9427-4f3f-92ff-3d9089931712",
-          "go": "cbcb29e0-67a4-45a6-9720-7a8a501e08bd",
+          "component_id": "1d9e3841-ac90-4825-9169-86d69c1483cd",
+          "go": "8a589723-0322-4c54-b3a5-bd743b1d0fc1",
           "component_type": "SkinnedModelRenderer"
         },
         "Muzzle": {

@@ -40,7 +40,8 @@
         "__type": "Scenebox.Inventory",
         "__guid": "35cecb4d-acdf-42f3-92f2-cfad81dc6036",
         "StartingWeapons": [
-          "weapons/physgun/physgun.weapon"
+          "weapons/physgun/physgun.weapon",
+          "weapons/m4a1/m4a1.weapon"
         ],
         "WeaponParent": {
           "_type": "gameobject",
