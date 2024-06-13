@@ -1,5 +1,7 @@
 FileTree, FileTreeEntry
 {
+    font-family: Verdana;
+    font-size: 14px;
     flex-direction: column;
     flex-shrink: 0;
 
@@ -11,6 +13,10 @@ FileTree, FileTreeEntry
     > div:not(.header)
     {
         flex-shrink: 0;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+        gap: 4px;
         
         i
         {
@@ -21,7 +27,7 @@ FileTree, FileTreeEntry
         &:hover
         {
             cursor: pointer;
-            background-color: rgba(white, 0.1);
+            background-color: rgba(grey, 0.1);
         }
 
         &.selected
@@ -47,7 +53,7 @@ FileTree, FileTreeEntry
 
             &:hover
             {
-                background-color: rgba(white, 0.1);
+                background-color: rgba(grey, 0.1);
             }
         }
     }

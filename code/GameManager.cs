@@ -14,7 +14,6 @@ public sealed class GameManager : Component, Component.INetworkListener
     protected override void OnAwake()
     {
         Instance = this;
-        ThumbnailCache.Clear();
     }
 
     protected override void OnUpdate()
@@ -73,6 +72,7 @@ public sealed class GameManager : Component, Component.INetworkListener
         {
             var prop = gameObject.Components.Create<Prop>();
             prop.Model = model;
+            gameObject.Components.Create<PropHelper>();
         }
         else
         {

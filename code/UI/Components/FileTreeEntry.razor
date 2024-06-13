@@ -6,7 +6,7 @@
 <root>
     @if (FileSystem.FindFile(Path, FileFilter, true).Count() > 0)
     {
-        <div class="@(Selected == Path ? "selected" : "")" onclick=@OpenClose><i>@(open ? "📂" : "📁")</i>@Dir</div>
+        <div class="@(Selected == Path ? "selected" : "")" onclick=@OpenClose><img src="ui/silkicons/folder.png" />@Dir</div>
         @if (open)
         {
             <FileTree FileSystem=@FileSystem Path=@Path ShowFiles=@ShowFiles FileFilter=@FileFilter OnFileSelect=@OnFileSelect OnFolderSelect=@OnFolderSelect />

@@ -1,13 +1,15 @@
 LocalModelList
 {
     flex-grow: 1;
+    font-family: Verdana;
+    font-size: 14px;
 
     .folderlist
     {
         .entry
         {
             flex-shrink: 0;
-            gap: 8px;
+            gap: 4px;
             pointer-events: all;
             cursor: pointer;
 
@@ -16,6 +18,11 @@ LocalModelList
                 background-position: center;
                 background-size: contain;
                 background-repeat: no-repeat;
+            }
+
+            &:hover
+            {
+                background-color: rgba(grey, 0.1);
             }
 
             &.selected

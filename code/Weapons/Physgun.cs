@@ -119,6 +119,7 @@ public class Physgun : Weapon
 
         var rootObject = tr.GameObject;
         if ( !rootObject.IsValid() ) return;
+        if ( rootObject.Tags.Has( "map" ) ) return;
 
         var physicsGroup = tr.Body.PhysicsGroup;
         if ( physicsGroup == null ) return;
@@ -198,7 +199,9 @@ public class Physgun : Weapon
         {
             if ( HeldBody.BodyType == PhysicsBodyType.Dynamic )
             {
-                HeldBody.BodyType = PhysicsBodyType.Keyframed;
+                HeldBody.BodyType = PhysicsBodyType.Static;
+                HeldBody.Velocity = 0;
+                HeldBody.AngularVelocity = 0;
             }
 
             if ( GrabbedObject.IsValid() )
