@@ -7,10 +7,12 @@ namespace Scenebox;
 
 public sealed class Player : Component
 {
-	[RequireComponent] CharacterController CharacterController { get; set; }
+	[RequireComponent] public CharacterController CharacterController { get; set; }
+	[RequireComponent] public Inventory Inventory { get; set; }
 
 	[Property, Group( "References" )] public GameObject Head { get; set; }
 	[Property, Group( "References" )] public GameObject Body { get; set; }
+	[Property, Group( "References" )] public GameObject FirstPersonView { get; set; }
 	[Property, Group( "References" )] public CitizenAnimationHelper AnimationHelper { get; set; }
 
 	[Property, Group( "Movement" )] public float GroundControl { get; set; } = 4.0f;
@@ -19,6 +21,8 @@ public sealed class Player : Component
 	[Property, Group( "Movement" )] public float RunSpeed { get; set; } = 290f;
 	[Property, Group( "Movement" )] public float WalkSpeed { get; set; } = 90f;
 	[Property, Group( "Movement" )] public float JumpForce { get; set; } = 400f;
+
+	public Action OnJump;
 
 	[Sync] public float Height { get; set; } = 1f;
 	public float CrouchHeight = 64f;
@@ -57,9 +61,9 @@ public sealed class Player : Component
 			if ( Input.Pressed( "Jump" ) ) Jump();
 
 			UpdateCamera();
-			UpdateCrouch();
 		}
 
+		UpdateCrouch();
 		UpdateAnimations();
 		RotateBody();
 	}
@@ -111,6 +115,7 @@ public sealed class Player : Component
 		if ( !CharacterController.IsOnGround ) return;
 
 		CharacterController.Punch( Vector3.Up * JumpForce );
+		OnJump?.Invoke();
 		BroadcastJump();
 	}
 
@@ -169,7 +174,11 @@ public sealed class Player : Component
 
 	void UpdateCrouch()
 	{
-		IsCrouching = Input.Down( "Duck" );
+		if ( !IsProxy )
+		{
+			IsCrouching = Input.Down( "Duck" );
+		}
+
 		CrouchHeight = CrouchHeight.LerpTo( IsCrouching ? 32f : 64f, 1f - MathF.Pow( 0.5f, Time.Delta * 25f ) );
 		Head.Transform.LocalPosition = Head.Transform.LocalPosition.WithZ( CrouchHeight );
 	}
@@ -204,7 +213,7 @@ public sealed class Player : Component
 		}
 	}
 
-	[Broadcast]
+	[Authority]
 	void BroadcastJump()
 	{
 		AnimationHelper?.TriggerJump();

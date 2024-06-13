@@ -22,6 +22,10 @@
           "_type": "gameobject",
           "go": "612596a2-7b52-437f-807c-21925aa27997"
         },
+        "FirstPersonView": {
+          "_type": "gameobject",
+          "go": "f5b571f1-e056-4385-9422-1231e0b548c8"
+        },
         "GroundControl": 4,
         "Head": {
           "_type": "gameobject",
@@ -1065,7 +1069,18 @@
         "Position": "0,0,60",
         "Enabled": true,
         "NetworkMode": 2,
-        "NetworkInterpolation": true
+        "NetworkInterpolation": true,
+        "Children": [
+          {
+            "__guid": "f5b571f1-e056-4385-9422-1231e0b548c8",
+            "Flags": 0,
+            "Name": "First Person View",
+            "Position": "0,0,0",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true
+          }
+        ]
       },
       {
         "__guid": "55aa5245-c347-4da5-8c57-a3dc74df3800",
