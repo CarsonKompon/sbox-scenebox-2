@@ -2,6 +2,29 @@ LocalModelList
 {
     flex-grow: 1;
 
+    .folderlist
+    {
+        .entry
+        {
+            flex-shrink: 0;
+            gap: 8px;
+            pointer-events: all;
+            cursor: pointer;
+
+            img
+            {
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            &.selected
+            {
+                background-color: rgba(blue, 0.3);
+            }
+        }
+    }
+
     .canvas
     {
         flex-direction: row;

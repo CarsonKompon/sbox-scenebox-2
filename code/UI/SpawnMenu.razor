@@ -39,11 +39,19 @@
 
 	Panel SelectedPanel;
 
-	public bool IsVisible => Input.Down("Menu");
+	public bool IsVisible => Input.Down("Menu") || Panel.Children.Any(x => x.HasFocus);
 
 	protected override void OnTreeFirstBuilt()
 	{
 		SelectedPanel = LocalModelsPanel;
+	}
+
+	protected override void OnFixedUpdate()
+	{
+		if (Input.Pressed("Attack1"))
+		{
+			Panel.Blur();
+		}
 	}
 
 	void SetActive(Panel panel)

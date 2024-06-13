@@ -6,9 +6,13 @@
 
 <root class="spawnpage columned">
     <div class="search-container">
-        <TextEntry @ref="SearchEntry" onsubmit=@Search Placeholder="Search..." />
+        <TextEntry @ref="SearchEntry" OnTextEdited=@Search Placeholder="Search..." />
         <div class="folderlist">
-
+            <div class="entry @(SelectedFolder == "" ? "selected" : "")" onclick=@ResetFolder>
+                <img src="ui/silkicons/bricks.png" />
+                All Models
+            </div>
+            <FileTree class="root-file-tree" FileFilter="*.vmdl_c" Selected=@(SelectedFolder) Root=@(true) FileSystem=@(FileSystem.Mounted) Path=@("") ShowFiles=@(false) OnFolderSelect=@OnFolderSelect />
         </div>
     </div>
     <div class="canvas">
@@ -30,14 +34,28 @@
     {
         if (firstTime)
         {
-            Search();
+            Search("");
         }
     }
 
-    void Search()
+    void OnFolderSelect(string folderPath)
     {
-        SearchQuery = SearchEntry.Text;
+        SelectedFolder = folderPath;
+        Search(SearchQuery);
+    }
+
+    void ResetFolder()
+    {
+        SelectedFolder = "";
+        Search(SearchQuery);
+    }
+
+    void Search(string value)
+    {
+        SearchQuery = value;
         ModelList.Clear();
+
+        Log.Info(SelectedFolder);
 
         var files = FileSystem.Mounted.FindFile(SelectedFolder, "*.vmdl_c", true);
         foreach (var file in files)
@@ -48,8 +66,12 @@
                 if (file.Contains("_lod0")) continue;
                 if (file.Contains("clothes")) continue;
             }
+            else
+            {
+                if (!file.Contains(SearchQuery)) continue;
+            }
 
-            var model = Model.Load(file);
+            var model = Model.Load(SelectedFolder + file);
             if (model is not null)
             {
                 ModelList.Add(model);

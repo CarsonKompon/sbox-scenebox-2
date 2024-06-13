@@ -21,7 +21,7 @@
         .Run();
 
         var position = tr.Hit ? (tr.HitPosition + tr.Normal * Model.Bounds.Size.Length / 2f) : tr.EndPosition;
-        var rotation = Rotation.From(0, localPlayer.Direction.yaw, 0);
+        var rotation = Rotation.From(0, localPlayer.Direction.yaw + 180, 0);
 
         GameManager.Instance.SpawnModel(Model, position, rotation);
     }
