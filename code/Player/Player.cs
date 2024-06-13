@@ -40,6 +40,11 @@ public sealed class Player : Component
 				renderer.RenderType = _isFirstPerson ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
 			}
 
+			var viewModel = Components.Get<ViewModel>( FindMode.EnabledInSelfAndDescendants );
+			if ( viewModel.IsValid() )
+			{
+				viewModel.SetVisible( _isFirstPerson );
+			}
 		}
 	}
 	bool _isFirstPerson = true;
@@ -47,6 +52,7 @@ public sealed class Player : Component
 	[Sync] public bool IsSprinting { get; set; } = false;
 	[Sync] public Vector3 WishVelocity { get; set; } = Vector3.Zero;
 	[Sync] public Angles Direction { get; set; } = Angles.Zero;
+	[Sync] public CitizenAnimationHelper.HoldTypes CurrentHoldType { get; set; } = CitizenAnimationHelper.HoldTypes.None;
 
 	protected override void OnStart()
 	{
@@ -143,8 +149,9 @@ public sealed class Player : Component
 	void UpdateCamera()
 	{
 		var eyeAngles = Head.Transform.Rotation.Angles();
-		eyeAngles.pitch += Input.MouseDelta.y * 0.1f;
-		eyeAngles.yaw -= Input.MouseDelta.x * 0.1f;
+		var sens = Preferences.Sensitivity;
+		eyeAngles.pitch += Input.MouseDelta.y * sens / 100f;
+		eyeAngles.yaw -= Input.MouseDelta.x * sens / 100f;
 		eyeAngles.roll = 0f;
 		eyeAngles.pitch = eyeAngles.pitch.Clamp( -89.9f, 89.9f );
 		Head.Transform.Rotation = eyeAngles;
@@ -194,6 +201,8 @@ public sealed class Player : Component
 		AnimationHelper.WithLook( Head.Transform.Rotation.Forward );
 		AnimationHelper.MoveStyle = CitizenAnimationHelper.MoveStyles.Run;
 		AnimationHelper.DuckLevel = IsCrouching ? 1f : 0f;
+
+		AnimationHelper.HoldType = CurrentHoldType;
 	}
 
 	void RotateBody()

@@ -37,6 +37,17 @@
         "WalkSpeed": 90
       },
       {
+        "__type": "Scenebox.Inventory",
+        "__guid": "35cecb4d-acdf-42f3-92f2-cfad81dc6036",
+        "StartingWeapons": [
+          "weapons/physgun/physgun.weapon"
+        ],
+        "WeaponParent": {
+          "_type": "gameobject",
+          "go": "3598b5f0-ed77-4bb2-b552-74337fb019dc"
+        }
+      },
+      {
         "__type": "Sandbox.CharacterController",
         "__guid": "f7e97f73-c79e-4663-ac1d-baba1e3a372e",
         "Acceleration": 10,

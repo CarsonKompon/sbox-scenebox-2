@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Sandbox;
 using Sandbox.Diagnostics;
@@ -11,7 +12,18 @@ public sealed class Inventory : Component
 	public IEnumerable<Weapon> Weapons => Player.Components.GetAll<Weapon>( FindMode.EverythingInSelfAndDescendants );
 
 	[Property] public GameObject WeaponParent { get; set; }
+	[Property] List<WeaponResource> StartingWeapons { get; set; } = new();
 	public Weapon CurrentWeapon { get; private set; }
+
+	protected override void OnStart()
+	{
+		if ( IsProxy ) return;
+
+		foreach ( var weaponResource in StartingWeapons )
+		{
+			GiveWeapon( weaponResource );
+		}
+	}
 
 	protected override void OnUpdate()
 	{
@@ -126,6 +138,43 @@ public sealed class Inventory : Component
 
 		weapon.GameObject.Destroy();
 		weapon.Enabled = false;
+	}
+
+	public void RemoveWeapon( WeaponResource resource )
+	{
+		var weapon = Weapons.FirstOrDefault( w => w.Resource == resource );
+		if ( !weapon.IsValid() ) return;
+		RemoveWeapon( weapon );
+	}
+
+	public Weapon GiveWeapon( WeaponResource resource, bool makeActive = true )
+	{
+		if ( HasWeapon( resource ) ) return null;
+
+		if ( !resource.MainPrefab.IsValid() )
+		{
+			Log.Error( $"Weapon {resource.Name} has no MainPrefab" );
+			return null;
+		}
+
+		var weaponGameObject = resource.MainPrefab.Clone( new CloneConfig()
+		{
+			Transform = new(),
+			Parent = WeaponParent
+		} );
+
+		var weaponComponent = weaponGameObject.Components.Get<Weapon>( FindMode.EverythingInSelfAndDescendants );
+		weaponGameObject.NetworkSpawn( Player.Network.OwnerConnection );
+		weaponComponent.OwnerId = Player.Id;
+
+		if ( makeActive ) EquipWeapon( weaponComponent );
+
+		return weaponComponent;
+	}
+
+	public bool HasWeapon( WeaponResource resource )
+	{
+		return Weapons.Any( w => w.Enabled && w.Resource == resource );
 	}
 
 	[Broadcast]

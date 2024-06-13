@@ -20,6 +20,12 @@ public partial class ViewModel : Component
     private float YawInertia;
     private float PitchInertia;
 
+    public void SetVisible( bool visible )
+    {
+        ModelRenderer.Enabled = visible;
+        Arms.Enabled = visible;
+    }
+
     protected override void OnStart()
     {
         ModelRenderer?.Set( "b_deploy", true );
@@ -42,8 +48,8 @@ public partial class ViewModel : Component
 
         var scale = 1f; // TODO: View Bob Setting
 
-        camera.Transform.LocalPosition += bone.Position * scale;
-        camera.Transform.LocalRotation = bone.Rotation * scale;
+        localPosition += bone.Position * scale;
+        localRotation *= bone.Rotation * scale;
     }
 
     void ApplyInertia()
@@ -85,7 +91,7 @@ public partial class ViewModel : Component
         var moveVel = Player.CharacterController.Velocity;
         var moveLen = moveVel.Length;
 
-        var wishLook = Player.WishVelocity.Normal;
+        var wishLook = new Vector3( 0, Input.MouseDelta.x, Input.MouseDelta.y ) * 0.01f;
 
         if ( Player.IsCrouching ) moveLen *= 0.2f;
 

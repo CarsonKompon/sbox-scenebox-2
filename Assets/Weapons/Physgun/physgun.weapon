@@ -1,0 +1,12 @@
+{
+  "Name": "Weapon",
+  "Description": "A basic weapon",
+  "Slot": 1,
+  "HasAmmo": true,
+  "ClipSize": 16,
+  "MainPrefab": null,
+  "ViewModelPrefab": null,
+  "WorldModel": null,
+  "__references": [],
+  "__version": 0
+}

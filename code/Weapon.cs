@@ -6,7 +6,7 @@ namespace Scenebox;
 
 public class Weapon : Component
 {
-    public WeaponResource Resource { get; set; }
+    [Property] public WeaponResource Resource { get; set; }
 
     [Property] public SkinnedModelRenderer ModelRenderer { get; set; }
     [Property] protected CitizenAnimationHelper.HoldTypes HoldType { get; set; } = CitizenAnimationHelper.HoldTypes.Pistol;
@@ -71,6 +71,7 @@ public class Weapon : Component
         }
 
         IsEquipped = true;
+        Player.CurrentHoldType = HoldType;
     }
 
     [Authority]

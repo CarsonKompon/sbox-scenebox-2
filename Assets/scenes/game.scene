@@ -36,7 +36,7 @@
           "__guid": "03baf189-6a15-4cc7-9404-08457f4dc3a3",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
-          "FieldOfView": 80,
+          "FieldOfView": 90,
           "IsMainCamera": true,
           "Orthographic": false,
           "OrthographicHeight": 1204,
@@ -46,7 +46,7 @@
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
-          "ZNear": 10
+          "ZNear": 0.01
         }
       ]
     },
@@ -91,7 +91,7 @@
   },
   "Title": "Carson\u0027s Mod",
   "Description": "",
-  "LastSaved": "2024-06-12T20:15:44.4178165-04:00",
+  "LastSaved": "2024-06-12T21:59:49.4919048-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
