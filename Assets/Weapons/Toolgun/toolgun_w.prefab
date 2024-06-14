@@ -9,14 +9,8 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Scenebox.Physgun",
-        "__guid": "e7ee153b-0747-4668-804c-8e028bc0fd25",
-        "BeamParticles": {
-          "_type": "component",
-          "component_id": "eef0237a-e580-4473-8c57-6abbaff10fe1",
-          "go": "14fec249-7523-4dc1-878f-b3795f5dc202",
-          "component_type": "LegacyParticleSystem"
-        },
+        "__type": "Scenebox.Toolgun",
+        "__guid": "cde37568-b873-4e81-a1cf-afa27e827908",
         "HoldType": "Pistol",
         "ModelRenderer": {
           "_type": "component",

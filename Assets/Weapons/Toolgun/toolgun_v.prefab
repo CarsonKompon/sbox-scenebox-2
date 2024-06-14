@@ -321,6 +321,41 @@
                                     "RenderType": "On",
                                     "Tint": "1,1,1,1",
                                     "UseAnimGraph": true
+                                  },
+                                  {
+                                    "__type": "Scenebox.MonitorComponent",
+                                    "__guid": "d934f851-2d46-4f87-8516-eb97f39cdf96",
+                                    "AttributeName": "",
+                                    "DebugDraw": false,
+                                    "MaterialName": "screen_fp",
+                                    "MaxUpdatesPerSecond": 15,
+                                    "Model": {
+                                      "_type": "component",
+                                      "component_id": "483dd8a2-1428-4ab4-934f-eed8d3822e5b",
+                                      "go": "2b242031-1de2-40d8-b2f9-7a153dfb49f4",
+                                      "component_type": "SkinnedModelRenderer"
+                                    },
+                                    "ScreenMaterial": "materials/toolgun_screen.vmat"
+                                  },
+                                  {
+                                    "__type": "Scenebox.TexturePanel",
+                                    "__guid": "6f65b5f5-622a-46e9-b2da-83e928bbeea7",
+                                    "CurrentPanelBounds": {},
+                                    "CurrentPanelScale": 0,
+                                    "CurrentPanelScaleFromScreen": 0,
+                                    "CurrentPanelScaleToScreen": 0,
+                                    "CurrentScreenSize": "878,494",
+                                    "CustomPanelBounds": {
+                                      "Size": "256,256"
+                                    },
+                                    "MarginPercent": 0,
+                                    "TextureTarget": {
+                                      "_type": "component",
+                                      "component_id": "d934f851-2d46-4f87-8516-eb97f39cdf96",
+                                      "go": "2b242031-1de2-40d8-b2f9-7a153dfb49f4",
+                                      "component_type": "MonitorComponent"
+                                    },
+                                    "UseScreenBounds": false
                                   }
                                 ],
                                 "Children": [
@@ -332,6 +367,22 @@
                                     "Enabled": true,
                                     "NetworkMode": 2,
                                     "NetworkInterpolation": true
+                                  },
+                                  {
+                                    "__guid": "fb9be05c-fe17-436a-8a17-3013be441f72",
+                                    "Flags": 0,
+                                    "Name": "Object",
+                                    "Position": "0,0,0",
+                                    "Enabled": true,
+                                    "NetworkMode": 2,
+                                    "NetworkInterpolation": true,
+                                    "Components": [
+                                      {
+                                        "__type": "Scenebox.ToolgunScreen",
+                                        "__guid": "05c6bf93-b888-4738-a868-62c518a77c0c",
+                                        "MyStringValue": "Hello World!"
+                                      }
+                                    ]
                                   }
                                 ]
                               }

@@ -39,7 +39,7 @@ public class Physgun : Weapon
     {
         base.OnUpdate();
 
-        if ( BeamActive )
+        if ( BeamActive && IsEquipped )
         {
             BeamParticles.Enabled = true;
             UpdateBeam();
@@ -108,6 +108,7 @@ public class Physgun : Weapon
 
     protected override void OnDestroy()
     {
+        BeamParticles.Enabled = false;
         GrabEnd();
     }
 
@@ -339,12 +340,14 @@ public class Physgun : Weapon
 
     void UpdateBeam()
     {
+        if ( !IsEquipped ) return;
+
         var startPos = Muzzle.Transform.Position;
 
         var viewModel = Player.ViewModel;
         if ( Player.IsFirstPerson && viewModel.IsValid() )
         {
-            startPos = viewModel.Muzzle.Transform.Position;
+            startPos = viewModel?.Muzzle?.Transform?.Position ?? startPos;
         }
 
         var endPos = lastBeamPosition;

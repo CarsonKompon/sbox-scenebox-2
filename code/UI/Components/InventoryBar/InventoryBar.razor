@@ -7,7 +7,7 @@
 <root class="@(IsVisible ? "" : "hidden")">
     @for (int i = 0; i < 9; i++)
     {
-        <div class="slot @(((Inventory?.CurrentWeapon?.Resource?.Slot ?? 0) == (i + 1)) ? "active" : "")">
+        <div class="slot @(((Inventory?.HoveredWeapon?.Resource?.Slot ?? 0) == (i + 1)) ? "active" : "")">
             @if (true)
             {
                 var weapons = Inventory.Weapons.Where(x => x.Resource.Slot == i + 1);
@@ -15,7 +15,7 @@
                 {
                     foreach (var weapon in weapons)
                     {
-                        <InventoryBarEntry class="@(Inventory.CurrentWeapon == weapon ? "active" : "")" Slot=@(i + 1) Weapon=@weapon />
+                        <InventoryBarEntry class="@(Inventory.HoveredWeapon == weapon ? "active" : "")" Slot=@(i + 1) Weapon=@weapon />
                     }
                 }
                 else
@@ -30,34 +30,7 @@
 @code
 {
     public Inventory Inventory { get; set; }
+    bool IsVisible => (Inventory?.timeSinceLastHover ?? 10) < 3f;
 
-    RealTimeSince timeSinceLastWeaponChange = 10;
-
-    bool IsVisible => timeSinceLastWeaponChange < 3f;
-
-    protected override void OnAfterTreeRender(bool firstTime)
-    {
-        if (firstTime)
-        {
-            Inventory.OnWeaponEquipped += OnWeaponEquipped;
-        }
-    }
-
-    private void OnWeaponEquipped(Weapon weapon)
-    {
-        Sound.Play("ui.gmod.weapon.hover");
-        timeSinceLastWeaponChange = 0;
-    }
-
-    public override void OnDeleted()
-    {
-        base.OnDeleted();
-
-        if (Inventory != null)
-        {
-            Inventory.OnWeaponEquipped -= OnWeaponEquipped;
-        }
-    }
-
-    protected override int BuildHash() => System.HashCode.Combine(IsVisible, Inventory?.CurrentWeapon, Inventory?.CurrentWeapon?.Resource?.Slot);
+    protected override int BuildHash() => System.HashCode.Combine(IsVisible, Inventory?.HoveredIndex);
 }

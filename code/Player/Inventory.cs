@@ -17,6 +17,10 @@ public sealed class Inventory : Component
 
 	public Action<Weapon> OnWeaponEquipped { get; set; }
 
+	public int HoveredIndex { get; private set; } = 0;
+	public Weapon HoveredWeapon => (HoveredIndex >= 0 && HoveredIndex < Weapons.Count()) ? Weapons.OrderBy( x => x.Resource.Slot ).ElementAt( HoveredIndex ) : null;
+	public TimeSince timeSinceLastHover { get; private set; } = 10;
+
 	protected override void OnStart()
 	{
 		if ( IsProxy ) return;
@@ -39,38 +43,48 @@ public sealed class Inventory : Component
 
 	public void CheckWeaponSwap()
 	{
-		var wheel = Input.MouseWheel;
+		if ( timeSinceLastHover < 3f && Input.Pressed( "Attack1" ) )
+		{
+			var weapon = HoveredWeapon;
+			if ( weapon.IsValid() )
+			{
+				EquipWeapon( weapon );
+			}
+			Sound.Play( "ui.gmod.weapon.selected" );
+			timeSinceLastHover = 10;
+			Input.ReleaseAction( "Attack1" );
+			return;
+		}
+		else if ( timeSinceLastHover > 3f && CurrentWeapon != HoveredWeapon )
+		{
+			HoveredIndex = Weapons.OrderBy( x => x.Resource.Slot ).ToList().IndexOf( CurrentWeapon );
+		}
+
+		for ( int i = 0; i < 10; i++ )
+		{
+			if ( Input.Pressed( $"Slot{i}" ) )
+			{
+				EquipSlot( i );
+				return;
+			}
+		}
+
+		var wheel = -Input.MouseWheel;
 
 		if ( Input.Pressed( "NextSlot" ) ) wheel.y = -1;
 		if ( Input.Pressed( "PrevSlot" ) ) wheel.y = 1;
 		if ( wheel.y == 0f ) return;
 
-		var availableWeapons = Weapons.OrderBy( x => x.Resource.Slot ).ToList();
-		var weaponCount = availableWeapons.Count();
-		if ( weaponCount == 0 ) return;
-
-		var currentSlot = 0;
-		for ( var index = 0; index < weaponCount; index++ )
-		{
-			var weapon = availableWeapons[index];
-			if ( !weapon.IsEquipped ) continue;
-
-			currentSlot = index;
-			break;
-		}
-
 		var slotDelta = wheel.y > 0 ? 1 : -1;
-		currentSlot += slotDelta;
+		HoveredIndex += slotDelta;
 
-		if ( currentSlot < 0 )
-			currentSlot = weaponCount - 1;
-		else if ( currentSlot >= weaponCount )
-			currentSlot = 0;
+		if ( HoveredIndex < 0 )
+			HoveredIndex = Weapons.Count() - 1;
+		else if ( HoveredIndex >= Weapons.Count() )
+			HoveredIndex = 0;
 
-		var weaponToEquip = availableWeapons[currentSlot];
-		if ( weaponToEquip == CurrentWeapon ) return;
-
-		EquipWeapon( weaponToEquip );
+		Sound.Play( "ui.gmod.weapon.hover" );
+		timeSinceLastHover = 0;
 	}
 
 	public void Clear()
@@ -118,6 +132,7 @@ public sealed class Inventory : Component
 		CurrentWeapon = weapon;
 		weapon.Equip();
 		OnWeaponEquipped?.Invoke( weapon );
+		HoveredIndex = Weapons.OrderBy( x => x.Resource.Slot ).ToList().IndexOf( weapon );
 	}
 
 	public void RemoveWeapon( Weapon weapon )

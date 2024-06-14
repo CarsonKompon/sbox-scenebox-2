@@ -39,12 +39,8 @@
           "ZIndex": 100
         },
         {
-          "__type": "Scenebox.SpawnMenu",
-          "__guid": "71e0612d-1db2-44f9-ae8e-db95980e82f2"
-        },
-        {
           "__type": "Scenebox.PlayerHud",
-          "__guid": "4a9f388a-f788-48c5-b1df-f154e03c0780"
+          "__guid": "3ab39807-e7b9-4b1e-bd56-df3781ee3578"
         }
       ]
     },
@@ -121,7 +117,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-14T09:15:56.2746715-04:00",
+  "LastSaved": "2024-06-14T16:38:57.9757535-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

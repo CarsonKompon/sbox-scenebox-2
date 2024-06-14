@@ -124,7 +124,6 @@ InventoryBar
         {
             background-color: rgba(black, 0.5);
             height: 180px;
-            sound-in: ui.gmod.weapon.hover;
             transition: all 0.1s ease-out;
 
             .item-icon
@@ -148,7 +147,6 @@ InventoryBar
     &.hidden
     {
         opacity: 0;
-        sound-in: ui.gmod.weapon.selected;
     }
 
 }

@@ -52,7 +52,11 @@ public static class ThumbnailCache
 
         var texture = Texture.CreateRenderTarget().WithSize( 128, 128 ).Create();
         Graphics.RenderToTexture( sceneCamera, texture );
-
         cache[model] = texture;
+
+        sceneLight.Delete();
+        sceneCamera.Dispose();
+        sceneModel.Delete();
+        sceneWorld.Delete();
     }
 }
