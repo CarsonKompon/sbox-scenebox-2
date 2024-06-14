@@ -108,7 +108,6 @@ public sealed class GameManager : Component, Component.INetworkListener
     public void BroadcastAddHighlight( Guid objectId, Color color, Color obscuredColor, float width )
     {
         var obj = Scene.Directory.FindByGuid( objectId );
-        Log.Info( $"BroadcastAddHighlight: {obj}" );
         if ( obj.IsValid() )
         {
             var outline = obj.Components.GetOrCreate<HighlightOutline>();

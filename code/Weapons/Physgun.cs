@@ -31,14 +31,13 @@ public class Physgun : Weapon
     [Sync] public Guid GrabbedObjectId { get; set; }
     [Sync] public int GrabbedBone { get; set; }
     [Sync] public Vector3 GrabbedPosition { get; set; }
-
-    Vector3 lastBeamPosition = Vector3.Zero;
+    [Sync] Vector3 lastBeamPosition { get; set; } = Vector3.Zero;
 
     public GameObject GrabbedObject => (GrabbedObjectId == Guid.Empty) ? null : Scene.Directory.FindByGuid( GrabbedObjectId );
 
-    public override void Update()
+    protected override void OnUpdate()
     {
-        if ( !IsEquipped ) return;
+        base.OnUpdate();
 
         if ( BeamActive )
         {
@@ -49,7 +48,12 @@ public class Physgun : Weapon
         {
             BeamParticles.Enabled = false;
         }
+    }
 
+    public override void Update()
+    {
+
+        if ( !IsEquipped ) return;
         if ( IsProxy ) return;
 
         var eyePos = Player.Head.Transform.Position;

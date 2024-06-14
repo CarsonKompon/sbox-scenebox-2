@@ -17,7 +17,18 @@ public class Weapon : Component
 
     public Player Player => Components.Get<Player>( FindMode.EverythingInAncestors );
 
-    [Sync] public bool IsEquipped { get; private set; }
+    [Sync]
+    public bool IsEquipped
+    {
+        get => _isEquipped;
+        set
+        {
+            _isEquipped = value;
+
+            ModelRenderer.Enabled = _isEquipped;
+        }
+    }
+    bool _isEquipped;
 
     public int Ammo { get; set; } = 0;
     public int AmmoReserve { get; set; } = 0;
@@ -68,7 +79,6 @@ public class Weapon : Component
 
         IsEquipped = true;
         Player.CurrentHoldType = HoldType;
-        GameObject.Enabled = true;
 
         OnEquip();
     }
@@ -79,7 +89,6 @@ public class Weapon : Component
         if ( !IsEquipped ) return;
 
         IsEquipped = false;
-        GameObject.Enabled = false;
 
         OnUnequip();
     }

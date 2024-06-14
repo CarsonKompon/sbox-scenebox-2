@@ -9,7 +9,7 @@ namespace Scenebox;
 public sealed class Inventory : Component
 {
 	[RequireComponent] Player Player { get; set; }
-	public IEnumerable<Weapon> Weapons => Player.Components.GetAll<Weapon>( FindMode.EverythingInSelfAndDescendants );
+	public IEnumerable<Weapon> Weapons => Player.Components.GetAll<Weapon>( FindMode.EnabledInSelfAndDescendants );
 
 	[Property] public GameObject WeaponParent { get; set; }
 	[Property] List<WeaponResource> StartingWeapons { get; set; } = new();
@@ -139,7 +139,6 @@ public sealed class Inventory : Component
 		}
 
 		weapon.GameObject.Destroy();
-		weapon.Enabled = false;
 	}
 
 	public void RemoveWeapon( WeaponResource resource )
