@@ -7,7 +7,7 @@
       "Name": "Game Manager",
       "Position": "-131.6942,-107.1172,-4.868141",
       "Enabled": true,
-      "NetworkMode": 2,
+      "NetworkMode": 1,
       "NetworkInterpolation": true,
       "Components": [
         {
@@ -121,7 +121,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-13T18:06:04.9471398-04:00",
+  "LastSaved": "2024-06-14T09:15:56.2746715-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

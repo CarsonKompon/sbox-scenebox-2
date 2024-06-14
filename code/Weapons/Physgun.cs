@@ -120,11 +120,14 @@ public class Physgun : Weapon
         var rootObject = tr.GameObject;
         if ( !rootObject.IsValid() ) return;
         if ( rootObject.Tags.Has( "map" ) ) return;
+        if ( rootObject.Root.Tags.Has( GrabbedTag ) ) return;
 
         var physicsGroup = tr.Body.PhysicsGroup;
         if ( physicsGroup == null ) return;
 
         bool unfrozen = false;
+
+        rootObject.Root.Network.TakeOwnership();
 
         for ( int i = 0; i < physicsGroup.BodyCount; i++ )
         {

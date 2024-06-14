@@ -53,8 +53,8 @@ public sealed class Player : Component
 				renderer.RenderType = _isFirstPerson ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
 			}
 
-			if ( _isFirstPerson ) Inventory.CurrentWeapon.CreateViewModel();
-			else Inventory.CurrentWeapon.ClearViewModel();
+			if ( _isFirstPerson ) Inventory?.CurrentWeapon?.CreateViewModel();
+			else Inventory?.CurrentWeapon?.ClearViewModel();
 		}
 	}
 	bool _isFirstPerson = true;

@@ -53,7 +53,7 @@ public sealed class PropHelper : Component, Component.ICollisionListener
 
             return;
         }
-        
+
         foreach ( var body in Physics.PhysicsGroup.Bodies )
         {
             if ( body.GroupIndex == 0 ) continue;

@@ -87,10 +87,9 @@ public sealed class GameManager : Component, Component.INetworkListener
             gameObject.Components.Create<Rigidbody>();
         }
 
-        gameObject.NetworkSpawn( null );
+        gameObject.NetworkSpawn();
         gameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
         gameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
-        gameObject.Network.AssignOwnership( Rpc.Caller );
     }
 
     [Broadcast]
@@ -109,6 +108,7 @@ public sealed class GameManager : Component, Component.INetworkListener
     public void BroadcastAddHighlight( Guid objectId, Color color, Color obscuredColor, float width )
     {
         var obj = Scene.Directory.FindByGuid( objectId );
+        Log.Info( $"BroadcastAddHighlight: {obj}" );
         if ( obj.IsValid() )
         {
             var outline = obj.Components.GetOrCreate<HighlightOutline>();

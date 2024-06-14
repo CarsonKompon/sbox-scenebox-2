@@ -17,9 +17,6 @@ public class Weapon : Component
 
     public Player Player => Components.Get<Player>( FindMode.EverythingInAncestors );
 
-    public Player Owner => Scene.Directory.FindComponentByGuid( OwnerId ) as Player;
-    [Sync] public Guid OwnerId { get; set; }
-
     [Sync] public bool IsEquipped { get; private set; }
 
     public int Ammo { get; set; } = 0;

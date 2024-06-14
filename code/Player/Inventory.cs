@@ -167,7 +167,6 @@ public sealed class Inventory : Component
 
 		var weaponComponent = weaponGameObject.Components.Get<Weapon>( FindMode.EverythingInSelfAndDescendants );
 		weaponGameObject.NetworkSpawn( Player.Network.OwnerConnection );
-		weaponComponent.OwnerId = Player.Id;
 
 		if ( makeActive ) EquipWeapon( weaponComponent );
 
