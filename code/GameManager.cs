@@ -88,6 +88,9 @@ public sealed class GameManager : Component, Component.INetworkListener
         }
 
         gameObject.NetworkSpawn( null );
+        gameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+        gameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+        gameObject.Network.AssignOwnership( Rpc.Caller );
     }
 
     [Broadcast]

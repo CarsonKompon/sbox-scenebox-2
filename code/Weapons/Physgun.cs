@@ -262,7 +262,6 @@ public class Physgun : Weapon
         {
             GameManager.Instance.BroadcastRemoveTag( GrabbedObjectId, GrabbedTag );
             GameManager.Instance.BroadcastRemoveHighlight( GrabbedObjectId );
-            grabbedObject.Network.DropOwnership();
         }
 
         GrabbedObjectId = Guid.Empty;
