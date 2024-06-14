@@ -20,6 +20,8 @@ SpawnMenu
     height: 90%;
     gap: 8px;
 
+	z-index: 1000;
+
 	font-family: Verdana;
 
     .left, .right

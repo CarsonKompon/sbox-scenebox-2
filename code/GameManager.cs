@@ -68,6 +68,9 @@ public sealed class GameManager : Component, Component.INetworkListener
         var gameObject = new GameObject();
         gameObject.Name = model.ResourceName;
 
+        gameObject.Transform.Position = position;
+        gameObject.Transform.Rotation = rotation;
+
         if ( model.Physics?.Parts.Count() > 0 )
         {
             var prop = gameObject.Components.Create<Prop>();
@@ -84,9 +87,6 @@ public sealed class GameManager : Component, Component.INetworkListener
             gameObject.Components.Create<Rigidbody>();
         }
 
-        gameObject.Transform.Position = position;
-        gameObject.Transform.Rotation = rotation;
-
         gameObject.NetworkSpawn( null );
     }
 
@@ -100,5 +100,28 @@ public sealed class GameManager : Component, Component.INetworkListener
     public void BroadcastRemoveTag( Guid objectId, string tag )
     {
         Scene.Directory.FindByGuid( objectId )?.Tags?.Remove( tag );
+    }
+
+    [Broadcast]
+    public void BroadcastAddHighlight( Guid objectId, Color color, Color obscuredColor, float width )
+    {
+        var obj = Scene.Directory.FindByGuid( objectId );
+        if ( obj.IsValid() )
+        {
+            var outline = obj.Components.GetOrCreate<HighlightOutline>();
+            outline.Color = color;
+            outline.ObscuredColor = obscuredColor;
+            outline.Width = width;
+        }
+    }
+
+    [Broadcast]
+    public void BroadcastRemoveHighlight( Guid objectId )
+    {
+        var obj = Scene.Directory.FindByGuid( objectId );
+        if ( obj.IsValid() )
+        {
+            obj.Components.Get<HighlightOutline>()?.Destroy();
+        }
     }
 }

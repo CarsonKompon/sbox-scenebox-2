@@ -138,13 +138,12 @@ public class Weapon : Component
         if ( Player.IsValid() && Player.IsFirstPerson )
             CreateViewModel();
 
-        if ( ModelRenderer.IsValid() )
-            ModelRenderer.Enabled = true;
+        BroadcastSetVisible( true );
     }
 
     protected virtual void OnUnequip()
     {
-        if ( ModelRenderer.IsValid() ) ModelRenderer.Enabled = false;
+        BroadcastSetVisible( false );
 
         ClearViewModel();
     }
@@ -152,5 +151,11 @@ public class Weapon : Component
     protected override void OnDestroy()
     {
         ClearViewModel();
+    }
+
+    [Broadcast]
+    void BroadcastSetVisible( bool visible )
+    {
+        if ( ModelRenderer.IsValid() ) ModelRenderer.Enabled = visible;
     }
 }

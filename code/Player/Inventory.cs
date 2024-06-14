@@ -15,6 +15,8 @@ public sealed class Inventory : Component
 	[Property] List<WeaponResource> StartingWeapons { get; set; } = new();
 	public Weapon CurrentWeapon { get; private set; }
 
+	public Action<Weapon> OnWeaponEquipped { get; set; }
+
 	protected override void OnStart()
 	{
 		if ( IsProxy ) return;
@@ -33,11 +35,9 @@ public sealed class Inventory : Component
 		{
 			DropWeapon( CurrentWeapon.Id );
 		}
-
-		CheckWeaponSwap();
 	}
 
-	void CheckWeaponSwap()
+	public void CheckWeaponSwap()
 	{
 		var wheel = Input.MouseWheel;
 
@@ -117,6 +117,7 @@ public sealed class Inventory : Component
 
 		CurrentWeapon = weapon;
 		weapon.Equip();
+		OnWeaponEquipped?.Invoke( weapon );
 	}
 
 	public void RemoveWeapon( Weapon weapon )

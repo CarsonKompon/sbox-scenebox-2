@@ -64,12 +64,14 @@ public sealed class Player : Component
 	[Sync] public Angles Direction { get; set; } = Angles.Zero;
 	[Sync] public CitizenAnimationHelper.HoldTypes CurrentHoldType { get; set; } = CitizenAnimationHelper.HoldTypes.None;
 
+	public int Health { get; set; } = 100;
+
 	public bool CanMoveHead = true;
 	public ViewModel ViewModel => Components.Get<ViewModel>( FindMode.EverythingInSelfAndDescendants );
 
 	protected override void OnStart()
 	{
-		IsFirstPerson = true;
+		IsFirstPerson = !IsProxy;
 	}
 
 	protected override void OnUpdate()
@@ -83,6 +85,8 @@ public sealed class Player : Component
 			{
 				Inventory.CurrentWeapon.Update();
 			}
+
+			Inventory.CheckWeaponSwap();
 
 			UpdateCamera();
 		}
@@ -224,9 +228,9 @@ public sealed class Player : Component
 
 		AnimationHelper.WithWishVelocity( WishVelocity );
 		AnimationHelper.WithVelocity( CharacterController.Velocity );
-		AnimationHelper.AimAngle = Head.Transform.Rotation;
+		AnimationHelper.AimAngle = Direction;
 		AnimationHelper.IsGrounded = CharacterController.IsOnGround;
-		AnimationHelper.WithLook( Head.Transform.Rotation.Forward );
+		AnimationHelper.WithLook( Direction.Forward );
 		AnimationHelper.MoveStyle = CitizenAnimationHelper.MoveStyles.Run;
 		AnimationHelper.DuckLevel = IsCrouching ? 1f : 0f;
 
@@ -237,7 +241,7 @@ public sealed class Player : Component
 	{
 		if ( Body is null ) return;
 
-		var targetAngle = new Angles( 0, Head.Transform.Rotation.Yaw(), 0 ).ToRotation();
+		var targetAngle = new Angles( 0, Direction.yaw, 0 ).ToRotation();
 		float rotateDiff = Body.Transform.Rotation.Distance( targetAngle );
 
 		if ( rotateDiff > 50f || CharacterController.Velocity.Length > 10f )

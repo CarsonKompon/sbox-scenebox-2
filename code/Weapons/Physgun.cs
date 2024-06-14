@@ -40,7 +40,7 @@ public class Physgun : Weapon
     {
         if ( !IsEquipped ) return;
 
-        if ( Input.Down( "Attack1" ) )
+        if ( BeamActive )
         {
             BeamParticles.Enabled = true;
             UpdateBeam();
@@ -187,6 +187,7 @@ public class Physgun : Weapon
 
         GrabbedObjectId = tr.GameObject.Id;
         GameManager.Instance.BroadcastAddTag( GrabbedObjectId, GrabbedTag );
+        GameManager.Instance.BroadcastAddHighlight( GrabbedObjectId, Color.Lerp( Color.Cyan, Color.White, 0.2f ), Color.Transparent, 0.3f );
         tr.GameObject.Network.TakeOwnership();
 
         GrabbedPosition = body.Transform.PointToLocal( tr.EndPosition );
@@ -260,6 +261,7 @@ public class Physgun : Weapon
         if ( grabbedObject.IsValid() )
         {
             GameManager.Instance.BroadcastRemoveTag( GrabbedObjectId, GrabbedTag );
+            GameManager.Instance.BroadcastRemoveHighlight( GrabbedObjectId );
             grabbedObject.Network.DropOwnership();
         }
 

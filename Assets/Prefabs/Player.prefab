@@ -41,7 +41,8 @@
         "__guid": "35cecb4d-acdf-42f3-92f2-cfad81dc6036",
         "StartingWeapons": [
           "weapons/physgun/physgun.weapon",
-          "weapons/m4a1/m4a1.weapon"
+          "weapons/m4a1/m4a1.weapon",
+          "weapons/toolgun/toolgun.weapon"
         ],
         "WeaponParent": {
           "_type": "gameobject",

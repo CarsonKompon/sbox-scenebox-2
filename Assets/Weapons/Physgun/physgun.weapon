@@ -1,7 +1,8 @@
 {
-  "Name": "Weapon",
-  "Description": "A basic weapon",
+  "Name": "Physgun",
+  "Description": "Physics gun or something idk",
   "Slot": 1,
+  "IconCharacter": "h",
   "HasAmmo": true,
   "ClipSize": 16,
   "MainPrefab": {
@@ -12,9 +13,7 @@
     "_type": "gameobject",
     "prefab": "weapons/physgun/physgun_v.prefab"
   },
-  "WorldModel": "models/weapons/sbox_pistol_usp/w_usp.vmdl",
-  "__references": [
-    "facepunch.w_usp"
-  ],
+  "WorldModel": "models/dev/error.vmdl",
+  "__references": [],
   "__version": 0
 }

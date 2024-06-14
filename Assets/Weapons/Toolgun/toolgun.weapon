@@ -1,0 +1,21 @@
+{
+  "Name": "Toolgun",
+  "Description": "It has all the tools",
+  "Slot": 1,
+  "IconCharacter": "h",
+  "HasAmmo": true,
+  "ClipSize": 16,
+  "MainPrefab": {
+    "_type": "gameobject",
+    "prefab": "weapons/toolgun/toolgun_w.prefab"
+  },
+  "ViewModelPrefab": {
+    "_type": "gameobject",
+    "prefab": "weapons/toolgun/toolgun_v.prefab"
+  },
+  "WorldModel": "models/weapons/toolgun.vmdl",
+  "__references": [
+    "mdlresrc.toolgun"
+  ],
+  "__version": 0
+}

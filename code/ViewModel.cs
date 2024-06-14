@@ -108,7 +108,7 @@ public partial class ViewModel : Component
 
     void ApplyAnimationParameters()
     {
-        ModelRenderer.Set( "b_sprint", Player.IsSprinting );
+        ModelRenderer.Set( "b_sprint", Player.IsSprinting && Player.WishVelocity.Length > 1 );
         ModelRenderer.Set( "b_grounded", Player.CharacterController.IsOnGround );
 
         ModelRenderer.Set( "b_twohanded", true );
