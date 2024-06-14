@@ -53,11 +53,8 @@ public sealed class Inventory : Component
 			Sound.Play( "ui.gmod.weapon.selected" );
 			timeSinceLastHover = 10;
 			Input.ReleaseAction( "Attack1" );
+			HoveredIndex = -1;
 			return;
-		}
-		else if ( timeSinceLastHover > 3f && CurrentWeapon != HoveredWeapon )
-		{
-			HoveredIndex = Weapons.OrderBy( x => x.Resource.Slot ).ToList().IndexOf( CurrentWeapon );
 		}
 
 		for ( int i = 0; i < 10; i++ )
@@ -74,6 +71,8 @@ public sealed class Inventory : Component
 		if ( Input.Pressed( "NextSlot" ) ) wheel.y = -1;
 		if ( Input.Pressed( "PrevSlot" ) ) wheel.y = 1;
 		if ( wheel.y == 0f ) return;
+
+		if ( HoveredIndex == -1 ) HoveredIndex = Weapons.OrderBy( x => x.Resource.Slot ).ToList().IndexOf( CurrentWeapon );
 
 		var slotDelta = wheel.y > 0 ? 1 : -1;
 		HoveredIndex += slotDelta;
@@ -120,8 +119,11 @@ public sealed class Inventory : Component
 			// TODO: Holder weapon?
 		}
 
-		var index = Array.IndexOf( weapons, CurrentWeapon );
-		EquipWeapon( weapons[(index + 1) % weapons.Length] );
+		var index = Array.IndexOf( weapons, HoveredWeapon );
+		HoveredIndex = Weapons.OrderBy( x => x.Resource.Slot ).ToList().IndexOf( weapons[(index + 1) % weapons.Length] );
+
+		Sound.Play( "ui.gmod.weapon.hover" );
+		timeSinceLastHover = 0;
 	}
 
 	public void EquipWeapon( Weapon weapon )

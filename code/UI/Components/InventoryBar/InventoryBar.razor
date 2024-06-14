@@ -5,7 +5,7 @@
 @attribute [StyleSheet]
 
 <root class="@(IsVisible ? "" : "hidden")">
-    @for (int i = 0; i < 9; i++)
+    @for (int i = 0; i < 6; i++)
     {
         <div class="slot @(((Inventory?.HoveredWeapon?.Resource?.Slot ?? 0) == (i + 1)) ? "active" : "")">
             @if (true)
@@ -30,7 +30,7 @@
 @code
 {
     public Inventory Inventory { get; set; }
-    bool IsVisible => (Inventory?.timeSinceLastHover ?? 10) < 3f;
+    bool IsVisible => (Inventory?.timeSinceLastHover ?? 10) < 1f;
 
     protected override int BuildHash() => System.HashCode.Combine(IsVisible, Inventory?.HoveredIndex);
 }
