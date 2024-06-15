@@ -255,6 +255,19 @@ public sealed class Player : Component
 	}
 
 	[Broadcast]
+	public void Damage( float amount )
+	{
+		if ( Health <= 0 ) return;
+		if ( IsProxy ) return;
+
+		Health -= (int)amount;
+		if ( Health <= 0 )
+		{
+			// TODO: Die
+		}
+	}
+
+	[Broadcast]
 	public void BroadcastSetVelocity( Vector3 velocity )
 	{
 		if ( IsProxy ) return;

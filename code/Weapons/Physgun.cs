@@ -112,6 +112,13 @@ public class Physgun : Weapon
         GrabEnd();
     }
 
+    protected override void OnUnequip()
+    {
+        base.OnUnequip();
+
+        GrabEnd();
+    }
+
     private void TryUnfreezeAll( Vector3 eyePos, Rotation eyeRot, Vector3 eyeDir )
     {
         var tr = Scene.Trace.Ray( eyePos, eyePos + eyeDir * MaxTargetDistance )

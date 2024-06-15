@@ -11,6 +11,8 @@ public sealed class GameManager : Component, Component.INetworkListener
     [Property] public GameObject PlayerPrefab { get; set; }
     [Property] public List<GameObject> SpawnPoints { get; set; }
 
+    [Property, Group( "Prefabs" )] public GameObject DecalObject { get; set; }
+
     protected override void OnAwake()
     {
         Instance = this;
@@ -90,6 +92,37 @@ public sealed class GameManager : Component, Component.INetworkListener
         gameObject.NetworkSpawn();
         gameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
         gameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+    }
+
+    [Broadcast]
+    public void SpawnDecal( string decalPath, Vector3 position, Vector3 normal, Guid parentId = default )
+    {
+        if ( string.IsNullOrWhiteSpace( decalPath ) ) decalPath = "decals/bullethole.decal";
+        position += normal;
+        var decalObject = DecalObject.Clone( position, Rotation.LookAt( -normal ) );
+        var parent = Scene.Directory.FindByGuid( parentId );
+        if ( parent.IsValid() ) decalObject.SetParent( parent );
+        decalObject.Name = decalPath;
+        if ( !string.IsNullOrWhiteSpace( decalPath ) )
+        {
+            var renderer = decalObject.Components.Get<DecalRenderer>();
+            var decal = ResourceLibrary.Get<DecalDefinition>( decalPath );
+            if ( decal is not null )
+            {
+                var entry = decal.Decals.OrderBy( x => Random.Shared.Float() ).FirstOrDefault();
+                renderer.Material = entry.Material;
+                var width = entry.Width.GetValue();
+                var height = entry.Height.GetValue();
+                renderer.Size = new Vector3(
+                    width,
+                    entry.KeepAspect ? width : height,
+                    entry.Depth.GetValue()
+                );
+                var fadeAfter = decalObject.Components.GetOrCreate<FadeAfter>();
+                fadeAfter.Time = entry.FadeTime.GetValue();
+                fadeAfter.FadeTime = entry.FadeDuration.GetValue();
+            }
+        }
     }
 
     [Broadcast]

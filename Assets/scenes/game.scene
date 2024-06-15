@@ -13,6 +13,10 @@
         {
           "__type": "Scenebox.GameManager",
           "__guid": "33e40800-8030-4e51-a41a-7cd7a7119604",
+          "DecalObject": {
+            "_type": "gameobject",
+            "prefab": "prefabs/decal.prefab"
+          },
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
@@ -121,7 +125,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-14T17:47:13.5356358-04:00",
+  "LastSaved": "2024-06-15T07:51:04.6457922-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

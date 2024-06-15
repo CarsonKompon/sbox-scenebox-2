@@ -4,7 +4,7 @@
 @namespace Scenebox
 @attribute [StyleSheet]
 
-<root class="@(IsVisible ? "" : "hidden")">
+<root class="@(Visible ? "" : "hidden")">
     @for (int i = 0; i < 6; i++)
     {
         <div class="slot @(((Inventory?.HoveredWeapon?.Resource?.Slot ?? 0) == (i + 1)) ? "active" : "")">
@@ -30,7 +30,7 @@
 @code
 {
     public Inventory Inventory { get; set; }
-    bool IsVisible => (Inventory?.timeSinceLastHover ?? 10) < 1f;
+    bool Visible => (Inventory?.timeSinceLastHover ?? 10) < 1f;
 
-    protected override int BuildHash() => System.HashCode.Combine(IsVisible, Inventory?.HoveredIndex);
+    protected override int BuildHash() => System.HashCode.Combine(Visible, Inventory?.HoveredIndex);
 }
