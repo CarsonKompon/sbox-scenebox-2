@@ -1,9 +1,9 @@
 {
   "Name": "Toolgun",
   "Description": "It has all the tools",
-  "Slot": 1,
-  "IconCharacter": "h",
-  "HasAmmo": true,
+  "Slot": 6,
+  "IconCharacter": "ui/weapons/toolgun.png",
+  "HasAmmo": false,
   "ClipSize": 16,
   "MainPrefab": {
     "_type": "gameobject",

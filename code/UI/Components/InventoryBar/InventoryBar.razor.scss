@@ -93,7 +93,6 @@ InventoryBar
             transition: all 0.1s ease-in-out;
             text-transform: uppercase;
             font-size: 10px;
-            
         }
 
         .slot-number
@@ -118,6 +117,15 @@ InventoryBar
             align-items: center;
             transition: all 0.3s ease-in-out;
             opacity: 0;
+            text-shadow: 0px 0px 10px rgba(#FFDD00, 1);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        img
+        {
+            margin: 0px 16px;
         }
 
         &.active
@@ -129,7 +137,6 @@ InventoryBar
             .item-icon
             {
                 font-size: 82px;
-                text-shadow: 0px 0px 10px rgba(#FFDD00, 1);
                 transition: all 0.1s ease-in-out;
                 opacity: 1;
             }

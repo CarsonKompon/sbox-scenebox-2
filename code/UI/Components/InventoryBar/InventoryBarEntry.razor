@@ -8,7 +8,14 @@
     @if (Weapon.IsValid())
     {
         <label class="item-name">@Weapon.Resource.Name</label>
-        <label class="item-icon">@Weapon.Resource.IconCharacter</label>
+        @if (Weapon.Resource.IconCharacter.Contains("/"))
+        {
+            <img class="item-icon" src=@Weapon.Resource.IconCharacter />
+        }
+        else
+        {
+            <label class="item-icon">@Weapon.Resource.IconCharacter</label>
+        }
     }
 </root>
 
