@@ -1,0 +1,12 @@
+{
+  "UI": false,
+  "Volume": "0.40,0.40,0",
+  "Pitch": "0.98,1.02,1",
+  "Decibels": 70,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/weapons/ar_light_1.vsnd",
+    "sounds/weapons/ar_light_2.vsnd"
+  ],
+  "__references": []
+}

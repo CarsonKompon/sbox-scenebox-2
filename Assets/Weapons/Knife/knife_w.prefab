@@ -7,6 +7,27 @@
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Scenebox.MeleeWeapon",
+        "__guid": "7f922137-3633-400c-8915-ce2c3611df5c",
+        "Cooldown": 1,
+        "Damage": 30,
+        "HoldType": "Swing",
+        "ModelRenderer": {
+          "_type": "component",
+          "component_id": "d569b625-3b78-4f1d-bbf2-3e905b360900",
+          "go": "1bdbe4de-1811-4ce7-b64d-a28744b913b5",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Muzzle": {
+          "_type": "gameobject",
+          "go": "1bdbe4de-1811-4ce7-b64d-a28744b913b5"
+        },
+        "Range": 60,
+        "Resource": "weapons/knife/knife.weapon"
+      }
+    ],
     "Children": [
       {
         "__guid": "1bdbe4de-1811-4ce7-b64d-a28744b913b5",
@@ -31,7 +52,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

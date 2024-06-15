@@ -1,0 +1,11 @@
+{
+  "UI": false,
+  "Volume": "0.32,0.32,0",
+  "Pitch": "1.00,1.00,0",
+  "Decibels": 95,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/weapons/rpg.explosion.vsnd"
+  ],
+  "__references": []
+}

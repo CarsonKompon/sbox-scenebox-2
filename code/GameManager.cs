@@ -96,12 +96,36 @@ public sealed class GameManager : Component, Component.INetworkListener
         gameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
     }
 
+    public LegacyParticleSystem CreateParticleSystem( string particle, Vector3 pos, Rotation rot, float decay = 5f )
+    {
+        var gameObject = Scene.CreateObject();
+        gameObject.Transform.Position = pos;
+        gameObject.Transform.Rotation = rot;
+
+        var p = gameObject.Components.Create<LegacyParticleSystem>();
+        p.Particles = ParticleSystem.Load( particle );
+        gameObject.Transform.ClearInterpolation();
+
+        gameObject.Components.GetOrCreate<DestroyAfter>().Time = 2f;
+
+        return p;
+    }
+
     [Broadcast]
     public void SpawnCloudModel( string cloudModel, Vector3 position, Rotation rotation )
     {
         if ( !Networking.IsHost ) return;
 
+        MountCloudModel( cloudModel );
         SpawnCloudModelAsync( cloudModel, position, rotation );
+    }
+
+    [Broadcast]
+    public async void MountCloudModel( string cloudModel )
+    {
+        if ( Connection.Local.Id == Rpc.CallerId ) return;
+        var package = await Package.Fetch( cloudModel, false );
+        await package.MountAsync();
     }
 
     async void SpawnCloudModelAsync( string cloudIdent, Vector3 position, Rotation rotation )

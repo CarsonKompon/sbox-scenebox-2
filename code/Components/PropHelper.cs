@@ -39,7 +39,14 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         Health -= amount;
         if ( Health <= 0 )
         {
-            Prop?.OnDamage( new DamageInfo( 9999, null, null ) );
+            // Prop?.OnDamage( new DamageInfo( 9999, null, null ) );
+            var gibs = Prop?.CreateGibs();
+            foreach ( var gib in gibs )
+            {
+                gib.GameObject.NetworkSpawn();
+                gib.GameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+            }
+            GameObject?.DestroyImmediate();
         }
     }
 
@@ -110,11 +117,5 @@ public sealed class PropHelper : Component, Component.ICollisionListener
             var dmg = speed / 8f;
             Damage( dmg );
         }
-    }
-
-    [Broadcast]
-    void BroadcastBreak()
-    {
-        Prop.CreateGibs();
     }
 }

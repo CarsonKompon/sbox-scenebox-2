@@ -43,6 +43,7 @@
           "weapons/toolgun/toolgun.weapon",
           "weapons/m4a1/m4a1.weapon",
           "weapons/crowbar/crowbar.weapon",
+          "weapons/knife/knife.weapon",
           "weapons/physgun/physgun.weapon"
         ],
         "WeaponParent": {

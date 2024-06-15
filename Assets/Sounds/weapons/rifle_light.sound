@@ -1,0 +1,11 @@
+{
+  "UI": false,
+  "Volume": "0.55,0.55,0",
+  "Pitch": "1.00,1.00,0",
+  "Decibels": 70,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/weapons/rifle_light.vsnd"
+  ],
+  "__references": []
+}

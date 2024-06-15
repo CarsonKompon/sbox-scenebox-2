@@ -11,6 +11,9 @@ public class Weapon : Component
     [Property] public SkinnedModelRenderer ModelRenderer { get; set; }
     [Property] protected CitizenAnimationHelper.HoldTypes HoldType { get; set; } = CitizenAnimationHelper.HoldTypes.Pistol;
 
+    [Property] public float Damage { get; set; } = 20f;
+
+
     [Property, Group( "Sounds" )] public SoundEvent EquipSound { get; set; }
 
     [Property, Group( "References" )] public GameObject Muzzle { get; set; }
@@ -159,9 +162,53 @@ public class Weapon : Component
         ClearViewModel();
     }
 
+    protected virtual void Attack( SceneTraceResult tr )
+    {
+        if ( tr.Hit )
+        {
+            Sound.Play( tr.Surface.Sounds.ImpactHard, tr.HitPosition );
+            string decal = "";
+            var decals = tr.Surface.ImpactEffects.BulletDecal;
+            if ( (decals?.Count() ?? 0) > 0 )
+                decal = decals.OrderBy( x => Random.Shared.Float() ).FirstOrDefault();
+
+            if ( tr.GameObject?.Components?.TryGet<PropHelper>( out var propHelper ) ?? false )
+            {
+                propHelper.Damage( Damage );
+            }
+
+            if ( tr.GameObject?.Root?.Components?.TryGet<Player>( out var player ) ?? false )
+            {
+                player.Damage( Damage );
+            }
+
+            GameManager.Instance.SpawnDecal( decal, tr.HitPosition, tr.Normal, tr.GameObject?.Id ?? Guid.Empty );
+        }
+    }
+
     [Broadcast]
     void BroadcastSetVisible( bool visible )
     {
         if ( ModelRenderer.IsValid() ) ModelRenderer.Enabled = visible;
+    }
+
+    [Broadcast]
+    protected void BroadcastBulletTrail( Vector3 startPos, Vector3 endPos, float distance, int count )
+    {
+        if ( !IsNearby( startPos ) || !IsNearby( endPos ) ) return;
+
+        var effectPath = "particles/bullet_trails/trail_smoke.vpcf";
+        if ( count > 0 ) effectPath = "particles/bullet_trails/rico_trail_smoke.vpcf";
+
+        var origin = count == 0 ? (Player.ViewModel?.Muzzle?.Transform.Position ?? Muzzle.Transform.Position) : startPos;
+        var ps = GameManager.Instance.CreateParticleSystem( effectPath, origin, Rotation.Identity, 1f );
+        ps.SceneObject.SetControlPoint( 0, origin );
+        ps.SceneObject.SetControlPoint( 1, endPos );
+        ps.SceneObject.SetControlPoint( 2, distance );
+    }
+
+    private bool IsNearby( Vector3 position )
+    {
+        return position.DistanceSquared( Scene.Camera.Transform.Position ) < 4194304f;
     }
 }

@@ -11,11 +11,6 @@
 
     </div>
     <div class="canvas">
-        @foreach (var package in FoundPackages)
-        {
-            <CloudModelEntry Package=@package />
-        }
-
         @foreach (var group in FoundPackages.GroupBy(GroupBy).OrderBy(x => x.Key))
         {
             if (!string.IsNullOrEmpty(group.Key))

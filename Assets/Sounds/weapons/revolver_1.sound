@@ -1,0 +1,11 @@
+{
+  "UI": false,
+  "Volume": "0.40,0.40,0",
+  "Pitch": "1.00,1.00,0",
+  "Decibels": 70,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/weapons/deagle_1.vsnd"
+  ],
+  "__references": []
+}
