@@ -21,7 +21,7 @@
 		</div>
 		<div class="body">
 			<LocalModelList @ref="LocalModelsPanel" />
-			<div @ref="CloudModelsPanel" />
+			<CloudModelList @ref="CloudModelsPanel" />
 			<div @ref="CloudPrefabsPanel" />
 		</div>
 	</div>
@@ -43,7 +43,7 @@
 
 	protected override void OnTreeFirstBuilt()
 	{
-		SelectedPanel = LocalModelsPanel;
+		SetActive(LocalModelsPanel);
 	}
 
 	protected override void OnFixedUpdate()

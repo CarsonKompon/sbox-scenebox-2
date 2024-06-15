@@ -10,8 +10,10 @@ public sealed class GameManager : Component, Component.INetworkListener
 
     [Property] public GameObject PlayerPrefab { get; set; }
     [Property] public List<GameObject> SpawnPoints { get; set; }
-
     [Property, Group( "Prefabs" )] public GameObject DecalObject { get; set; }
+
+    [Sync] public NetList<string> Packages { get; set; }
+
 
     protected override void OnAwake()
     {
@@ -92,6 +94,23 @@ public sealed class GameManager : Component, Component.INetworkListener
         gameObject.NetworkSpawn();
         gameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
         gameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+    }
+
+    [Broadcast]
+    public void SpawnCloudModel( string cloudModel, Vector3 position, Rotation rotation )
+    {
+        if ( !Networking.IsHost ) return;
+
+        SpawnCloudModelAsync( cloudModel, position, rotation );
+    }
+
+    async void SpawnCloudModelAsync( string cloudIdent, Vector3 position, Rotation rotation )
+    {
+        var package = await Package.FetchAsync( cloudIdent, false );
+        await package.MountAsync();
+
+        var model = Model.Load( package.GetMeta( "PrimaryAsset", "" ) );
+        SpawnModel( model, position, rotation );
     }
 
     [Broadcast]

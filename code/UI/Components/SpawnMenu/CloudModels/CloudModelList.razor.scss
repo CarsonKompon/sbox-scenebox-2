@@ -1,0 +1,162 @@
+CloudModelList
+{
+    flex-grow: 1;
+    font-family: Verdana;
+    font-size: 14px;
+
+    .folderlist
+    {
+        .entry
+        {
+            flex-shrink: 0;
+            gap: 4px;
+            pointer-events: all;
+            cursor: pointer;
+
+            img
+            {
+                background-position: center;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+
+            &:hover
+            {
+                background-color: rgba(grey, 0.1);
+            }
+
+            &.selected
+            {
+                background-color: rgba(blue, 0.3);
+            }
+        }
+    }
+
+    .canvas
+    {
+        flex-direction: row;
+        flex-grow: 1;
+        flex-wrap: wrap;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        gap: 16px;
+
+        .cell
+        {
+            width: 150px;
+            height: 150px;
+            flex-shrink: 0;
+            background-color: #FEFEFE;
+            border-radius: 4px;
+            border: 1px solid #737679;
+            box-shadow: 0 0 3px rgba(black, 1);
+            overflow: hidden;
+            padding: 3px;
+            flex-direction: column;
+            font-family: Coolvetica Rg;
+            
+            .title
+            {
+                margin-bottom: 2px;
+                font-size: 13px;
+                font-weight: 700;
+                flex-shrink: 0;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                color: #666;
+            }
+
+            .author
+            {
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
+                max-width: 90%;
+                text-align: right;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                background-color: white;
+                border-radius: 4px 0px 0px 0px;
+                padding: 2px 4px;
+                font-weight: 700;
+                font-size: 10px;
+                color: #333;
+                z-index: 100;
+                transition: right 0.2s ease;
+            }
+
+            .hover-panel
+            {
+                opacity: 0;
+                transition: opacity 0.2s ease;
+                position: absolute;
+                top: 22;
+                left: 3;
+                right: 3;
+                bottom: 3;
+                background-color: #44ADEF;
+                overflow: hidden;
+                padding: 6px;
+                color: white;
+                font-size: 12px;
+                flex-direction: column;
+
+                .description
+                {
+                    flex-grow: 1;
+                }
+
+                button
+                {
+                    align-self: flex-end;
+                    background-color: #F5FF80;
+                    color: black;
+                    border-radius: 2px;
+                    padding: 1px 3px;
+                    box-shadow: 1px 1px 4px black;
+                    top: 200px;
+                    transition: top 0.2s ease;
+                }
+            }
+
+            Image
+            {
+                width: 100%;
+                height: 100%;
+                
+            }
+
+            &:hover
+            {
+                border: 1px solid #53B1FE;
+
+                .author
+                {
+                    right: -200px;
+                }
+
+                .hover-panel
+                {
+                    opacity: 1;
+
+                    button
+                    {
+                        top: 0px;
+                    }
+                }
+            }
+
+            &:active
+            {
+                sound-out: ui.gmod.button.release;
+
+                .icon
+                {
+                    transform: scale(0.95);
+                }
+            }
+        }
+
+    }
+}
