@@ -6,27 +6,40 @@
 <root class="@(IsVisible ? "open" : "")">
 	<div class="left">
 		<div class="tabs">
-			<button onclick=@(() => SetActive(LocalModelsPanel)) class="@(SelectedPanel == LocalModelsPanel ? "active" : "")">
+			<button onclick=@(() => SetActiveLeft(LocalModelsPanel)) class="@(SelectedPanelLeft == LocalModelsPanel ? "active" : "")">
 				<img src="ui/silkicons/application_view_tile.png" />
 				Local Models
 			</button>
-			<button onclick=@(() => SetActive(CloudModelsPanel)) class="@(SelectedPanel == CloudModelsPanel ? "active" : "")">
+			<button onclick=@(() => SetActiveLeft(CloudModelsPanel)) class="@(SelectedPanelLeft == CloudModelsPanel ? "active" : "")">
 				<img src="ui/silkicons/brick.png" />
 				Cloud Models
 			</button>
-			<button onclick=@(() => SetActive(CloudPrefabsPanel)) class="@(SelectedPanel == CloudPrefabsPanel ? "active" : "")">
-				<img src="ui/silkicons/bricks.png" />
-				Cloud Prefabs
-			</button>
+			@* <button onclick=@(() => SetActiveLeft(CloudPrefabsPanel)) class="@(SelectedPanelLeft == CloudPrefabsPanel ? "active" : "")">
+			<img src="ui/silkicons/bricks.png" />
+			Cloud Prefabs
+			</button> *@
 		</div>
 		<div class="body">
 			<LocalModelList @ref="LocalModelsPanel" />
 			<CloudModelList @ref="CloudModelsPanel" />
-			<div @ref="CloudPrefabsPanel" />
+			@* <div @ref="CloudPrefabsPanel" /> *@
 		</div>
 	</div>
 	<div class="right">
-
+		<div class="tabs">
+			<button onclick=@(() => SetActiveRight(ToolsPanel)) class="@(SelectedPanelRight == ToolsPanel ? "active" : "")">
+				<img src="ui/silkicons/wrench.png" />
+				Tools
+			</button>
+			<button onclick=@(() => SetActiveRight(UtilitiesPanel)) class="@(SelectedPanelRight == UtilitiesPanel ? "active" : "")">
+				<img src="ui/silkicons/page_white_wrench.png" />
+				Utilities
+			</button>
+		</div>
+		<div class="body">
+			<ToolMenu @ref="ToolsPanel" />
+			<div @ref="UtilitiesPanel" />
+		</div>
 	</div>
 </root>
 
@@ -37,13 +50,18 @@
 	Panel CloudModelsPanel;
 	Panel CloudPrefabsPanel;
 
-	Panel SelectedPanel;
+	Panel ToolsPanel;
+	Panel UtilitiesPanel;
+
+	Panel SelectedPanelLeft;
+	Panel SelectedPanelRight;
 
 	public bool IsVisible => Input.Down("Menu") || Panel.Children.Any(x => x.HasFocus);
 
 	protected override void OnTreeFirstBuilt()
 	{
-		SetActive(LocalModelsPanel);
+		SetActiveLeft(LocalModelsPanel);
+		SetActiveRight(ToolsPanel);
 	}
 
 	protected override void OnFixedUpdate()
@@ -54,13 +72,20 @@
 		}
 	}
 
-	void SetActive(Panel panel)
+	void SetActiveLeft(Panel panel)
 	{
 		LocalModelsPanel.SetClass("hidden", LocalModelsPanel != panel);
 		CloudModelsPanel.SetClass("hidden", CloudModelsPanel != panel);
 		CloudPrefabsPanel.SetClass("hidden", CloudPrefabsPanel != panel);
-		SelectedPanel = panel;
+		SelectedPanelLeft = panel;
 	}
 
-	protected override int BuildHash() => System.HashCode.Combine(SelectedPanel, IsVisible);
+	void SetActiveRight(Panel panel)
+	{
+		ToolsPanel.SetClass("hidden", ToolsPanel != panel);
+		UtilitiesPanel.SetClass("hidden", UtilitiesPanel != panel);
+		SelectedPanelRight = panel;
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine(SelectedPanelLeft, SelectedPanelRight, IsVisible);
 }

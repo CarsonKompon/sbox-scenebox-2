@@ -1,5 +1,6 @@
 
 using System;
+using Scenebox.Tools;
 
 namespace Scenebox;
 
@@ -8,18 +9,24 @@ public class Toolgun : Weapon
 
     [Property, Group( "Sounds" )] SoundEvent UseSound { get; set; }
 
+    internal BaseTool CurrentTool = null;
+
+    protected override void OnStart()
+    {
+        SetTool( TypeLibrary.GetType<BaseTool>( "Scenebox.Tools.RemoverTool" ) );
+    }
+
     public override void Update()
     {
         if ( !IsEquipped ) return;
 
-        if ( Input.Pressed( "attack1" ) )
-        {
-            PrimaryUse();
-        }
-        else if ( Input.Pressed( "attack2" ) )
-        {
-            SecondaryUse();
-        }
+        if ( Input.Pressed( "attack1" ) ) CurrentTool?.PrimaryUseStart();
+        if ( Input.Down( "attack1" ) ) CurrentTool?.PrimaryUseUpdate();
+        if ( Input.Released( "attack1" ) ) CurrentTool?.PrimaryUseEnd();
+
+        if ( Input.Pressed( "attack2" ) ) CurrentTool?.SecondaryUseStart();
+        if ( Input.Down( "attack2" ) ) CurrentTool?.SecondaryUseUpdate();
+        if ( Input.Released( "attack2" ) ) CurrentTool?.SecondaryUseEnd();
     }
 
     void PrimaryUse()
@@ -32,8 +39,23 @@ public class Toolgun : Weapon
         BroadcastUseEffects();
     }
 
+    public void SetTool( TypeDescription toolDescription )
+    {
+        if ( CurrentTool != null )
+        {
+            CurrentTool?.OnUnequip();
+            CurrentTool = null;
+        }
+
+        if ( toolDescription == null ) return;
+
+        CurrentTool = TypeLibrary.Create<BaseTool>( toolDescription.TargetType );
+        CurrentTool.Toolgun = this;
+        CurrentTool?.OnEquip();
+    }
+
     [Broadcast]
-    void BroadcastUseEffects()
+    public void BroadcastUseEffects()
     {
         var playerRenderer = Player?.Body?.Components?.Get<SkinnedModelRenderer>();
         playerRenderer?.Set( "b_attack", true );

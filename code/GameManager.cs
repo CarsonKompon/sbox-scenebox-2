@@ -168,6 +168,16 @@ public partial class GameManager : Component, Component.INetworkListener
     }
 
     [Broadcast]
+    public void BroadcastDestroyObject( Guid objectId )
+    {
+        var obj = Scene.Directory.FindByGuid( objectId );
+        if ( obj.IsValid() )
+        {
+            obj.Destroy();
+        }
+    }
+
+    [Broadcast]
     public void BroadcastAddTag( Guid objectId, string tag )
     {
         Scene.Directory.FindByGuid( objectId )?.Tags?.Add( tag );

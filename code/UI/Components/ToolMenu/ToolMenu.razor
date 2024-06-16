@@ -1,0 +1,67 @@
+@using System;
+@using System.Collections.Generic;
+@using Sandbox;
+@using Sandbox.UI;
+@using Scenebox.Tools;
+@inherits Panel
+@namespace Scenebox
+@attribute [StyleSheet]
+
+<root>
+    <div class="listcontainer">
+        <TextEntry @ref="SearchEntry" Placeholder="Quick Filter..." />
+        <div class="toollist">
+            @if (true)
+            {
+                var tools = TypeLibrary.GetTypes<BaseTool>().Where(x => x.Name != "BaseTool");
+                foreach (var group in GetGroups(tools.ToList()))
+                {
+                    <label class="header">@group</label>
+                    foreach (var tool in tools.Where(x => GetGroup(x.TargetType) == group))
+                    {
+                        <div class="tool" onclick=@(() => GiveTool(tool))>
+                            @(TypeLibrary.GetAttribute<ToolAttribute>(tool.TargetType)?.Title ?? "Missingtool.")
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+    <div class="inspector">
+
+    </div>
+</root>
+
+@code
+{
+    TextEntry SearchEntry;
+
+    string GetGroup(Type tool) => TypeLibrary.GetAttribute<ToolAttribute>(tool)?.Group ?? "Other";
+
+    void GiveTool(TypeDescription tool)
+    {
+        var toolgun = Player.Local?.Components.Get<Toolgun>(FindMode.EverythingInSelfAndDescendants);
+        if (toolgun.IsValid())
+        {
+            toolgun.SetTool(tool);
+        }
+        Log.Info(toolgun);
+        Player.Local?.Inventory?.EquipWeapon(toolgun);
+    }
+
+    List<string> GetGroups(List<TypeDescription> tools)
+    {
+        var groups = new List<string>();
+        foreach (var tool in tools)
+        {
+            var group = GetGroup(tool.TargetType);
+            if (!groups.Contains(group))
+            {
+                groups.Add(group);
+            }
+        }
+        return groups;
+    }
+
+    protected override int BuildHash() => System.HashCode.Combine(SearchEntry.Text);
+}

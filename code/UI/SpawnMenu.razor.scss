@@ -334,6 +334,7 @@ SpawnMenu
                 flex-direction: column;
                 gap: 4px;
                 width: 30%;
+                flex-shrink: 0;
 
                 textentry
                 {
@@ -375,12 +376,12 @@ SpawnMenu
                     color: #858585;
                     flex-grow: 1;
                     overflow-y: scroll;
+                    font-size: 12px;
 
-                    button
+                    .tool
                     {
                         padding: 3px 10px;
                         font-family: Verdana;
-                        font-size: 12px;
                         background-color: rgb(240, 240, 240);
                         cursor: pointer;
 
@@ -421,6 +422,7 @@ SpawnMenu
                 border: 1px solid $border-col;
                 flex-grow: 1;
                 border-radius: 5px;
+                flex-direction: column;
             }
         }
     }
