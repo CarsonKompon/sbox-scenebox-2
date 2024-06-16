@@ -10,7 +10,7 @@
     <img class="avatar" src="@($"avatar:{Entry.SteamId}")" />
     } *@
     <label class="name">@Entry.Name</label>
-    <label class="colon">:</label>
+    <label class="colon">@((Entry.Styles.Split(" ").Contains("notification")) ? "" : ":")</label>
     <div class="message-content">
         <label class="message">@Entry.Message</label>
     </div>

@@ -84,8 +84,6 @@ public sealed class PropHelper : Component, Component.ICollisionListener
             return;
         }
 
-        Log.Info( $"UpdateNetworkedBodies for {Prop.Model?.ResourceName ?? "Someone"}" );
-
         if ( !Network.IsOwner )
         {
             var rootBody = FindRootBody();
@@ -123,7 +121,7 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         var body = Physics.PhysicsGroup.Bodies.FirstOrDefault();
         if ( body == null ) return null;
         while ( body.Parent.IsValid() )
-        {
+        { 
             body = body.Parent;
         }
         return body;

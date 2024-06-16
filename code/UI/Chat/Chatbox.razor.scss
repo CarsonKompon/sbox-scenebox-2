@@ -50,6 +50,7 @@ Chatbox
 			.name
 			{
 				flex-shrink: 0;
+				color: rgb(255, 255, 100);
 			}
 
 			.colon
@@ -60,6 +61,11 @@ Chatbox
 			&.fade
 			{
 				opacity: 0;
+			}
+
+			&.notification
+			{
+				color: rgb(255, 255, 100);
 			}
 		}
 	}

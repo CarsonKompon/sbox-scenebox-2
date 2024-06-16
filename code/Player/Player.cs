@@ -18,6 +18,7 @@ public sealed class Player : Component
 	[Property, Group( "References" )] public CitizenAnimationHelper AnimationHelper { get; set; }
 	[Property, Group( "References" )] public ModelPhysics ModelPhysics { get; set; }
 	[Property, Group( "References" )] public Collider PlayerBoxCollider { get; set; }
+	[Property, Group( "References" )] public GameObject NametagObject { get; set; }
 
 	[Property, Group( "Movement" )] public float GroundControl { get; set; } = 4.0f;
 	[Property, Group( "Movement" )] public float AirControl { get; set; } = 0.1f;
@@ -58,6 +59,7 @@ public sealed class Player : Component
 	protected override void OnStart()
 	{
 		IsFirstPerson = !IsProxy;
+		NametagObject.Enabled = !Network.IsOwner;
 	}
 
 	protected override void OnUpdate()
@@ -302,6 +304,7 @@ public sealed class Player : Component
 			GameObject.Tags.Set( "invisible", true );
 			SetRagdoll( false );
 		}
+		NametagObject.Enabled = false;
 
 		if ( IsProxy ) return;
 		Health = 0;

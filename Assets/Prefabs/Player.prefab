@@ -38,6 +38,10 @@
           "go": "612596a2-7b52-437f-807c-21925aa27997",
           "component_type": "ModelPhysics"
         },
+        "NametagObject": {
+          "_type": "gameobject",
+          "go": "f0d37034-47e7-4ddf-8a50-85630f1274f9"
+        },
         "PlayerBoxCollider": {
           "_type": "component",
           "component_id": "bba350d9-6802-4ba2-8f89-81c5066dc833",
@@ -1110,6 +1114,31 @@
             "Enabled": true,
             "NetworkMode": 2,
             "NetworkInterpolation": true
+          },
+          {
+            "__guid": "f0d37034-47e7-4ddf-8a50-85630f1274f9",
+            "Flags": 0,
+            "Name": "Nametag",
+            "Position": "0,0,18.87769",
+            "Enabled": true,
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "Components": [
+              {
+                "__type": "Sandbox.WorldPanel",
+                "__guid": "033bfa33-6001-4ee2-9d73-dc15099fce3a",
+                "HorizontalAlign": "Center",
+                "InteractionRange": 1000,
+                "LookAtCamera": true,
+                "PanelSize": "664.3994,256",
+                "RenderScale": 1,
+                "VerticalAlign": "Center"
+              },
+              {
+                "__type": "Scenebox.PlayerNametag",
+                "__guid": "39779b5a-2e4e-4d5f-b33a-283ee2ef0fa8"
+              }
+            ]
           }
         ]
       },

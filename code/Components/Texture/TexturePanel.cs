@@ -1,9 +1,8 @@
 ﻿using Sandbox;
 using Sandbox.UI;
 
-namespace Scenebox; 
+namespace Scenebox;
 
-[StyleSheet]
 public sealed class TexturePanel : PanelComponent
 {
 	[Property] public DynamicTextureComponent TextureTarget { get; set; }
