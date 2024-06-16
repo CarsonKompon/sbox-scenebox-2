@@ -2,7 +2,7 @@ namespace Scenebox;
 
 public sealed class PropHelper : Component, Component.ICollisionListener
 {
-    [RequireComponent] Prop Prop { get; set; }
+    Prop Prop;
 
     [Sync] public float Health { get; set; } = 1;
     [Sync] NetDictionary<int, BodyInfo> NetworkedBodies { get; set; } = new();
@@ -10,6 +10,7 @@ public sealed class PropHelper : Component, Component.ICollisionListener
     Vector3 _lastPosition = Vector3.Zero;
     Vector3 Velocity;
     ModelPhysics Physics;
+    Rigidbody Rigidbody;
 
     struct BodyInfo
     {
@@ -19,21 +20,18 @@ public sealed class PropHelper : Component, Component.ICollisionListener
 
     protected override void OnStart()
     {
-        Health = Prop.Health;
-        Physics = Components.Get<ModelPhysics>();
-        _lastPosition = Prop.Transform.Position;
+        Prop = Components.Get<Prop>();
+        Health = Prop?.Health ?? 0;
+        Physics = Components.Get<ModelPhysics>( FindMode.EverythingInSelf );
+        Rigidbody = Components.Get<Rigidbody>();
+        _lastPosition = Prop?.Transform?.Position ?? Transform.Position;
         Velocity = 0;
-
-        Prop.OnPropBreak += () =>
-        {
-
-        };
     }
 
     [Broadcast]
     public void Damage( float amount )
     {
-        if ( Prop.Health <= 0 ) return;
+        if ( (Prop?.Health ?? 0) <= 0 ) return;
         if ( IsProxy ) return;
 
         Health -= amount;
@@ -50,10 +48,27 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         }
     }
 
+    [Broadcast]
+    public void AddForce( int bodyIndex, Vector3 force )
+    {
+        if ( IsProxy ) return;
+
+        Log.Info( bodyIndex );
+        var body = Physics?.PhysicsGroup?.GetBody( bodyIndex );
+        if ( body.IsValid() )
+            body.ApplyForce( force );
+        else
+            Rigidbody.Velocity += force;
+    }
+
+
     protected override void OnFixedUpdate()
     {
-        Velocity = (Prop.Transform.Position - _lastPosition) / Time.Delta;
-        _lastPosition = Prop.Transform.Position;
+        if ( Prop.IsValid() )
+        {
+            Velocity = (Prop.Transform.Position - _lastPosition) / Time.Delta;
+            _lastPosition = Prop.Transform.Position;
+        }
 
         UpdateNetworkedBodies();
     }
@@ -116,6 +131,11 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         {
             var dmg = speed / 8f;
             Damage( dmg );
+
+            if ( other.Other.GameObject.Root.Components.TryGet<Player>( out var player ) )
+            {
+                player.Damage( dmg );
+            }
         }
     }
 }

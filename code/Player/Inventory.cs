@@ -137,6 +137,16 @@ public sealed class Inventory : Component
 		HoveredIndex = Weapons.OrderBy( x => x.Resource.Slot ).ToList().IndexOf( weapon );
 	}
 
+	public void HolsterWeapon()
+	{
+		Assert.True( !IsProxy );
+
+		if ( !CurrentWeapon.IsValid() ) return;
+
+		CurrentWeapon.Unequip();
+		CurrentWeapon = null;
+	}
+
 	public void RemoveWeapon( Weapon weapon )
 	{
 		Assert.True( !IsProxy );

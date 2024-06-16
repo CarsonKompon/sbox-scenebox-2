@@ -1,0 +1,21 @@
+{
+  "Name": "Revolver",
+  "Description": "six shooter",
+  "Slot": 2,
+  "IconCharacter": "e",
+  "HasAmmo": true,
+  "ClipSize": 16,
+  "MainPrefab": {
+    "_type": "gameobject",
+    "prefab": "weapons/revolver/revolver_w.prefab"
+  },
+  "ViewModelPrefab": {
+    "_type": "gameobject",
+    "prefab": "weapons/revolver/revolver_v.prefab"
+  },
+  "WorldModel": "models/weapons/w_revolver.vmdl",
+  "__references": [
+    "gok.w_revolver"
+  ],
+  "__version": 0
+}

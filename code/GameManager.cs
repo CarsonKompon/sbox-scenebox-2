@@ -23,6 +23,11 @@ public sealed class GameManager : Component, Component.INetworkListener
     protected override void OnUpdate()
     {
         ThumbnailCache.CheckTextureQueue();
+
+        if ( !Player.Local.IsValid() && (Input.Pressed( "Jump" ) || Input.Pressed( "Attack1" )) )
+        {
+            SpawnPlayer( Connection.Local );
+        }
     }
 
     protected override async Task OnLoad()
@@ -42,8 +47,16 @@ public sealed class GameManager : Component, Component.INetworkListener
     {
         Log.Info( $"Player '{channel.DisplayName}' has joined the game" );
 
+        SpawnPlayer( channel );
+    }
+
+    void SpawnPlayer( Connection channel )
+    {
         if ( PlayerPrefab is null )
             return;
+
+        var existingPlayer = Scene.GetAllComponents<Player>().FirstOrDefault( x => x.Network.OwnerId == channel.Id );
+        existingPlayer?.Kill();
 
         var startLocation = FindSpawnLocation().WithScale( 1 );
 
@@ -178,6 +191,23 @@ public sealed class GameManager : Component, Component.INetworkListener
     public void BroadcastRemoveTag( Guid objectId, string tag )
     {
         Scene.Directory.FindByGuid( objectId )?.Tags?.Remove( tag );
+    }
+
+    [Broadcast]
+    public void BroadcastSetTag( Guid objectId, string tag, bool state )
+    {
+        var obj = Scene.Directory.FindByGuid( objectId );
+        if ( obj.IsValid() )
+        {
+            if ( state )
+            {
+                obj.Tags.Add( tag );
+            }
+            else
+            {
+                obj.Tags.Remove( tag );
+            }
+        }
     }
 
     [Broadcast]

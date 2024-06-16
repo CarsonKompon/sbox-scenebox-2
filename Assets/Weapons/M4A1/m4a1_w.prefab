@@ -26,7 +26,7 @@
         },
         "Range": 2000,
         "Resource": "weapons/m4a1/m4a1.weapon",
-        "ShootSound": "sounds/weapons/rifle_light.sound"
+        "ShootSound": "sounds/weapons/ar_light.sound"
       }
     ],
     "Children": [

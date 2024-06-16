@@ -7,6 +7,28 @@
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Scenebox.TraceWeapon",
+        "__guid": "8adad3eb-c909-4857-b189-62ec98304d07",
+        "Cooldown": 0.4,
+        "Damage": 20,
+        "HoldType": "Pistol",
+        "ModelRenderer": {
+          "_type": "component",
+          "component_id": "48095363-89e0-45b7-a274-0bef66d3d673",
+          "go": "dfe85094-d61e-41a4-af87-34cbff10bb10",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Muzzle": {
+          "_type": "gameobject",
+          "go": "d9f05d0a-08b1-4dd3-8945-728406235242"
+        },
+        "Range": 2000,
+        "Resource": "weapons/usp/usp.weapon",
+        "ShootSound": "sounds/weapons/pistol_light_1.sound"
+      }
+    ],
     "Children": [
       {
         "__guid": "dfe85094-d61e-41a4-af87-34cbff10bb10",

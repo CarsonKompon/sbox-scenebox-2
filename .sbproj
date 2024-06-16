@@ -5,7 +5,7 @@
   "Ident": "scenebox_2",
   "Tags": null,
   "Schema": 1,
-  "Resources": null,
+  "Resources": "/fonts/*\nui/*",
   "PackageReferences": [],
   "EditorReferences": null,
   "Metadata": {
@@ -21,6 +21,7 @@
     "PerMapRanking": false,
     "LeaderboardType": "None",
     "CsProjName": "",
-    "StartupScene": "scenes/minimal.scene"
+    "StartupScene": "scenes/minimal.scene",
+    "LaunchMode": "QuickPlay"
   }
 }

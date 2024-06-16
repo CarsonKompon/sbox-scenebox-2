@@ -2,11 +2,33 @@
   "RootObject": {
     "__guid": "bc32a5fb-cd1a-4efb-b34d-3792f4a472d2",
     "Flags": 0,
-    "Name": "mp5_ww",
+    "Name": "mp5_w",
     "Tags": "player",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Scenebox.TraceWeapon",
+        "__guid": "a9e0e764-46b7-4c8b-894d-152d527c645b",
+        "Cooldown": 0.1,
+        "Damage": 12,
+        "HoldType": "Rifle",
+        "ModelRenderer": {
+          "_type": "component",
+          "component_id": "1c0445b5-3a8b-4193-b96c-63e380eb82c8",
+          "go": "1b9828fd-a540-44db-ab12-68e4a89d807f",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Muzzle": {
+          "_type": "gameobject",
+          "go": "897c2d58-8bf5-4a72-9ae6-5370b285aa1e"
+        },
+        "Range": 2000,
+        "Resource": "weapons/mp5/mp5.weapon",
+        "ShootSound": "sounds/weapons/rifle_light.sound"
+      }
+    ],
     "Children": [
       {
         "__guid": "1b9828fd-a540-44db-ab12-68e4a89d807f",
@@ -42,7 +64,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

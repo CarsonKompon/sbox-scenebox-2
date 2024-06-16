@@ -7,18 +7,7 @@ namespace Scenebox;
 
 public sealed class Player : Component
 {
-	public static Player Local
-	{
-		get
-		{
-			if ( !_local.IsValid() )
-			{
-				_local = Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault( x => x.Network.IsOwner );
-			}
-			return _local;
-		}
-	}
-	private static Player _local;
+	public static Player Local => Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault( x => x.Network.IsOwner );
 
 	[RequireComponent] public CharacterController CharacterController { get; set; }
 	[RequireComponent] public Inventory Inventory { get; set; }
@@ -27,6 +16,8 @@ public sealed class Player : Component
 	[Property, Group( "References" )] public GameObject Body { get; set; }
 	[Property, Group( "References" )] public GameObject FirstPersonView { get; set; }
 	[Property, Group( "References" )] public CitizenAnimationHelper AnimationHelper { get; set; }
+	[Property, Group( "References" )] public ModelPhysics ModelPhysics { get; set; }
+	[Property, Group( "References" )] public Collider PlayerBoxCollider { get; set; }
 
 	[Property, Group( "Movement" )] public float GroundControl { get; set; } = 4.0f;
 	[Property, Group( "Movement" )] public float AirControl { get; set; } = 0.1f;
@@ -47,12 +38,7 @@ public sealed class Player : Component
 		{
 			_isFirstPerson = value;
 
-			var renderers = AnimationHelper.GameObject.Components.GetAll<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
-			foreach ( var renderer in renderers )
-			{
-				renderer.RenderType = _isFirstPerson ? ModelRenderer.ShadowRenderType.ShadowsOnly : ModelRenderer.ShadowRenderType.On;
-			}
-
+			ShowBodyParts( !_isFirstPerson );
 			if ( _isFirstPerson ) Inventory?.CurrentWeapon?.CreateViewModel();
 			else Inventory?.CurrentWeapon?.ClearViewModel();
 		}
@@ -254,6 +240,33 @@ public sealed class Player : Component
 		}
 	}
 
+	void ShowBodyParts( bool show )
+	{
+		var renderers = AnimationHelper.GameObject.Components.GetAll<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+		foreach ( var renderer in renderers )
+		{
+			renderer.RenderType = show ? ModelRenderer.ShadowRenderType.On : ModelRenderer.ShadowRenderType.ShadowsOnly;
+		}
+	}
+
+	void SetRagdoll( bool enabled )
+	{
+		ModelPhysics.Enabled = enabled;
+		AnimationHelper.Target.UseAnimGraph = !enabled;
+
+		GameManager.Instance.BroadcastSetTag( GameObject.Id, "ragdoll", enabled );
+
+		if ( !enabled )
+		{
+			GameObject.Transform.LocalPosition = Vector3.Zero;
+			GameObject.Transform.LocalRotation = Rotation.Identity;
+		}
+
+		ShowBodyParts( enabled );
+
+		Transform.ClearInterpolation();
+	}
+
 	[Broadcast]
 	public void Damage( float amount )
 	{
@@ -263,8 +276,34 @@ public sealed class Player : Component
 		Health -= (int)amount;
 		if ( Health <= 0 )
 		{
-			// TODO: Die
+			Kill();
 		}
+	}
+
+	[Broadcast]
+	public void Kill( bool enableRagdoll = true )
+	{
+		GameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+		GameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+		if ( enableRagdoll )
+		{
+			SetRagdoll( true );
+			PlayerBoxCollider.Enabled = false;
+			var fadeAfter = Components.GetOrCreate<FadeAfter>();
+			fadeAfter.Time = 10f;
+			fadeAfter.FadeTime = 4f;
+		}
+		else
+		{
+			GameObject.Tags.Set( "invisible", true );
+			SetRagdoll( false );
+		}
+
+		if ( IsProxy ) return;
+		Health = 0;
+
+		Inventory.HolsterWeapon();
+		BroadcastDestroy( GameObject.Id );
 	}
 
 	[Broadcast]
@@ -284,5 +323,21 @@ public sealed class Player : Component
 	internal void BroadcastAttackAnimation()
 	{
 		AnimationHelper?.Target?.Set( "b_attack", true );
+	}
+
+	[Broadcast]
+	void BroadcastDestroy( Guid id )
+	{
+		var gameObject = Scene.Directory.FindByGuid( id );
+		if ( gameObject.IsValid() )
+		{
+			AnimationHelper.Components.GetOrCreate<PropHelper>();
+			Components.Get<Inventory>()?.Destroy();
+			Components.Get<Player>()?.Destroy();
+			Components.Get<CharacterController>()?.Destroy();
+			Components.Get<Voice>()?.Destroy();
+		}
+
+		if ( !IsProxy ) Network.Refresh();
 	}
 }

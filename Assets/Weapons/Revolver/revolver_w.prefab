@@ -8,21 +8,24 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Weapon",
-        "Body": "00592f38-e92d-480d-b5f6-5b381936aa2e",
-        "BulletPrefab": "prefabs/projectiles/bullet_trace.prefab",
-        "BulletSpawnPos": "598d07d8-a03c-4f05-909e-03631cd09896",
-        "BulletsPerShot": 1,
-        "ClipSize": 16,
-        "Damage": 25,
-        "FireRate": 0.9,
-        "FireSound": "sounds/weapons/revolver_1.sound",
+        "__type": "Scenebox.TraceWeapon",
+        "__guid": "6162d819-2e16-42d9-bed0-dbce96a42c04",
+        "Cooldown": 0.55,
+        "Damage": 50,
         "HoldType": "Pistol",
-        "Icon": "ui/weapons/revolver.png",
-        "IsDefault": false,
-        "Name": "Revolver",
-        "Range": 1000,
-        "Spread": 0
+        "ModelRenderer": {
+          "_type": "component",
+          "component_id": "a3f33505-742e-46d4-a899-619df384aa02",
+          "go": "00592f38-e92d-480d-b5f6-5b381936aa2e",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Muzzle": {
+          "_type": "gameobject",
+          "go": "598d07d8-a03c-4f05-909e-03631cd09896"
+        },
+        "Range": 2000,
+        "Resource": "weapons/revolver/revolver.weapon",
+        "ShootSound": "sounds/weapons/revolver_1.sound"
       }
     ],
     "Children": [
@@ -61,7 +64,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,

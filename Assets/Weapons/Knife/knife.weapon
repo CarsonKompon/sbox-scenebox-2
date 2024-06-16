@@ -1,7 +1,7 @@
 {
   "Name": "Knife",
   "Description": "A basic weapon",
-  "Slot": 1,
+  "Slot": 5,
   "IconCharacter": "ui/weapons/knife.png",
   "HasAmmo": false,
   "ClipSize": 16,
