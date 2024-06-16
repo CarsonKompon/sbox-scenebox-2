@@ -105,9 +105,6 @@ public partial class ViewModel : Component
         ModelRenderer?.Set( "move_groundspeed", moveLen );
     }
 
-    private float FieldOfViewOffset = 0f;
-    private float TargetFieldOfView = 90f;
-
     void ApplyAnimationParameters()
     {
         ModelRenderer.Set( "b_sprint", Player.IsSprinting && Player.WishVelocity.Length > 1 );
