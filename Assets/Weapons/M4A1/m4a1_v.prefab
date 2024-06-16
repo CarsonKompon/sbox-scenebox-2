@@ -9,32 +9,6 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Facepunch.ViewModel",
-        "__guid": "3906a1c0-2ab7-48f2-ab9e-d3cfc12e5be5",
-        "Arms": {
-          "_type": "component",
-          "component_id": "fb235c71-917c-40f4-8b6e-e19cf3e75210",
-          "go": "719d259a-f296-4a92-ae85-7c7930cced26",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "EjectionPort": {
-          "_type": "gameobject",
-          "go": "2a99b205-e03c-49a0-b45b-f0cc99872f16"
-        },
-        "IsThrowable": false,
-        "ModelRenderer": {
-          "_type": "component",
-          "component_id": "b383d63d-87b2-4a34-9552-25f6781c5dd6",
-          "go": "f53ff74d-59ef-40fc-bae0-3ffc3c86d32e",
-          "component_type": "SkinnedModelRenderer"
-        },
-        "Muzzle": {
-          "_type": "gameobject",
-          "go": "aaf084c0-49a2-4388-9d51-6e840effceb9"
-        },
-        "ThrowableType": "HEGrenade"
-      },
-      {
         "__type": "Scenebox.ViewModel",
         "__guid": "9d9a8092-76bb-4863-be96-1a9f047971fe",
         "Arms": {
@@ -48,6 +22,10 @@
           "component_id": "b383d63d-87b2-4a34-9552-25f6781c5dd6",
           "go": "f53ff74d-59ef-40fc-bae0-3ffc3c86d32e",
           "component_type": "SkinnedModelRenderer"
+        },
+        "Muzzle": {
+          "_type": "gameobject",
+          "go": "aaf084c0-49a2-4388-9d51-6e840effceb9"
         }
       },
       {

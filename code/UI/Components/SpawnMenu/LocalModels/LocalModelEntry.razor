@@ -14,6 +14,8 @@
     void Spawn()
     {
         var localPlayer = Player.Local;
+        if (!localPlayer.IsValid())
+            return;
 
         var tr = Scene.Trace.Ray(new Ray(localPlayer.Head.Transform.Position, localPlayer.Direction.Forward), 10_000)
         .IgnoreGameObject(localPlayer.GameObject.Root)

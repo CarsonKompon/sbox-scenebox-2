@@ -1,0 +1,17 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@namespace Scenebox
+@attribute [StyleSheet]
+
+<root>
+    <div class="health">
+        <label class="health-header">HEALTH</label>
+        <label class="value">@Player.Local.Health</label>
+    </div>
+</root>
+
+@code
+{
+    protected override int BuildHash() => System.HashCode.Combine(Player.Local?.Health);
+}

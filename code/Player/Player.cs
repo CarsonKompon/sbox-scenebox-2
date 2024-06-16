@@ -67,11 +67,11 @@ public sealed class Player : Component
 			IsSprinting = Input.Down( "Run" );
 			if ( Input.Pressed( "Jump" ) ) Jump();
 
+			Inventory.CheckWeaponConfirm();
 			if ( Inventory.CurrentWeapon.IsValid() )
 			{
 				Inventory.CurrentWeapon.Update();
 			}
-
 			Inventory.CheckWeaponSwap();
 
 			UpdateCamera();
@@ -273,6 +273,10 @@ public sealed class Player : Component
 		if ( Health <= 0 ) return;
 		if ( IsProxy ) return;
 
+		HurtOverlay.Instance?.Hurt();
+		var sound = Sound.Play( "impact-melee-flesh" );
+		sound.ListenLocal = true;
+
 		Health -= (int)amount;
 		if ( Health <= 0 )
 		{
@@ -328,16 +332,17 @@ public sealed class Player : Component
 	[Broadcast]
 	void BroadcastDestroy( Guid id )
 	{
+		bool isProxy = IsProxy;
 		var gameObject = Scene.Directory.FindByGuid( id );
 		if ( gameObject.IsValid() )
 		{
 			AnimationHelper.Components.GetOrCreate<PropHelper>();
 			Components.Get<Inventory>()?.Destroy();
-			Components.Get<Player>()?.Destroy();
 			Components.Get<CharacterController>()?.Destroy();
 			Components.Get<Voice>()?.Destroy();
+			Components.Get<Player>()?.Destroy();
 		}
 
-		if ( !IsProxy ) Network.Refresh();
+		if ( !isProxy ) Network.Refresh();
 	}
 }

@@ -41,7 +41,7 @@ public sealed class Inventory : Component
 		}
 	}
 
-	public void CheckWeaponSwap()
+	public void CheckWeaponConfirm()
 	{
 		if ( timeSinceLastHover < 3f && Input.Pressed( "Attack1" ) )
 		{
@@ -54,9 +54,11 @@ public sealed class Inventory : Component
 			timeSinceLastHover = 10;
 			Input.ReleaseAction( "Attack1" );
 			HoveredIndex = -1;
-			return;
 		}
+	}
 
+	public void CheckWeaponSwap()
+	{
 		for ( int i = 0; i < 10; i++ )
 		{
 			if ( Input.Pressed( $"Slot{i}" ) )

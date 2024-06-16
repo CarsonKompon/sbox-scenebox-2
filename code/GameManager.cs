@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Scenebox;
 
-public sealed class GameManager : Component, Component.INetworkListener
+public partial class GameManager : Component, Component.INetworkListener
 {
     public static GameManager Instance { get; private set; }
 

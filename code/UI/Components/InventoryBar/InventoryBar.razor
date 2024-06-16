@@ -29,7 +29,12 @@
 
 @code
 {
-    public Inventory Inventory { get; set; }
+    Inventory Inventory
+    {
+        get => (!_inventory.IsValid()) ? Player.Local.Inventory : _inventory;
+        set => _inventory = value;
+    }
+    private Inventory _inventory;
     bool Visible => (Inventory?.timeSinceLastHover ?? 10) < 1f;
 
     protected override int BuildHash() => System.HashCode.Combine(Visible, Inventory?.HoveredIndex);

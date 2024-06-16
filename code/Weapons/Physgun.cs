@@ -6,6 +6,7 @@ namespace Scenebox;
 public class Physgun : Weapon
 {
     [Property] LegacyParticleSystem BeamParticles { get; set; }
+    [Property, Group( "Prefabs" )] public GameObject FreezeParticles { get; set; }
 
     public PhysicsBody HeldBody { get; private set; }
     public Vector3 HeldPosition { get; private set; }
@@ -220,10 +221,7 @@ public class Physgun : Weapon
                 HeldBody.AngularVelocity = 0;
             }
 
-            if ( GrabbedObject.IsValid() )
-            {
-                // TODO: Freeze particles here
-            }
+            BroadcastFreezeParticles( HeldBody.IsValid() ? (HeldBody.Position + HeldPosition * HeldBody.Rotation) : lastBeamPosition );
 
             GrabEnd();
             return;
@@ -398,5 +396,11 @@ public class Physgun : Weapon
         var ecp = BeamParticles.ControlPoints[1];
         ecp.VectorValue = endPos;
         BeamParticles.ControlPoints[1] = ecp;
+    }
+
+    [Broadcast]
+    void BroadcastFreezeParticles( Vector3 position )
+    {
+        FreezeParticles?.Clone( position );
     }
 }

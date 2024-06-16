@@ -29,6 +29,7 @@ public partial class ViewModel : Component
     protected override void OnStart()
     {
         ModelRenderer?.Set( "b_deploy", true );
+        if ( !Network.IsOwner ) GameObject.Enabled = false;
 
         if ( Player.IsValid() ) Player.OnJump += OnPlayerJumped;
     }

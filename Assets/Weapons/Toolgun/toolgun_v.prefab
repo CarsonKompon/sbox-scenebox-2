@@ -19,8 +19,8 @@
         },
         "ModelRenderer": {
           "_type": "component",
-          "component_id": "483dd8a2-1428-4ab4-934f-eed8d3822e5b",
-          "go": "2b242031-1de2-40d8-b2f9-7a153dfb49f4",
+          "component_id": "1d9e3841-ac90-4825-9169-86d69c1483cd",
+          "go": "8a589723-0322-4c54-b3a5-bd743b1d0fc1",
           "component_type": "SkinnedModelRenderer"
         },
         "Muzzle": {
@@ -306,8 +306,9 @@
                                 "__guid": "2b242031-1de2-40d8-b2f9-7a153dfb49f4",
                                 "Flags": 0,
                                 "Name": "Object",
-                                "Position": "-2.277367,1.636248,1.409332",
+                                "Position": "-2.277367,1.536247,0.9093319",
                                 "Rotation": "-0.1076683,-0.1130861,-0.6969213,0.6999435",
+                                "Scale": "0.8,0.8,0.8",
                                 "Enabled": true,
                                 "NetworkMode": 2,
                                 "NetworkInterpolation": true,
@@ -344,7 +345,7 @@
                                     "CurrentPanelScale": 0,
                                     "CurrentPanelScaleFromScreen": 0,
                                     "CurrentPanelScaleToScreen": 0,
-                                    "CurrentScreenSize": "878,494",
+                                    "CurrentScreenSize": "1018,581",
                                     "CustomPanelBounds": {
                                       "Size": "256,256"
                                     },
@@ -379,8 +380,7 @@
                                     "Components": [
                                       {
                                         "__type": "Scenebox.ToolgunScreen",
-                                        "__guid": "05c6bf93-b888-4738-a868-62c518a77c0c",
-                                        "MyStringValue": "Hello World!"
+                                        "__guid": "05c6bf93-b888-4738-a868-62c518a77c0c"
                                       }
                                     ]
                                   }

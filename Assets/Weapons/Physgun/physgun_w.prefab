@@ -17,6 +17,11 @@
           "go": "14fec249-7523-4dc1-878f-b3795f5dc202",
           "component_type": "LegacyParticleSystem"
         },
+        "Damage": 20,
+        "FreezeParticles": {
+          "_type": "gameobject",
+          "prefab": "prefabs/particles/particle_freeze.prefab"
+        },
         "HoldType": "Pistol",
         "ModelRenderer": {
           "_type": "component",

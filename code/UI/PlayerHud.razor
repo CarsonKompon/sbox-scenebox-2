@@ -6,20 +6,16 @@
 <root>
 	@if (!Player.Local.IsValid()) return;
 
-	<InventoryBar Inventory=@Player.Local.Inventory />
+	<InventoryBar />
 
 	<div class="crosshair" />
 
-	<div class="health">
-		<label class="health-header">HEALTH</label>
-		<label class="value">@Player.Local.Health</label>
-	</div>
+	<PlayerVitals />
+
+	<HurtOverlay />
 </root>
 
 @code
 {
 
-
-
-	protected override int BuildHash() => System.HashCode.Combine(Player.Local?.Health);
 }

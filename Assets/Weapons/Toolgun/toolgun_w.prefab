@@ -11,6 +11,7 @@
       {
         "__type": "Scenebox.Toolgun",
         "__guid": "cde37568-b873-4e81-a1cf-afa27e827908",
+        "Damage": 20,
         "HoldType": "Pistol",
         "ModelRenderer": {
           "_type": "component",
@@ -22,7 +23,8 @@
           "_type": "gameobject",
           "go": "cf4feaa9-289a-4cbd-abda-1c5529cbf45a"
         },
-        "Resource": "weapons/toolgun/toolgun.weapon"
+        "Resource": "weapons/toolgun/toolgun.weapon",
+        "UseSound": "sounds/toolgun/gmod.toolgun.fire.sound"
       }
     ],
     "Children": [
