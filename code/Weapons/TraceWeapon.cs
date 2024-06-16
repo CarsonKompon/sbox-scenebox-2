@@ -7,6 +7,8 @@ public class TraceWeapon : Weapon
 {
     [Property] public float Cooldown { get; set; } = 0.3f;
     [Property] public float Range { get; set; } = 2000f;
+    [Property] public int BulletCount { get; set; } = 1;
+    [Property] public float Spread { get; set; } = 0;
 
     [Property, Group( "Sounds" )] SoundEvent ShootSound { get; set; }
 
@@ -26,15 +28,19 @@ public class TraceWeapon : Weapon
     {
         if ( timeSinceLastAttack < Cooldown ) return;
 
-        var tr = Scene.Trace.Ray( new Ray( Player.Head.Transform.Position, Player.Direction.Forward ), Range )
-            .IgnoreGameObjectHierarchy( GameObject.Root )
-            .WithoutTags( "trigger" )
-            .Run();
+        for ( int i = 0; i < BulletCount; i++ )
+        {
+            var angles = Player.Direction + new Angles( Random.Shared.Float( -Spread, Spread ), Random.Shared.Float( -Spread, Spread ), 0 );
+            var tr = Scene.Trace.Ray( new Ray( Player.Head.Transform.Position, angles.Forward ), Range )
+                .IgnoreGameObjectHierarchy( GameObject.Root )
+                .WithoutTags( "trigger" )
+                .Run();
 
-        Attack( tr );
-        BroadcastBulletTrail( tr.StartPosition, tr.EndPosition, tr.Distance, 0 );
+            Attack( tr );
+            BroadcastBulletTrail( tr.StartPosition, tr.EndPosition, tr.Distance, 0 );
+        }
+
         BroadcastAttackAnimation();
-
         timeSinceLastAttack = 0f;
     }
 

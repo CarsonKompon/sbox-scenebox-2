@@ -11,6 +11,7 @@
       {
         "__type": "Scenebox.TraceWeapon",
         "__guid": "a9e0e764-46b7-4c8b-894d-152d527c645b",
+        "BulletCount": 1,
         "Cooldown": 0.1,
         "Damage": 12,
         "HoldType": "Rifle",
@@ -26,7 +27,8 @@
         },
         "Range": 2000,
         "Resource": "weapons/mp5/mp5.weapon",
-        "ShootSound": "sounds/weapons/rifle_light.sound"
+        "ShootSound": "sounds/weapons/rifle_light.sound",
+        "Spread": 1
       }
     ],
     "Children": [

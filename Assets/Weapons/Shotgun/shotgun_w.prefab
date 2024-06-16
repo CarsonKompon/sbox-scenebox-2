@@ -8,21 +8,26 @@
     "NetworkInterpolation": true,
     "Components": [
       {
-        "__type": "Weapon",
-        "Body": "131955dc-db0f-421c-8a3c-82ac73c12ba5",
-        "BulletPrefab": "prefabs/projectiles/bullet_trace.prefab",
-        "BulletSpawnPos": "74540792-fda8-4954-9bf1-49793a404eff",
-        "BulletsPerShot": 6,
-        "ClipSize": 32,
-        "Damage": 5,
-        "FireRate": 0.5,
-        "FireSound": "sounds/weapons/shotgun_auto.sound",
+        "__type": "Scenebox.TraceWeapon",
+        "__guid": "b137f570-6293-445c-a10b-8bcb8e96cf0c",
+        "BulletCount": 7,
+        "Cooldown": 1,
+        "Damage": 8,
         "HoldType": "Shotgun",
-        "Icon": "ui/weapons/shotgun-auto.png",
-        "IsDefault": false,
-        "Name": "Auto Shotgun",
-        "Range": 148,
-        "Spread": 20
+        "ModelRenderer": {
+          "_type": "component",
+          "component_id": "a04fe41c-20e8-44c0-98ef-fad39c3b64fd",
+          "go": "131955dc-db0f-421c-8a3c-82ac73c12ba5",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Muzzle": {
+          "_type": "gameobject",
+          "go": "74540792-fda8-4954-9bf1-49793a404eff"
+        },
+        "Range": 2000,
+        "Resource": "weapons/shotgun/shotgun.weapon",
+        "ShootSound": "sounds/weapons/shotgun_medium.sound",
+        "Spread": 3.5
       }
     ],
     "Children": [
@@ -61,7 +66,8 @@
           }
         ]
       }
-    ]
+    ],
+    "__variables": []
   },
   "ShowInMenu": false,
   "MenuPath": null,
