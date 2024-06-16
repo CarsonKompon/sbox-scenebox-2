@@ -64,6 +64,7 @@
           "weapons/revolver/revolver.weapon",
           "weapons/m4a1/m4a1.weapon",
           "weapons/shotgun/shotgun.weapon",
+          "weapons/gravgun/gravgun.weapon",
           "weapons/physgun/physgun.weapon"
         ],
         "WeaponParent": {
