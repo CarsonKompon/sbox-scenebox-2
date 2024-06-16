@@ -11,8 +11,10 @@
       {
         "__type": "Scenebox.TraceWeapon",
         "__guid": "8adad3eb-c909-4857-b189-62ec98304d07",
+        "BulletCount": 1,
         "Cooldown": 0.4,
         "Damage": 20,
+        "Force": 10,
         "HoldType": "Pistol",
         "ModelRenderer": {
           "_type": "component",
@@ -26,7 +28,8 @@
         },
         "Range": 2000,
         "Resource": "weapons/usp/usp.weapon",
-        "ShootSound": "sounds/weapons/pistol_light_1.sound"
+        "ShootSound": "sounds/weapons/pistol_light_1.sound",
+        "Spread": 0
       }
     ],
     "Children": [

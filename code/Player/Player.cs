@@ -332,7 +332,6 @@ public sealed class Player : Component
 	[Broadcast]
 	void BroadcastDestroy( Guid id )
 	{
-		bool isProxy = IsProxy;
 		var gameObject = Scene.Directory.FindByGuid( id );
 		if ( gameObject.IsValid() )
 		{
@@ -342,7 +341,5 @@ public sealed class Player : Component
 			Components.Get<Voice>()?.Destroy();
 			Components.Get<Player>()?.Destroy();
 		}
-
-		if ( !isProxy ) Network.Refresh();
 	}
 }

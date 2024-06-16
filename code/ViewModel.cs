@@ -41,6 +41,7 @@ public partial class ViewModel : Component
 
     void ApplyAnimationTransform()
     {
+        if ( !Network.IsOwner ) return;
         if ( !ModelRenderer.IsValid() ) return;
         if ( !ModelRenderer.Enabled ) return;
 

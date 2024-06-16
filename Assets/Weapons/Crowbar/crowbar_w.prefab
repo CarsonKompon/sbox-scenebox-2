@@ -12,6 +12,8 @@
         "__type": "Scenebox.MeleeWeapon",
         "__guid": "763d3c56-2957-436c-a9bb-5622a4022506",
         "Cooldown": 0.5,
+        "Damage": 20,
+        "Force": 20,
         "HoldType": "Swing",
         "ModelRenderer": {
           "_type": "component",
@@ -23,6 +25,7 @@
           "_type": "gameobject",
           "go": "1bdbe4de-1811-4ce7-b64d-a28744b913b5"
         },
+        "Range": 100,
         "Resource": "weapons/crowbar/crowbar.weapon"
       }
     ],

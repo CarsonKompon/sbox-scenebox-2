@@ -50,6 +50,23 @@
           "__type": "Scenebox.PlayerHud",
           "__guid": "8881c500-240e-413f-a1ce-a13b85f9d54e"
         }
+      ],
+      "Children": [
+        {
+          "__guid": "27c9228f-31f4-4184-be72-38bd6a5dbe38",
+          "Flags": 0,
+          "Name": "Object",
+          "Position": "0,0,0",
+          "Enabled": true,
+          "NetworkMode": 1,
+          "NetworkInterpolation": true,
+          "Components": [
+            {
+              "__type": "Scenebox.Chatbox",
+              "__guid": "d4233a90-0255-48bf-a933-8e3279a444f9"
+            }
+          ]
+        }
       ]
     },
     {
@@ -125,7 +142,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-16T11:36:25.2697232-04:00",
+  "LastSaved": "2024-06-16T13:43:28.0495658-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

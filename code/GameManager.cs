@@ -80,15 +80,15 @@ public partial class GameManager : Component, Component.INetworkListener
         return Transform.World;
     }
 
-    public void SpawnModel( Model model, Vector3 position, Rotation rotation )
+    public GameObject SpawnModel( Model model, Vector3 position, Rotation rotation )
     {
         var gameObject = new GameObject();
-        gameObject.Name = model.ResourceName;
+        gameObject.Name = model?.ResourceName ?? "";
 
         gameObject.Transform.Position = position;
         gameObject.Transform.Rotation = rotation;
 
-        if ( model.Physics?.Parts.Count() > 0 )
+        if ( model == null || model.Physics?.Parts.Count() > 0 )
         {
             var prop = gameObject.Components.Create<Prop>();
             prop.Model = model;
@@ -107,6 +107,8 @@ public partial class GameManager : Component, Component.INetworkListener
         gameObject.NetworkSpawn();
         gameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
         gameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+
+        return gameObject;
     }
 
     public LegacyParticleSystem CreateParticleSystem( string particle, Vector3 pos, Rotation rot, float decay = 5f )
@@ -129,25 +131,9 @@ public partial class GameManager : Component, Component.INetworkListener
     {
         if ( !Networking.IsHost ) return;
 
-        MountCloudModel( cloudModel );
-        SpawnCloudModelAsync( cloudModel, position, rotation );
-    }
-
-    [Broadcast]
-    public async void MountCloudModel( string cloudModel )
-    {
-        if ( Connection.Local.Id == Rpc.CallerId ) return;
-        var package = await Package.Fetch( cloudModel, false );
-        await package.MountAsync();
-    }
-
-    async void SpawnCloudModelAsync( string cloudIdent, Vector3 position, Rotation rotation )
-    {
-        var package = await Package.FetchAsync( cloudIdent, false );
-        await package.MountAsync();
-
-        var model = Model.Load( package.GetMeta( "PrimaryAsset", "" ) );
-        SpawnModel( model, position, rotation );
+        var gameObject = SpawnModel( null, position, rotation );
+        var propHelper = gameObject.Components.Get<PropHelper>();
+        propHelper?.SetCloudModel( cloudModel );
     }
 
     [Broadcast]

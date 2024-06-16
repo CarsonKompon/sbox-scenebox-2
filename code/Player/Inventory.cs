@@ -145,7 +145,10 @@ public sealed class Inventory : Component
 
 		if ( !CurrentWeapon.IsValid() ) return;
 
-		CurrentWeapon.Unequip();
+		foreach ( var weapon in Weapons )
+		{
+			weapon.Unequip();
+		}
 		CurrentWeapon = null;
 	}
 

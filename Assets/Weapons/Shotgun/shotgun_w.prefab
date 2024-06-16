@@ -10,9 +10,10 @@
       {
         "__type": "Scenebox.TraceWeapon",
         "__guid": "b137f570-6293-445c-a10b-8bcb8e96cf0c",
-        "BulletCount": 7,
+        "BulletCount": 8,
         "Cooldown": 1,
-        "Damage": 8,
+        "Damage": 13,
+        "Force": 8,
         "HoldType": "Shotgun",
         "ModelRenderer": {
           "_type": "component",

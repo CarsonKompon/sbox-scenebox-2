@@ -12,6 +12,7 @@ public class Weapon : Component
     [Property] protected CitizenAnimationHelper.HoldTypes HoldType { get; set; } = CitizenAnimationHelper.HoldTypes.Pistol;
 
     [Property] public float Damage { get; set; } = 20f;
+    [Property] protected float Force { get; set; } = 20f;
 
 
     [Property, Group( "Sounds" )] public SoundEvent EquipSound { get; set; }
@@ -174,8 +175,8 @@ public class Weapon : Component
 
             if ( tr.GameObject?.Components?.TryGet<PropHelper>( out var propHelper ) ?? false )
             {
+                propHelper.AddForce( tr.Body.GroupIndex, tr.Direction * 80000f * (Force / 10f) );
                 propHelper.Damage( Damage );
-                propHelper.AddForce( tr.Body.GroupIndex, tr.Direction * 20f * Damage );
             }
 
             if ( tr.GameObject?.Root?.Components?.TryGet<Player>( out var player ) ?? false )

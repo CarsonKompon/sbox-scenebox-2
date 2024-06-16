@@ -14,6 +14,7 @@
         "BulletCount": 1,
         "Cooldown": 0.1,
         "Damage": 12,
+        "Force": 10,
         "HoldType": "Rifle",
         "ModelRenderer": {
           "_type": "component",

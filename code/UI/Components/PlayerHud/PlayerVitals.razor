@@ -7,7 +7,7 @@
 <root>
     <div class="health">
         <label class="health-header">HEALTH</label>
-        <label class="value">@Player.Local.Health</label>
+        <label class="value">@(Player.Local?.Health ?? 0)</label>
     </div>
 </root>
 

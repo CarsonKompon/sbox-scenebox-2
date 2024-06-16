@@ -6,6 +6,7 @@ public sealed class PropHelper : Component, Component.ICollisionListener
 
     [Sync] public float Health { get; set; } = 1;
     [Sync] NetDictionary<int, BodyInfo> NetworkedBodies { get; set; } = new();
+    [Sync, Change( "InitCloudModel" )] string CloudModel { get; set; } = "";
 
     Vector3 _lastPosition = Vector3.Zero;
     Vector3 Velocity;
@@ -26,6 +27,8 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         Rigidbody = Components.Get<Rigidbody>();
         _lastPosition = Prop?.Transform?.Position ?? Transform.Position;
         Velocity = 0;
+
+        InitCloudModel();
     }
 
     [Broadcast]
@@ -53,12 +56,11 @@ public sealed class PropHelper : Component, Component.ICollisionListener
     {
         if ( IsProxy ) return;
 
-        Log.Info( bodyIndex );
         var body = Physics?.PhysicsGroup?.GetBody( bodyIndex );
         if ( body.IsValid() )
             body.ApplyForce( force );
-        else
-            Rigidbody.Velocity += force;
+        else if ( Rigidbody.IsValid() )
+            Rigidbody.Velocity += force / Rigidbody.PhysicsBody.Mass;
     }
 
 
@@ -75,7 +77,14 @@ public sealed class PropHelper : Component, Component.ICollisionListener
 
     void UpdateNetworkedBodies()
     {
-        if ( !Physics.IsValid() ) return;
+        if ( !Physics.IsValid() )
+        {
+            Physics = Components.Get<ModelPhysics>( FindMode.EverythingInSelf );
+            Rigidbody = Components.Get<Rigidbody>();
+            return;
+        }
+
+        Log.Info( $"UpdateNetworkedBodies for {Prop.Model?.ResourceName ?? "Someone"}" );
 
         if ( !Network.IsOwner )
         {
@@ -137,5 +146,43 @@ public sealed class PropHelper : Component, Component.ICollisionListener
                 player.Damage( dmg );
             }
         }
+    }
+
+
+    async void InitCloudModel()
+    {
+        if ( string.IsNullOrWhiteSpace( CloudModel ) ) return;
+
+        var package = await Package.Fetch( CloudModel, false );
+        await package.MountAsync();
+
+        var model = Model.Load( package.GetMeta( "PrimaryAsset", "" ) );
+        if ( model is null ) return;
+        if ( Prop.IsValid() )
+        {
+            Prop.Enabled = false;
+            Prop.Model = model;
+            Prop.Enabled = true;
+        }
+
+        var renderer = Components.Get<Renderer>();
+        if ( renderer.IsValid() )
+        {
+            renderer.Enabled = true;
+        }
+    }
+
+    [Broadcast]
+    public void SetCloudModel( string cloudModel )
+    {
+        CloudModel = cloudModel;
+
+        var renderer = Components.Get<Renderer>();
+        if ( renderer.IsValid() )
+        {
+            renderer.Enabled = false;
+        }
+
+        InitCloudModel();
     }
 }
