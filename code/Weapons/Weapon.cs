@@ -51,12 +51,9 @@ public class Weapon : Component
         }
     }
     private ViewModel _viewModel;
-    bool _hasStarted = false;
 
     protected override void OnStart()
     {
-        _hasStarted = true;
-
         if ( IsEquipped )
             OnEquip();
         else
@@ -181,7 +178,7 @@ public class Weapon : Component
 
             if ( tr.GameObject?.Root?.Components?.TryGet<Player>( out var player ) ?? false )
             {
-                player.Damage( Damage );
+                player.Damage( Damage, Resource.DamageCharacter );
             }
 
             GameManager.Instance.SpawnDecal( decal, tr.HitPosition, tr.Normal, tr.GameObject?.Id ?? Guid.Empty );

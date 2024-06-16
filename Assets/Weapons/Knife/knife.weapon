@@ -3,6 +3,7 @@
   "Description": "A basic weapon",
   "Slot": 5,
   "IconCharacter": "ui/weapons/knife.png",
+  "DamageCharacter": "j",
   "HasAmmo": false,
   "ClipSize": 16,
   "MainPrefab": {

@@ -3,6 +3,7 @@
   "Description": "A semi-automatic weapon capable of big damage",
   "Slot": 3,
   "IconCharacter": "l",
+  "DamageCharacter": "w",
   "HasAmmo": true,
   "ClipSize": 24,
   "MainPrefab": {

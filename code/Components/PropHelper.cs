@@ -121,7 +121,7 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         var body = Physics.PhysicsGroup.Bodies.FirstOrDefault();
         if ( body == null ) return null;
         while ( body.Parent.IsValid() )
-        { 
+        {
             body = body.Parent;
         }
         return body;
@@ -141,7 +141,7 @@ public sealed class PropHelper : Component, Component.ICollisionListener
 
             if ( other.Other.GameObject.Root.Components.TryGet<Player>( out var player ) )
             {
-                player.Damage( dmg );
+                player.Damage( dmg, "h/`" );
             }
         }
     }

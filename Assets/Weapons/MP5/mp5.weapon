@@ -3,6 +3,7 @@
   "Description": "We shootin",
   "Slot": 3,
   "IconCharacter": "a",
+  "DamageCharacter": "x",
   "HasAmmo": true,
   "ClipSize": 16,
   "MainPrefab": {

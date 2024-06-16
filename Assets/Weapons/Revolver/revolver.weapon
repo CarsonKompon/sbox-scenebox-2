@@ -3,6 +3,7 @@
   "Description": "six shooter",
   "Slot": 2,
   "IconCharacter": "e",
+  "DamageCharacter": "h/$",
   "HasAmmo": true,
   "ClipSize": 16,
   "MainPrefab": {

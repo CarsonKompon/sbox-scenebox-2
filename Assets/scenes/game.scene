@@ -55,7 +55,7 @@
         {
           "__guid": "27c9228f-31f4-4184-be72-38bd6a5dbe38",
           "Flags": 0,
-          "Name": "Object",
+          "Name": "Chat and Kill Feed",
           "Position": "0,0,0",
           "Enabled": true,
           "NetworkMode": 1,
@@ -64,6 +64,10 @@
             {
               "__type": "Scenebox.Chatbox",
               "__guid": "d4233a90-0255-48bf-a933-8e3279a444f9"
+            },
+            {
+              "__type": "Scenebox.KillFeed",
+              "__guid": "9ede538a-bbac-4a7a-b4cc-bc07bb7c2070"
             }
           ]
         }
@@ -142,7 +146,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-16T15:56:49.7102404-04:00",
+  "LastSaved": "2024-06-16T17:36:57.9839672-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

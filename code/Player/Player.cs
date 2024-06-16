@@ -270,7 +270,7 @@ public sealed class Player : Component
 	}
 
 	[Broadcast]
-	public void Damage( float amount )
+	public void Damage( float amount, string damageType = "C" )
 	{
 		if ( Health <= 0 ) return;
 		if ( IsProxy ) return;
@@ -282,12 +282,12 @@ public sealed class Player : Component
 		Health -= (int)amount;
 		if ( Health <= 0 )
 		{
-			Kill();
+			Kill( damageType, Rpc.Caller.DisplayName );
 		}
 	}
 
 	[Broadcast]
-	public void Kill( bool enableRagdoll = true )
+	public void Kill( string damageType = "C", string killer = "", bool enableRagdoll = true )
 	{
 		GameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 		GameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
@@ -308,6 +308,7 @@ public sealed class Player : Component
 
 		if ( IsProxy ) return;
 		Health = 0;
+		KillFeed.Instance?.AddEntry( killer, damageType, Network.OwnerConnection.DisplayName );
 
 		Inventory.HolsterWeapon();
 		BroadcastDestroy( GameObject.Id );

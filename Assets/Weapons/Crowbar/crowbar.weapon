@@ -3,6 +3,7 @@
   "Description": "Holy shit half-life reference",
   "Slot": 1,
   "IconCharacter": "c",
+  "DamageCharacter": "h/^",
   "HasAmmo": false,
   "ClipSize": 16,
   "MainPrefab": {

@@ -1,0 +1,48 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@namespace Scenebox
+@attribute [StyleSheet]
+
+<root>
+    <label class="killer">@Entry.Killer</label>
+    <label class="object @GetObjectStyle()">@GetObject()</label>
+    <label class="victim">@Entry.Victim</label>
+</root>
+
+@code
+{
+    public KillFeed.Entry Entry { get; set; }
+
+    TimeSince timeSinceCreate = 0;
+
+    public override void Tick()
+    {
+        if (timeSinceCreate > 10)
+        {
+            Delete();
+        }
+    }
+
+    string GetObjectStyle()
+    {
+        if (Entry.Object.StartsWith("h/"))
+        {
+            return "hl";
+        }
+
+        return "";
+    }
+
+    string GetObject()
+    {
+        if (Entry.Object.StartsWith("h/"))
+        {
+            return Entry.Object.Substring(2);
+        }
+
+        return Entry.Object;
+    }
+
+    protected override int BuildHash() => System.HashCode.Combine("");
+}

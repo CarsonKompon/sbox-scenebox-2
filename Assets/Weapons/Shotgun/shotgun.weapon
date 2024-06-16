@@ -3,6 +3,7 @@
   "Description": "Shottyyyy gun mc shooty",
   "Slot": 4,
   "IconCharacter": "b",
+  "DamageCharacter": "h/(",
   "HasAmmo": true,
   "ClipSize": 8,
   "MainPrefab": {

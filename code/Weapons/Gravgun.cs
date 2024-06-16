@@ -92,7 +92,7 @@ public class Gravgun : Weapon
         }
         else
         {
-            CanPickup = tr.Body.IsValid() && !tr.GameObject.Root.Tags.HasAny( "map", "player" );
+            CanPickup = tr.Body.IsValid() && tr.Body.BodyType == PhysicsBodyType.Dynamic && !tr.GameObject.Root.Tags.HasAny( "map", "player" );
             if ( CanPickup ) timeSinceLastCanPickup = 0f;
 
             HoldingSoundHandle?.Stop();
