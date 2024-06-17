@@ -76,7 +76,11 @@ public sealed class Player : Component
 			}
 			Inventory.CheckWeaponSwap();
 
-			UpdateCamera();
+			var cameraComponent = Scene.GetAllComponents<ICameraOverride>().Where( x => x.IsActive )?.FirstOrDefault();
+			if ( cameraComponent is not null )
+				cameraComponent.Update();
+			else
+				UpdateCamera();
 		}
 
 		UpdateCrouch();
@@ -196,6 +200,7 @@ public sealed class Player : Component
 
 		Scene.Camera.Transform.Position = camPos;
 		Scene.Camera.Transform.Rotation = eyeAngles;
+		Scene.Camera.FieldOfView = SceneboxPreferences.Settings.FieldOfView;
 		Direction = eyeAngles;
 	}
 

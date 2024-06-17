@@ -1,0 +1,22 @@
+{
+  "Name": "Camera",
+  "Description": "Take-a da pictures",
+  "Slot": 6,
+  "IconCharacter": "ui/weapons/camera.png",
+  "DamageCharacter": "a",
+  "HasAmmo": false,
+  "ClipSize": 16,
+  "MainPrefab": {
+    "_type": "gameobject",
+    "prefab": "weapons/camera/camera_w.prefab"
+  },
+  "ViewModelPrefab": {
+    "_type": "gameobject",
+    "prefab": "weapons/camera/camera_v.prefab"
+  },
+  "WorldModel": "models/3dmodelscc0/gadgetselectronics/digital_camera/digital_camera.vmdl",
+  "__references": [
+    "titanovsky.digital_camera"
+  ],
+  "__version": 0
+}

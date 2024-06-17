@@ -1,0 +1,64 @@
+{
+  "RootObject": {
+    "__guid": "56fffd4a-7058-4879-b0c9-efc3e3bbce84",
+    "Flags": 0,
+    "Name": "camera_w",
+    "Tags": "player",
+    "Enabled": true,
+    "NetworkMode": 2,
+    "NetworkInterpolation": true,
+    "Components": [
+      {
+        "__type": "Scenebox.Camera",
+        "__guid": "72f1f696-337e-4251-bbab-afc4a768c28a",
+        "Damage": 20,
+        "Force": 20,
+        "HoldType": "HoldItem",
+        "ModelRenderer": {
+          "_type": "component",
+          "component_id": "48095363-89e0-45b7-a274-0bef66d3d673",
+          "go": "dfe85094-d61e-41a4-af87-34cbff10bb10",
+          "component_type": "SkinnedModelRenderer"
+        },
+        "Muzzle": {
+          "_type": "gameobject",
+          "go": "dfe85094-d61e-41a4-af87-34cbff10bb10"
+        },
+        "Resource": "weapons/camera/camera.weapon"
+      }
+    ],
+    "Children": [
+      {
+        "__guid": "dfe85094-d61e-41a4-af87-34cbff10bb10",
+        "Flags": 0,
+        "Name": "Model",
+        "Position": "3.535849,0,-4.395255",
+        "Scale": "1.5,1.5,1.5",
+        "Enabled": true,
+        "NetworkMode": 2,
+        "NetworkInterpolation": true,
+        "Components": [
+          {
+            "__type": "Sandbox.SkinnedModelRenderer",
+            "__guid": "48095363-89e0-45b7-a274-0bef66d3d673",
+            "BodyGroups": 18446744073709551615,
+            "CreateBoneObjects": false,
+            "Model": "models/3dmodelscc0/gadgetselectronics/digital_camera/digital_camera.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1",
+            "UseAnimGraph": true
+          }
+        ]
+      }
+    ],
+    "__variables": []
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "ResourceVersion": 1,
+  "__references": [
+    "titanovsky.digital_camera"
+  ],
+  "__version": 1
+}

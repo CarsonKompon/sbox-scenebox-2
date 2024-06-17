@@ -29,5 +29,5 @@ public static class SceneboxPreferences
 
 public class SceneboxSettings
 {
-
+    public float FieldOfView { get; set; } = 90f;
 }

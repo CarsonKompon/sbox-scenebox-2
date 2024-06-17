@@ -56,7 +56,7 @@
         "__type": "Scenebox.Inventory",
         "__guid": "35cecb4d-acdf-42f3-92f2-cfad81dc6036",
         "StartingWeapons": [
-          "weapons/toolgun/toolgun.weapon",
+          "weapons/camera/camera.weapon",
           "weapons/mp5/mp5.weapon",
           "weapons/crowbar/crowbar.weapon",
           "weapons/knife/knife.weapon",
@@ -65,6 +65,7 @@
           "weapons/m4a1/m4a1.weapon",
           "weapons/shotgun/shotgun.weapon",
           "weapons/gravgun/gravgun.weapon",
+          "weapons/toolgun/toolgun.weapon",
           "weapons/physgun/physgun.weapon"
         ],
         "WeaponParent": {
