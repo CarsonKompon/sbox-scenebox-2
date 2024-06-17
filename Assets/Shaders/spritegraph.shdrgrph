@@ -1,7 +1,7 @@
 {
   "Model": "models/dev/plane.vmdl",
   "Description": "",
-  "BlendMode": "Masked",
+  "BlendMode": "Translucent",
   "nodes": [
     {
       "_class": "Result",

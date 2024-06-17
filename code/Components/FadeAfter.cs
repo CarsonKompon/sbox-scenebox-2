@@ -12,10 +12,10 @@ public sealed class FadeAfter : Component
 
     protected override void OnStart()
     {
-        modelRenderer = Components.Get<ModelRenderer>();
+        modelRenderer = Components.Get<ModelRenderer>( FindMode.EnabledInSelfAndChildren );
         if ( !modelRenderer.IsValid() )
         {
-            decalRenderer = Components.Get<DecalRenderer>();
+            decalRenderer = Components.Get<DecalRenderer>( FindMode.EnabledInSelfAndChildren );
         }
         timeSinceStart = 0;
     }

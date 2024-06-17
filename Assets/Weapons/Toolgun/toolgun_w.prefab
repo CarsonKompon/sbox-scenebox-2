@@ -12,7 +12,16 @@
         "__type": "Scenebox.Toolgun",
         "__guid": "cde37568-b873-4e81-a1cf-afa27e827908",
         "Damage": 20,
+        "Force": 20,
         "HoldType": "Pistol",
+        "LinePrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/particles/toolgun_line.prefab"
+        },
+        "MarkerPrefab": {
+          "_type": "gameobject",
+          "prefab": "prefabs/particles/toolgun_mark.prefab"
+        },
         "ModelRenderer": {
           "_type": "component",
           "component_id": "e40b4121-0851-4ade-a3ca-2d3802bcea02",

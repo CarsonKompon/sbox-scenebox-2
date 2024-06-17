@@ -11,6 +11,7 @@ public partial class GameManager : Component, Component.INetworkListener
     [Property] public GameObject PlayerPrefab { get; set; }
     [Property] public List<GameObject> SpawnPoints { get; set; }
     [Property, Group( "Prefabs" )] public GameObject DecalObject { get; set; }
+    [Property, Group( "Prefabs" )] public GameObject RemoverDestroyParticle { get; set; }
 
     [Sync] public NetList<string> Packages { get; set; }
 
@@ -227,5 +228,21 @@ public partial class GameManager : Component, Component.INetworkListener
         {
             obj.Components.Get<HighlightOutline>()?.Destroy();
         }
+    }
+
+    [Broadcast]
+    public void BroadcastDestroyObjectEffect( Vector3 position, Rotation rotation, Vector3 size )
+    {
+        var destroyEffect = RemoverDestroyParticle.Clone( position, rotation );
+        destroyEffect.BreakFromPrefab();
+        var emitter = destroyEffect.Components.Get<ParticleBoxEmitter>( FindMode.EverythingInSelfAndDescendants );
+        destroyEffect.Transform.Position = position;
+        destroyEffect.Transform.Rotation = rotation;
+        if ( size.Length < 100f )
+        {
+            emitter.Burst = size.Length * 2f;
+        }
+        emitter.Size = size;
+        emitter.Enabled = true;
     }
 }

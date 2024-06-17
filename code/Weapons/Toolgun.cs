@@ -9,6 +9,9 @@ public class Toolgun : Weapon
 
     [Property, Group( "Sounds" )] SoundEvent UseSound { get; set; }
 
+    [Property, Group( "Prefabs" )] GameObject LinePrefab { get; set; }
+    [Property, Group( "Prefabs" )] GameObject MarkerPrefab { get; set; }
+
     internal BaseTool CurrentTool = null;
 
     protected override void OnStart()
@@ -29,16 +32,6 @@ public class Toolgun : Weapon
         if ( Input.Released( "attack2" ) ) CurrentTool?.SecondaryUseEnd();
     }
 
-    void PrimaryUse()
-    {
-        BroadcastUseEffects();
-    }
-
-    void SecondaryUse()
-    {
-        BroadcastUseEffects();
-    }
-
     public void SetTool( TypeDescription toolDescription )
     {
         if ( CurrentTool != null )
@@ -57,12 +50,21 @@ public class Toolgun : Weapon
     }
 
     [Broadcast]
-    public void BroadcastUseEffects()
+    public void BroadcastUseEffects( Vector3 hitPosition, Vector3 hitNormal = default )
     {
+        var startPosition = (Player?.ViewModel?.Muzzle ?? Muzzle).Transform.Position;
+
         var playerRenderer = Player?.Body?.Components?.Get<SkinnedModelRenderer>();
         playerRenderer?.Set( "b_attack", true );
         Player?.ViewModel?.ModelRenderer?.Set( "b_attack", true );
-        var sound = Sound.Play( UseSound, Transform.Position );
+
+        MarkerPrefab.Clone( hitPosition, Rotation.LookAt( hitNormal, Vector3.Up ) );
+        var lineObj = LinePrefab.Clone( startPosition );
+        lineObj.BreakFromPrefab();
+        var line = lineObj.Components.Get<LineParticle>( FindMode.EverythingInSelfAndDescendants );
+        line.Init( startPosition, hitPosition );
+
+        var sound = Sound.Play( UseSound, startPosition );
         if ( Connection.Local.Id == Rpc.CallerId ) sound.ListenLocal = true;
     }
 
