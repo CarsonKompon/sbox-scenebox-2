@@ -11,7 +11,7 @@
         <label class="header">HEALTH</label>
         <label class="value">@(Player.Local?.Health ?? 0)</label>
     </div>
-    @if (Player.Local?.Inventory.CurrentWeapon?.Resource?.HasAmmo ?? false)
+    @if (Player.Local?.Inventory?.CurrentWeapon?.Resource?.HasAmmo ?? false)
     {
         <div class="panel ammo">
             <label class="header">AMMO</label>
@@ -19,6 +19,10 @@
             <label class="header"></label>
             <label class="value small">@(Player.Local?.Inventory?.CurrentWeapon?.AmmoReserve ?? 0)</label>
         </div>
+    }
+    @if(Player.Local?.Inventory?.CurrentWeapon?.Resource?.ResourceName == "toolgun")
+    {
+        <CurrentToolPanel />
     }
 </root>
 

@@ -48,7 +48,7 @@
 
 	Panel LocalModelsPanel;
 	Panel CloudModelsPanel;
-	Panel CloudPrefabsPanel;
+	@* Panel CloudPrefabsPanel; *@
 
 	Panel ToolsPanel;
 	Panel UtilitiesPanel;
@@ -76,7 +76,7 @@
 	{
 		LocalModelsPanel.SetClass("hidden", LocalModelsPanel != panel);
 		CloudModelsPanel.SetClass("hidden", CloudModelsPanel != panel);
-		CloudPrefabsPanel.SetClass("hidden", CloudPrefabsPanel != panel);
+		@* CloudPrefabsPanel.SetClass("hidden", CloudPrefabsPanel != panel); *@
 		SelectedPanelLeft = panel;
 	}
 
@@ -87,5 +87,5 @@
 		SelectedPanelRight = panel;
 	}
 
-	protected override int BuildHash() => System.HashCode.Combine(SelectedPanelLeft, SelectedPanelRight, IsVisible);
+	protected override int BuildHash() => System.HashCode.Combine(SelectedPanelLeft ?? null, SelectedPanelRight ?? null, IsVisible);
 }

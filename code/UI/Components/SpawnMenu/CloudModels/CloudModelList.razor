@@ -10,6 +10,7 @@
         <TextEntry @ref="SearchEntry" OnTextEdited=@Search Placeholder="Search..." />
 
     </div>
+    @if (FoundPackages == null) return;
     <div class="canvas">
         @foreach (var group in FoundPackages.GroupBy(GroupBy).OrderBy(x => x.Key))
         {

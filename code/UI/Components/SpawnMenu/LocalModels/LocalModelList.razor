@@ -55,8 +55,6 @@
         SearchQuery = value;
         ModelList.Clear();
 
-        Log.Info(SelectedFolder);
-
         var files = FileSystem.Mounted.FindFile(SelectedFolder, "*.vmdl_c", true);
         foreach (var file in files)
         {

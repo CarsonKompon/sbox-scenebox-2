@@ -1,6 +1,7 @@
 namespace Scenebox.Tools;
 
-[Tool( "Remover", "Removes GameObjects", "Construction" )]
+[Tool( "Remover", "Remove GameObjects", "Construction" )]
+[ToolControl( "Attack1", "Remove selected object" )]
 public class RemoverTool : BaseTool
 {
     public override void PrimaryUseStart()

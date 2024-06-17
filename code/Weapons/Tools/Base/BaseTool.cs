@@ -58,4 +58,9 @@ public abstract class BaseTool
     {
         return TypeLibrary.GetAttribute<ToolAttribute>( GetType() ).Group;
     }
+
+    public List<ToolControlAttribute> GetControls()
+    {
+        return TypeLibrary.GetAttributes<ToolControlAttribute>( GetType() ).ToList();
+    }
 }

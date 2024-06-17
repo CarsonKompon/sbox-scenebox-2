@@ -1,0 +1,35 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@namespace Scenebox
+@attribute [StyleSheet]
+
+<root>
+    @if (Player.Local?.Inventory?.CurrentWeapon is Toolgun toolgun)
+    {
+        <div class="header">
+            <label class="title">@toolgun.CurrentTool.GetName()</label>
+            <label class="description">@toolgun.CurrentTool.GetDescription()</label>
+        </div>
+        <div class="controls">
+            @if (true)
+            {
+                var controls = toolgun.CurrentTool.GetControls();
+                @foreach (var control in controls)
+                {
+                    <div class="control">
+                        <Image Texture=@Input.GetGlyph(control.Input, InputGlyphSize.Small, GlyphStyle.Light) />
+                        @control.Description
+                    </div>
+                }
+            }
+        </div>
+    }
+</root>
+
+@code
+{
+
+
+    protected override int BuildHash() => System.HashCode.Combine("");
+}
