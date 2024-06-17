@@ -12,6 +12,7 @@ public partial class GameManager : Component, Component.INetworkListener
     [Property] public List<GameObject> SpawnPoints { get; set; }
     [Property, Group( "Prefabs" )] public GameObject DecalObject { get; set; }
     [Property, Group( "Prefabs" )] public GameObject RemoverDestroyParticle { get; set; }
+    [Property, Group( "Prefabs" )] public GameObject ExplosionParticle { get; set; }
 
     [Sync] public NetList<string> Packages { get; set; }
 
@@ -134,6 +135,24 @@ public partial class GameManager : Component, Component.INetworkListener
         propHelper?.SetCloudModel( cloudModel );
 
         return gameObject;
+    }
+
+    [Broadcast]
+    public void SpawnExplosion( Vector3 position, float range, float force )
+    {
+        ExplosionParticle.Clone( position, Rotation.Identity );
+        Sound.Play( "gmod.explosion", position );
+
+        if ( Connection.Local.Id != Rpc.CallerId ) return;
+
+        var obj = new GameObject() { Name = "Explosion", Enabled = false };
+        obj.Transform.Position = position;
+        obj.Components.GetOrCreate<Explosion>().Force = force;
+        obj.Components.GetOrCreate<DestroyAfter>().Time = 0.2f;
+        var collider = obj.Components.GetOrCreate<SphereCollider>();
+        collider.Radius = range;
+        collider.IsTrigger = true;
+        obj.Enabled = true;
     }
 
     [Broadcast]

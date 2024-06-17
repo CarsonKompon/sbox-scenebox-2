@@ -17,6 +17,10 @@
             "_type": "gameobject",
             "prefab": "prefabs/decal.prefab"
           },
+          "ExplosionParticle": {
+            "_type": "gameobject",
+            "prefab": "prefabs/particles/particle_explosion.prefab"
+          },
           "PlayerPrefab": {
             "_type": "gameobject",
             "prefab": "prefabs/player.prefab"
@@ -91,8 +95,8 @@
       "NetworkInterpolation": true,
       "Components": [
         {
-          "__type": "Sandbox.MapInstance",
-          "__guid": "dfa455ba-730e-4306-b07f-e13055d850ad",
+          "__type": "Scenebox.CustomMapInstance",
+          "__guid": "4388d134-3624-41a6-92c8-8796eda30dc0",
           "MapName": "facepunch.construct23",
           "UseMapFromLaunch": true
         }
@@ -163,6 +167,55 @@
         {
           "__type": "Sandbox.Highlight",
           "__guid": "ae485106-e443-4340-8aec-3c1ae7ed3ae6"
+        },
+        {
+          "__type": "Sandbox.AmbientOcclusion",
+          "__guid": "a390629f-4cbf-4b0c-b245-b36390a2e294",
+          "Intensity": 8,
+          "Quality": "Medium",
+          "Radius": 20
+        }
+      ]
+    },
+    {
+      "__guid": "5d1ce2a4-ffde-49eb-b685-a22164635947",
+      "Flags": 0,
+      "Name": "Explosion",
+      "Position": "-147.7069,1685.196,685.9749",
+      "Enabled": true,
+      "NetworkMode": 0,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.SphereCollider",
+          "__guid": "569766d6-a887-4e76-baa8-798c5800c74e",
+          "Center": "0,0,0",
+          "IsTrigger": true,
+          "Radius": 200,
+          "Static": false
+        },
+        {
+          "__type": "Scenebox.Explosion",
+          "__guid": "37e9817e-01bb-4b84-b58d-984eb101c433"
+        },
+        {
+          "__type": "Scenebox.DestroyAfter",
+          "__guid": "4c8d43cb-4db2-48f5-ad99-9e2a10bbdb89",
+          "Time": 0.5
+        }
+      ],
+      "Children": [
+        {
+          "__guid": "0b675601-131c-40af-b760-1bda446e3d83",
+          "Flags": 0,
+          "Name": "particle_explosion",
+          "Position": "0,0,0",
+          "Tags": "particles",
+          "Enabled": true,
+          "NetworkMode": 0,
+          "NetworkInterpolation": true,
+          "__Prefab": "prefabs/particles/particle_explosion.prefab",
+          "__PrefabVariables": {}
         }
       ]
     }
@@ -190,7 +243,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-17T14:27:44.4434192-04:00",
+  "LastSaved": "2024-06-17T19:00:06.8259988-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

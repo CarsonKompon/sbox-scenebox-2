@@ -40,18 +40,30 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         Health -= amount;
         if ( Health <= 0 )
         {
-            // Prop?.OnDamage( new DamageInfo( 9999, null, null ) );
-            var gibs = Prop?.CreateGibs();
-            foreach ( var gib in gibs )
-            {
-                gib.GameObject.NetworkSpawn();
-                gib.GameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
-            }
-            GameObject?.DestroyImmediate();
+            Kill();
         }
     }
 
-    [Broadcast]
+    public void Kill()
+    {
+        if ( IsProxy ) return;
+
+        var gibs = Prop?.CreateGibs();
+        foreach ( var gib in gibs )
+        {
+            gib.GameObject.NetworkSpawn();
+            gib.GameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+        }
+
+        bool isExpodingProp = IsExpodingProp();
+        Vector3 position = Prop.Transform.Position;
+        GameObject.DestroyImmediate();
+        if ( isExpodingProp )
+        {
+            GameManager.Instance.SpawnExplosion( position, 500, 80_000 );
+        }
+    }
+
     public void AddForce( int bodyIndex, Vector3 force )
     {
         if ( IsProxy ) return;
@@ -59,8 +71,45 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         var body = Physics?.PhysicsGroup?.GetBody( bodyIndex );
         if ( body.IsValid() )
             body.ApplyForce( force );
-        else if ( Rigidbody.IsValid() )
+        else if ( bodyIndex == 0 && Rigidbody.IsValid() )
             Rigidbody.Velocity += force / Rigidbody.PhysicsBody.Mass;
+    }
+
+    public async void AddDamagingForce( Vector3 force, float damage )
+    {
+        if ( IsProxy ) return;
+
+        if ( Physics.IsValid() )
+        {
+            foreach ( var body in Physics.PhysicsGroup.Bodies )
+            {
+                AddForce( body.GroupIndex, force );
+            }
+        }
+        else
+        {
+            AddForce( 0, force );
+        }
+
+        await GameTask.DelaySeconds( 1f / Scene.FixedUpdateFrequency + 0.05f );
+
+        Damage( damage );
+    }
+
+    [Broadcast]
+    public void BroadcastAddForce( int bodyIndex, Vector3 force )
+    {
+        if ( IsProxy ) return;
+
+        AddForce( bodyIndex, force );
+    }
+
+    [Broadcast]
+    public void BroadcastAddDamagingForce( Vector3 force, float damage )
+    {
+        if ( IsProxy ) return;
+
+        AddDamagingForce( force, damage );
     }
 
 
@@ -182,5 +231,10 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         }
 
         InitCloudModel();
+    }
+
+    bool IsExpodingProp()
+    {
+        return Prop?.Model?.ResourceName?.Contains( "explosive" ) ?? false;
     }
 }

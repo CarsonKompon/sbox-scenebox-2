@@ -3,7 +3,7 @@
     "__guid": "ec129907-216d-4f31-8944-32757a4e87fa",
     "Flags": 0,
     "Name": "player",
-    "Tags": "player",
+    "Tags": "player,noblockaudio",
     "Enabled": true,
     "NetworkMode": 2,
     "NetworkInterpolation": true,

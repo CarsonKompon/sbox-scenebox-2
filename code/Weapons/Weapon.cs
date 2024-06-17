@@ -172,7 +172,7 @@ public class Weapon : Component
 
             if ( tr.GameObject?.Components?.TryGet<PropHelper>( out var propHelper ) ?? false )
             {
-                propHelper.AddForce( tr.Body.GroupIndex, tr.Direction * 80000f * (Force / 10f) );
+                propHelper.BroadcastAddForce( tr.Body.GroupIndex, tr.Direction * 80000f * (Force / 10f) );
                 propHelper.Damage( Damage );
             }
 

@@ -1,0 +1,19 @@
+{
+  "UI": false,
+  "Volume": "1.00,1.00,0",
+  "Pitch": "1.00,1.00,0",
+  "Decibels": 500,
+  "SelectionMode": "Random",
+  "Sounds": [
+    "sounds/gmod.explosion.1.vsnd",
+    "sounds/gmod.explosion.2.vsnd",
+    "sounds/gmod.explosion.3.vsnd"
+  ],
+  "Occlusion": true,
+  "AirAbsorption": true,
+  "Transmission": true,
+  "OcclusionRadius": 175.89,
+  "DistanceAttenuation": true,
+  "__references": [],
+  "__version": 0
+}
