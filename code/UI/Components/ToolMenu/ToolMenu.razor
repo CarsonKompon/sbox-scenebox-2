@@ -79,6 +79,8 @@
 
     public void UpdateInspector()
     {
+        if (!InspectorPanel.IsValid()) return;
+
         InspectorPanel.DeleteChildren();
         var toolgun = Player.Local?.Components.Get<Toolgun>(FindMode.EverythingInSelfAndDescendants);
         if (!toolgun.IsValid()) return;
@@ -105,5 +107,5 @@
         }
     }
 
-    protected override int BuildHash() => System.HashCode.Combine(SearchEntry.Text);
+    protected override int BuildHash() => System.HashCode.Combine(SearchEntry?.Text);
 }

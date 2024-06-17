@@ -168,6 +168,10 @@ public sealed class Inventory : Component
 			{
 				EquipWeapon( targetWeapon );
 			}
+			else
+			{
+				CurrentWeapon = null;
+			}
 		}
 
 		weapon.GameObject.Destroy();
@@ -212,7 +216,8 @@ public sealed class Inventory : Component
 	[Broadcast]
 	public void DropWeapon( Guid weaponId )
 	{
-		if ( !Networking.IsHost ) return;
+		if ( IsProxy ) return;
+
 		var weapon = Scene.Directory.FindComponentByGuid( weaponId ) as Weapon;
 		if ( !weapon.IsValid() ) return;
 
@@ -223,9 +228,24 @@ public sealed class Inventory : Component
 
 		var position = tr.Hit ? (tr.HitPosition + tr.Normal * weapon.Resource.WorldModel.Bounds.Size.Length) : (Player.Head.Transform.Position + Player.Direction.Forward * 32);
 		var rotation = Rotation.From( 0, Player.Direction.yaw + 90, 90 );
-
 		var baseVelocity = Player.CharacterController.Velocity;
-		// TODO: Spawn dropped weapon!!
+
+		var weaponObj = weapon.Resource.MainPrefab.Clone( new CloneConfig()
+		{
+			Transform = new Transform( position, rotation ),
+			Parent = null
+		} );
+		var weaponComponent = weaponObj.Components.Get<Weapon>( FindMode.EverythingInSelfAndDescendants );
+		var attachObj = (weaponComponent?.ModelRenderer?.GameObject ?? null);
+		weaponComponent.Destroy();
+		weaponObj.Components.GetOrCreate<WeaponPickup>().WeaponResource = weapon.Resource;
+		var collider = weaponObj.Components.GetOrCreate<BoxCollider>();
+		collider.Center = weapon.Resource.WorldModel.Bounds.Center - (attachObj?.Transform?.LocalPosition ?? Vector3.Zero);
+		collider.Scale = weapon.Resource.WorldModel.Bounds.Size;
+		weaponObj.Components.GetOrCreate<Rigidbody>().Velocity = baseVelocity;
+		weaponObj.Network.SetOrphanedMode( NetworkOrphaned.Host );
+		weaponObj.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+		weaponObj.NetworkSpawn();
 
 		RemoveWeapon( weapon );
 	}
