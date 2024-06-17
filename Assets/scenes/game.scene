@@ -125,7 +125,7 @@
             "tunnel.medium",
             "tunnel.small"
           ],
-          "OutsideMix": 0.08,
+          "OutsideMix": 0.11,
           "OutsidePresets": [
             "outside.small",
             "outside.medium",
@@ -141,7 +141,7 @@
           "WoodPresets": [
             "room.diffuse.small",
             "room.diffuse.huge",
-            "duct.empty.huge"
+            "room.empty.huge"
           ]
         }
       ]
@@ -188,7 +188,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-17T14:15:34.9354751-04:00",
+  "LastSaved": "2024-06-17T14:17:12.4747952-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
