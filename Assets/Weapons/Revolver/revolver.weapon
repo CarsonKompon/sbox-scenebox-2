@@ -5,7 +5,8 @@
   "IconCharacter": "e",
   "DamageCharacter": "h/$",
   "HasAmmo": true,
-  "ClipSize": 16,
+  "ClipSize": 6,
+  "StartingReserve": 32,
   "MainPrefab": {
     "_type": "gameobject",
     "prefab": "weapons/revolver/revolver_w.prefab"

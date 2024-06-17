@@ -5,7 +5,8 @@
   "IconCharacter": "a",
   "DamageCharacter": "x",
   "HasAmmo": true,
-  "ClipSize": 16,
+  "ClipSize": 45,
+  "StartingReserve": 256,
   "MainPrefab": {
     "_type": "gameobject",
     "prefab": "weapons/mp5/mp5_w.prefab"

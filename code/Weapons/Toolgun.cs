@@ -52,6 +52,8 @@ public class Toolgun : Weapon
         CurrentTool = TypeLibrary.Create<BaseTool>( toolDescription.TargetType );
         CurrentTool.Toolgun = this;
         CurrentTool?.OnEquip();
+
+        ToolMenu.Instance?.UpdateInspector();
     }
 
     [Broadcast]

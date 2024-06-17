@@ -5,7 +5,8 @@
   "IconCharacter": "l",
   "DamageCharacter": "w",
   "HasAmmo": true,
-  "ClipSize": 24,
+  "ClipSize": 30,
+  "StartingReserve": 130,
   "MainPrefab": {
     "_type": "gameobject",
     "prefab": "weapons/m4a1/m4a1_w.prefab"

@@ -1,0 +1,23 @@
+@using System;
+@using System.Collections.Generic;
+@using Sandbox;
+@using Sandbox.UI;
+@using Scenebox.Tools;
+@inherits Panel
+@implements IToolInspector
+@namespace Scenebox
+@attribute [StyleSheet]
+
+<root>
+    <label class="header">@Toolgun.CurrentTool.GetName()</label>
+    <div class="content">
+        <label class="description">@Toolgun.CurrentTool.GetDescription()</label>
+    </div>
+</root>
+
+@code
+{
+    public Toolgun Toolgun { get; set; }
+
+    protected override int BuildHash() => System.HashCode.Combine("");
+}

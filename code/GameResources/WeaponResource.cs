@@ -15,6 +15,7 @@ public partial class WeaponResource : GameResource
 
     [Group( "Ammo" )] public bool HasAmmo { get; set; } = true;
     [Group( "Ammo" )] public int ClipSize { get; set; } = 16;
+    [Group( "Ammo" )] public int StartingReserve { get; set; } = 32;
 
     [Group( "Prefabs" )] public GameObject MainPrefab { get; set; }
     [Group( "Prefabs" )] public GameObject ViewModelPrefab { get; set; }

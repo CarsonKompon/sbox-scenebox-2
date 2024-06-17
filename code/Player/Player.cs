@@ -78,7 +78,7 @@ public sealed class Player : Component
 
 			var cameraComponent = Scene.GetAllComponents<ICameraOverride>().Where( x => x.IsActive )?.FirstOrDefault();
 			if ( cameraComponent is not null )
-				cameraComponent.Update();
+				cameraComponent.UpdateCamera();
 			else
 				UpdateCamera();
 		}
@@ -88,6 +88,8 @@ public sealed class Player : Component
 		RotateBody();
 
 		CanMoveHead = true;
+
+		Components.Get<Voice>().Volume = 30f;
 	}
 
 	protected override void OnFixedUpdate()

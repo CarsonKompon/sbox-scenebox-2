@@ -11,6 +11,17 @@ PlayerVitals
         position: absolute;
         bottom: 32px;
         left: 32px;
+    }
+
+    .ammo
+    {
+        position: absolute;
+        bottom: 32px;
+        right: 32px;
+    }
+
+    .panel
+    {
         justify-content: center;
         align-items: center;
         padding: 4px 12px;
@@ -20,7 +31,7 @@ PlayerVitals
         gap: 12px;
         text-shadow: 0 0 4px rgb(112, 112, 0);
 
-        .health-header
+        .header
         {
             font-family: Tahoma;
             font-weight: black;
@@ -36,6 +47,15 @@ PlayerVitals
             font-size: 64px;
             width: 100px;
             text-align: right;
+
+            
+            &.small
+            {
+                font-size: 32px;
+                align-self: flex-end;
+                bottom: 4px;
+                right: 16px;
+            }
         }
     }
 }

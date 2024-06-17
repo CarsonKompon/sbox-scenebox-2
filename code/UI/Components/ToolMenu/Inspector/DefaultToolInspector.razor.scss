@@ -1,0 +1,17 @@
+DefaultToolInspector
+{
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    gap: 4px;
+    font-family: Tahoma;
+    font-size: 13px;
+
+    > .content
+    {
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+        padding: 4px;
+    }
+}

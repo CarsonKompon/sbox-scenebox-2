@@ -27,16 +27,30 @@
             }
         </div>
     </div>
-    <div class="inspector">
+    <div class="inspector" @ref="InspectorPanel">
 
     </div>
 </root>
 
 @code
 {
+    public static ToolMenu Instance { get; private set; }
+
     TextEntry SearchEntry;
+    Panel InspectorPanel;
 
     string GetGroup(Type tool) => TypeLibrary.GetAttribute<ToolAttribute>(tool)?.Group ?? "Other";
+
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+
+        if (firstTime)
+        {
+            Instance = this;
+            UpdateInspector();
+        }
+    }
 
     void GiveTool(TypeDescription tool)
     {
@@ -61,6 +75,34 @@
             }
         }
         return groups;
+    }
+
+    public void UpdateInspector()
+    {
+        InspectorPanel.DeleteChildren();
+        var toolgun = Player.Local?.Components.Get<Toolgun>(FindMode.EverythingInSelfAndDescendants);
+        if (!toolgun.IsValid()) return;
+
+        var tool = toolgun.CurrentTool;
+        if (tool is null) return;
+
+        var panelTypes = TypeLibrary.GetTypesWithAttribute<ToolInspectorAttribute>();
+        var panelType = panelTypes.FirstOrDefault(x => x.Attribute.Type == tool.GetType());
+        if (panelType.Type is not null)
+        {
+            var panel = TypeLibrary.Create<Panel>(panelType.Type.TargetType);
+            if (panel is IToolInspector inspectorPanel)
+            {
+                inspectorPanel.Toolgun = toolgun;
+            }
+            InspectorPanel.AddChild(panel);
+        }
+        else
+        {
+            var defaultPanel = new DefaultToolInspector();
+            defaultPanel.Toolgun = toolgun;
+            InspectorPanel.AddChild(defaultPanel);
+        }
     }
 
     protected override int BuildHash() => System.HashCode.Combine(SearchEntry.Text);

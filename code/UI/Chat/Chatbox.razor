@@ -64,14 +64,19 @@ GameManager.Instance.RockTheVote(Client.Local.GameObject.Id);
 return;
 } *@
 
-        AddMessage(Sandbox.Utility.Steam.SteamId.ToString(), text);
+        SendMessage(Sandbox.Utility.Steam.SteamId.ToString(), text);
     }
 
     [Broadcast]
-    public void AddMessage(string sender, string message, string styles = "")
+    public void SendMessage(string sender, string message, string styles = "")
     {
         if (string.IsNullOrWhiteSpace(message)) return;
 
+        AddEntry(sender, message, styles);
+    }
+
+    public void AddEntry(string sender, string message, string styles = "")
+    {
         long steamId = 0;
         string name = "";
         if (long.TryParse(sender, out steamId))
@@ -100,13 +105,13 @@ return;
     {
         if (IsProxy) return;
 
-        AddMessage("🛎️", $"{channel.DisplayName} has joined the Server", "notification");
+        SendMessage("🛎️", $"{channel.DisplayName} has joined the Server", "notification");
     }
 
     void Component.INetworkListener.OnDisconnected(Connection channel)
     {
         if (IsProxy) return;
 
-        AddMessage("💨", $"{channel.DisplayName} has left the Server", "notification");
+        SendMessage("💨", $"{channel.DisplayName} has left the Server", "notification");
     }
 }

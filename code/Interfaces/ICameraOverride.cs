@@ -4,5 +4,5 @@ public interface ICameraOverride
 {
     bool IsActive { get; }
 
-    void Update();
+    void UpdateCamera();
 }

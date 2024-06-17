@@ -5,7 +5,8 @@
   "IconCharacter": "b",
   "DamageCharacter": "h/(",
   "HasAmmo": true,
-  "ClipSize": 8,
+  "ClipSize": 6,
+  "StartingReserve": 64,
   "MainPrefab": {
     "_type": "gameobject",
     "prefab": "weapons/shotgun/shotgun_w.prefab"

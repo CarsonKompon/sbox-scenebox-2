@@ -5,7 +5,8 @@
   "IconCharacter": "d",
   "DamageCharacter": "h/%",
   "HasAmmo": true,
-  "ClipSize": 16,
+  "ClipSize": 18,
+  "StartingReserve": 256,
   "MainPrefab": {
     "_type": "gameobject",
     "prefab": "weapons/usp/usp_w.prefab"

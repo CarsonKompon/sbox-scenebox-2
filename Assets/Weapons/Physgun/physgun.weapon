@@ -3,8 +3,10 @@
   "Description": "Physics gun or something idk",
   "Slot": 1,
   "IconCharacter": "h",
-  "HasAmmo": true,
+  "DamageCharacter": "a",
+  "HasAmmo": false,
   "ClipSize": 16,
+  "StartingReserve": 32,
   "MainPrefab": {
     "_type": "gameobject",
     "prefab": "weapons/physgun/physgun_w.prefab"
