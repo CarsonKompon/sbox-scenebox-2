@@ -26,6 +26,10 @@
           "_type": "gameobject",
           "go": "f5b571f1-e056-4385-9422-1231e0b548c8"
         },
+        "FlashlightObject": {
+          "_type": "gameobject",
+          "go": "0e35ab9b-7ff5-45e1-9363-468394312daa"
+        },
         "GroundControl": 4,
         "Head": {
           "_type": "gameobject",
@@ -1139,6 +1143,30 @@
               {
                 "__type": "Scenebox.PlayerNametag",
                 "__guid": "39779b5a-2e4e-4d5f-b33a-283ee2ef0fa8"
+              }
+            ]
+          },
+          {
+            "__guid": "0e35ab9b-7ff5-45e1-9363-468394312daa",
+            "Flags": 0,
+            "Name": "Flashlight",
+            "Position": "36.5815,0,0",
+            "Tags": "light_spot,light,flashlight",
+            "NetworkMode": 2,
+            "NetworkInterpolation": true,
+            "Components": [
+              {
+                "__type": "Sandbox.SpotLight",
+                "__guid": "7fa28791-10d0-48bb-a244-a597dea85eae",
+                "Attenuation": 1,
+                "ConeInner": 12.26,
+                "ConeOuter": 43.72,
+                "Cookie": "materials/effects/lightcookie.vtex",
+                "FogMode": "Enabled",
+                "FogStrength": 1,
+                "LightColor": "0.91373,0.98039,1,1",
+                "Radius": 500,
+                "Shadows": true
               }
             ]
           }

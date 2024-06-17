@@ -82,16 +82,36 @@
       ]
     },
     {
-      "__guid": "9109cdf6-17dc-41f3-b0f7-c7c9bff8fcb9",
+      "__guid": "faa84601-8c46-4370-a9bf-448c85dd166e",
       "Flags": 0,
-      "Name": "Main Camera",
+      "Name": "Map Instance",
+      "Tags": "map",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.MapInstance",
+          "__guid": "dfa455ba-730e-4306-b07f-e13055d850ad",
+          "MapName": "facepunch.construct23",
+          "UseMapFromLaunch": true
+        }
+      ],
+      "Children": []
+    },
+    {
+      "__guid": "016021fd-f3f1-4fbd-843a-b387f6081efe",
+      "Flags": 0,
+      "Name": "Camera",
+      "Position": "-0.4023438,69.371,301.2031",
+      "Tags": "maincamera",
       "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
-          "__guid": "03baf189-6a15-4cc7-9404-08457f4dc3a3",
+          "__guid": "92eff968-455b-4f15-ac40-3abffb25cb12",
           "BackgroundColor": "0.33333,0.46275,0.52157,1",
           "ClearFlags": "All",
           "FieldOfView": 90,
@@ -104,11 +124,7 @@
           "TargetEye": "None",
           "Viewport": "0,0,1,1",
           "ZFar": 10000,
-          "ZNear": 0.01
-        },
-        {
-          "__type": "Sandbox.Highlight",
-          "__guid": "ba77a0d0-f050-4526-a576-9d9a40908795"
+          "ZNear": 1
         },
         {
           "__type": "Scenebox.AutoDspFilter",
@@ -143,26 +159,12 @@
             "room.diffuse.huge",
             "room.empty.huge"
           ]
+        },
+        {
+          "__type": "Sandbox.Highlight",
+          "__guid": "ae485106-e443-4340-8aec-3c1ae7ed3ae6"
         }
       ]
-    },
-    {
-      "__guid": "faa84601-8c46-4370-a9bf-448c85dd166e",
-      "Flags": 0,
-      "Name": "Map Instance",
-      "Tags": "map",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "Components": [
-        {
-          "__type": "Sandbox.MapInstance",
-          "__guid": "dfa455ba-730e-4306-b07f-e13055d850ad",
-          "MapName": "facepunch.construct23",
-          "UseMapFromLaunch": true
-        }
-      ],
-      "Children": []
     }
   ],
   "SceneProperties": {
@@ -188,7 +190,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-17T14:17:12.4747952-04:00",
+  "LastSaved": "2024-06-17T14:27:44.4434192-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

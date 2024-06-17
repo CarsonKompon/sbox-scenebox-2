@@ -19,6 +19,7 @@ public sealed class Player : Component
 	[Property, Group( "References" )] public ModelPhysics ModelPhysics { get; set; }
 	[Property, Group( "References" )] public Collider PlayerBoxCollider { get; set; }
 	[Property, Group( "References" )] public GameObject NametagObject { get; set; }
+	[Property, Group( "References" )] public GameObject FlashlightObject { get; set; }
 
 	[Property, Group( "Movement" )] public float GroundControl { get; set; } = 4.0f;
 	[Property, Group( "Movement" )] public float AirControl { get; set; } = 0.1f;
@@ -47,6 +48,7 @@ public sealed class Player : Component
 	bool _isFirstPerson = true;
 	[Sync] public bool IsCrouching { get; set; } = false;
 	[Sync] public bool IsSprinting { get; set; } = false;
+	[Sync] public bool IsFlashlightOn { get; set; } = false;
 	[Sync] public Vector3 WishVelocity { get; set; } = Vector3.Zero;
 	[Sync] public Angles Direction { get; set; } = Angles.Zero;
 	[Sync] public CitizenAnimationHelper.HoldTypes CurrentHoldType { get; set; } = CitizenAnimationHelper.HoldTypes.None;
@@ -66,6 +68,12 @@ public sealed class Player : Component
 	{
 		if ( !IsProxy )
 		{
+			if ( Input.Pressed( "Flashlight" ) )
+			{
+				IsFlashlightOn = !IsFlashlightOn;
+				BroadcastFlashlightSound();
+			}
+
 			IsSprinting = Input.Down( "Run" );
 			if ( Input.Pressed( "Jump" ) ) Jump();
 
@@ -90,6 +98,7 @@ public sealed class Player : Component
 		CanMoveHead = true;
 
 		Components.Get<Voice>().Volume = 30f;
+		FlashlightObject.Enabled = IsFlashlightOn;
 	}
 
 	protected override void OnFixedUpdate()
@@ -107,6 +116,10 @@ public sealed class Player : Component
 
 			BuildWishVelocity();
 			Move();
+		}
+		else
+		{
+			Head.Transform.Rotation = Direction;
 		}
 	}
 
@@ -338,6 +351,17 @@ public sealed class Player : Component
 	internal void BroadcastAttackAnimation()
 	{
 		AnimationHelper?.Target?.Set( "b_attack", true );
+	}
+
+	[Broadcast]
+	void BroadcastFlashlightSound()
+	{
+		var sound = Sound.Play( "gmod.flashlight" );
+		if ( !IsProxy )
+		{
+			sound.Volume = 0.4f;
+			sound.ListenLocal = true;
+		}
 	}
 
 	[Broadcast]

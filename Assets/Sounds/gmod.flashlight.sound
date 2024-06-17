@@ -1,11 +1,11 @@
 {
   "UI": false,
-  "Volume": "0.23,0.23,0",
+  "Volume": "1.00,1.00,0",
   "Pitch": "1.00,1.00,0",
-  "Decibels": 300,
+  "Decibels": 120,
   "SelectionMode": "Random",
   "Sounds": [
-    "sounds/weapons/rpg_heavy.vsnd"
+    "sounds/gmod.flashlight.vsnd"
   ],
   "Occlusion": true,
   "AirAbsorption": true,
