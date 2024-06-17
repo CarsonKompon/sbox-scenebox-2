@@ -22,7 +22,25 @@ public sealed class AutoDspFilter : Component
 
     Mixer mixer;
     DspProcessor processor;
+    List<DspProcessor> previousProcessors = new();
 
+    float CurrentMix = 0f;
+    DspPresetHandle CurrentPreset
+    {
+        get => _currentPreset;
+        set
+        {
+            if ( _currentPreset == value ) return;
+
+            previousProcessors.Add( processor );
+            processor = new DspProcessor();
+            mixer.AddProcessor( processor );
+            processor.Mix = 0;
+            processor.Effect = value;
+            _currentPreset = value;
+        }
+    }
+    DspPresetHandle _currentPreset;
     TimeSince timeSinceLastUpdate = 10f;
     float Distance => 6000f;
 
@@ -31,6 +49,24 @@ public sealed class AutoDspFilter : Component
         mixer = Mixer.FindMixerByName( "Game" );
         processor = new DspProcessor();
         mixer.AddProcessor( processor );
+        processor.Mix = 0;
+    }
+
+    protected override void OnUpdate()
+    {
+        for ( int i = previousProcessors.Count - 1; i >= 0; i-- )
+        {
+            var prev = previousProcessors[i];
+            prev.Mix = prev.Mix.LerpTo( 0, 10 * Time.Delta );
+            if ( prev.Mix <= 0.01f )
+            {
+                mixer.RemoveProcessor( prev );
+                previousProcessors.Remove( prev );
+            }
+        }
+
+
+        processor.Mix = processor.Mix.LerpTo( CurrentMix, 10 * Time.Delta );
     }
 
     protected override void OnFixedUpdate()
@@ -38,8 +74,8 @@ public sealed class AutoDspFilter : Component
         if ( timeSinceLastUpdate < 0.2f ) return;
 
         (DspPresetHandle preset, float mix) = GetPresetAndMix();
-        processor.Effect = preset;
-        processor.Mix = mix;
+        CurrentPreset = preset;
+        CurrentMix = mix;
 
         timeSinceLastUpdate = 0;
     }
@@ -83,9 +119,6 @@ public sealed class AutoDspFilter : Component
 
         var commonSurface = surfaces.GroupBy( x => x ).OrderByDescending( x => x.Count() ).First().Key;
 
-        Log.Info( $"Size: {totalSize}" );
-        Log.Info( $"Surfaces: {commonSurface.ResourceName}" );
-
         switch ( commonSurface.ResourceName )
         {
             case "plaster":
@@ -101,6 +134,12 @@ public sealed class AutoDspFilter : Component
             case "wood":
             case "wood.sheet":
                 return (WoodPresets[size], WoodMix);
+            case "grass":
+            case "dirt":
+            case "sand":
+            case "gravel":
+            case "mud":
+                return (OutsidePresets[size], OutsideMix);
             default:
                 if ( size < 2 )
                 {
