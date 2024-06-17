@@ -23,7 +23,9 @@
     "CsProjName": "",
     "StartupScene": "scenes/minimal.scene",
     "LaunchMode": "QuickPlay",
-    "ControlModes": {},
+    "ControlModes": {
+      "Keyboard": true
+    },
     "InputSettings": {
       "Actions": [
         {
@@ -209,6 +211,12 @@
         {
           "Name": "Chat",
           "KeyboardCode": "enter",
+          "GamepadCode": "None",
+          "GroupName": "Other"
+        },
+        {
+          "Name": "Undo",
+          "KeyboardCode": "Z",
           "GamepadCode": "None",
           "GroupName": "Other"
         }

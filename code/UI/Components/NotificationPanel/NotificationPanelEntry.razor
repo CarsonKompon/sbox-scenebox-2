@@ -1,0 +1,28 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@namespace Scenebox
+@attribute [StyleSheet]
+
+<root>
+
+    @* <label class="icon">@Entry.Icon</label> *@
+    <label class="message">@Entry.Text</label>
+</root>
+
+@code
+{
+    public NotificationPanel.Entry Entry { get; set; }
+
+    TimeSince timeSinceCreate = 0;
+
+    public override void Tick()
+    {
+        if (timeSinceCreate > Entry.Duration)
+        {
+            Delete();
+        }
+    }
+
+    protected override int BuildHash() => System.HashCode.Combine("");
+}

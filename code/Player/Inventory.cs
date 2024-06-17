@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using Sandbox;
+using Sandbox.Audio;
 using Sandbox.Diagnostics;
 
 namespace Scenebox;
@@ -50,7 +50,7 @@ public sealed class Inventory : Component
 			{
 				EquipWeapon( weapon );
 			}
-			Sound.Play( "ui.gmod.weapon.selected" );
+			Sound.Play( "ui.gmod.weapon.selected" ).TargetMixer = Mixer.FindMixerByName( "UI" );
 			timeSinceLastHover = 10;
 			Input.ReleaseAction( "Attack1" );
 			HoveredIndex = -1;
@@ -84,7 +84,7 @@ public sealed class Inventory : Component
 		else if ( HoveredIndex >= Weapons.Count() )
 			HoveredIndex = 0;
 
-		Sound.Play( "ui.gmod.weapon.hover" );
+		Sound.Play( "ui.gmod.weapon.hover" ).TargetMixer = Mixer.FindMixerByName( "UI" );
 		timeSinceLastHover = 0;
 	}
 
@@ -124,7 +124,7 @@ public sealed class Inventory : Component
 		var index = Array.IndexOf( weapons, HoveredWeapon );
 		HoveredIndex = Weapons.OrderBy( x => x.Resource.Slot ).ToList().IndexOf( weapons[(index + 1) % weapons.Length] );
 
-		Sound.Play( "ui.gmod.weapon.hover" );
+		Sound.Play( "ui.gmod.weapon.hover" ).TargetMixer = Mixer.FindMixerByName( "UI" );
 		timeSinceLastHover = 0;
 	}
 

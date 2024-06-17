@@ -127,14 +127,13 @@ public partial class GameManager : Component, Component.INetworkListener
         return p;
     }
 
-    [Broadcast]
-    public void SpawnCloudModel( string cloudModel, Vector3 position, Rotation rotation )
+    public GameObject SpawnCloudModel( string cloudModel, Vector3 position, Rotation rotation )
     {
-        if ( !Networking.IsHost ) return;
-
         var gameObject = SpawnModel( null, position, rotation );
         var propHelper = gameObject.Components.Get<PropHelper>();
         propHelper?.SetCloudModel( cloudModel );
+
+        return gameObject;
     }
 
     [Broadcast]
@@ -238,10 +237,7 @@ public partial class GameManager : Component, Component.INetworkListener
         var emitter = destroyEffect.Components.Get<ParticleBoxEmitter>( FindMode.EverythingInSelfAndDescendants );
         destroyEffect.Transform.Position = position;
         destroyEffect.Transform.Rotation = rotation;
-        if ( size.Length < 100f )
-        {
-            emitter.Burst = size.Length * 2f;
-        }
+        emitter.Burst = size.Length * 2f;
         emitter.Size = size;
         emitter.Enabled = true;
     }

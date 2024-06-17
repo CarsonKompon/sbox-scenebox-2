@@ -37,7 +37,8 @@
         var position = tr.Hit ? (tr.HitPosition + tr.Normal * bounds.Size.Length / 2f) : tr.EndPosition;
         var rotation = Rotation.From(0, localPlayer.Direction.yaw + 180, 0);
 
-        GameManager.Instance.SpawnCloudModel(Package.FullIdent, position, rotation);
+        var obj = GameManager.Instance.SpawnCloudModel(Package.FullIdent, position, rotation);
+        UndoManager.Instance.AddGameObject(obj.Id);
     }
 
     protected override int BuildHash() => System.HashCode.Combine(Package);

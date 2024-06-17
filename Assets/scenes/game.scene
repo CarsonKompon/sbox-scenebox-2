@@ -26,6 +26,10 @@
             "prefab": "prefabs/particles/particle_destroy_object.prefab"
           },
           "SpawnPoints": []
+        },
+        {
+          "__type": "Scenebox.UndoManager",
+          "__guid": "ba7aa110-ad9d-49c2-a88f-964ec3dc1612"
         }
       ]
     },
@@ -105,6 +109,40 @@
         {
           "__type": "Sandbox.Highlight",
           "__guid": "ba77a0d0-f050-4526-a576-9d9a40908795"
+        },
+        {
+          "__type": "Scenebox.AutoDspFilter",
+          "__guid": "3a5261b2-b3fa-4b8e-a904-bb1d5f9c8e2a",
+          "ConcreteMix": 0.43,
+          "ConcretePresets": [
+            "concrete.small",
+            "concrete.medium",
+            "concrete.large"
+          ],
+          "MetalMix": 0.47,
+          "MetalPresets": [
+            "tunnel.large",
+            "tunnel.medium",
+            "tunnel.small"
+          ],
+          "OutsideMix": 0.08,
+          "OutsidePresets": [
+            "outside.small",
+            "outside.medium",
+            "weird.2"
+          ],
+          "PlasterMix": 0.41,
+          "PlasterPresets": [
+            "room.diffuse.small",
+            "room.empty.small",
+            "room.empty.huge"
+          ],
+          "WoodMix": 0.5,
+          "WoodPresets": [
+            "room.diffuse.small",
+            "room.diffuse.huge",
+            "duct.empty.huge"
+          ]
         }
       ]
     },
@@ -120,7 +158,7 @@
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "dfa455ba-730e-4306-b07f-e13055d850ad",
-          "MapName": "leeroystuff.gm_flatgrass_cl",
+          "MapName": "facepunch.construct23",
           "UseMapFromLaunch": true
         }
       ],
@@ -150,7 +188,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-17T09:04:01.1547788-04:00",
+  "LastSaved": "2024-06-17T11:27:53.4220795-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

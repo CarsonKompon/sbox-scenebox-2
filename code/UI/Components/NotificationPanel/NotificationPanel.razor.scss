@@ -1,0 +1,60 @@
+NotificationPanel
+{
+    position: absolute;
+    bottom: 142px;
+    right: 64px;
+    font-family: Tahoma;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 1px 1px 0 black;
+    align-items: flex-end;
+    gap: 8px;
+
+    flex-direction: column;
+
+    NotificationPanelEntry
+    {
+        top: 0px;
+        left: 0px;
+        opacity: 1;
+        gap: 24px;
+        background-color: rgba(black, 0.5);
+        // in-out-bounce bezier
+        transition: all 0.4s cubic-bezier(0.19, -0.74, 0.77, 1.78);
+        padding: 10px 20px;
+        border-radius: 4px;
+
+        .killer, .victim
+        {
+            color: yellow;
+        }
+
+        .object
+        {
+            font-family: csd;
+            font-size: 42px;
+            color: rgb(255, 115, 115);
+
+            &.hl
+            {
+                font-family: halflife2;
+                bottom: 16px;
+            }
+        }
+
+        &:intro
+        {
+            top: 32px;
+            left: 300px;
+            opacity: 0;
+        }
+
+        &:outro
+        {
+            opacity: 0;
+            left: 300px;
+            transition: all 0.4s cubic-bezier(0.29, -0.57, 0.55, 1.03);
+        }
+    }
+}
