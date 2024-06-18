@@ -47,7 +47,7 @@ public static class ThumbnailCache
 
         var bounds = sceneModel.Bounds;
         var center = bounds.Center;
-        var distance = bounds.Size.Length * 1.5f;
+        var distance = bounds.Size.Length * 0.8f;
         sceneCamera.Position = center + sceneCamera.Rotation.Backward * distance;
 
         var texture = Texture.CreateRenderTarget().WithSize( 128, 128 ).Create();

@@ -46,6 +46,8 @@ public sealed class Player : Component
 		}
 	}
 	bool _isFirstPerson = true;
+
+	[Sync] public bool IsNoclipping { get; set; } = false;
 	[Sync] public bool IsCrouching { get; set; } = false;
 	[Sync] public bool IsSprinting { get; set; } = false;
 	[Sync] public bool IsFlashlightOn { get; set; } = false;
@@ -72,6 +74,15 @@ public sealed class Player : Component
 			{
 				IsFlashlightOn = !IsFlashlightOn;
 				BroadcastFlashlightSound();
+			}
+
+			if ( Input.Pressed( "Noclip" ) )
+			{
+				IsNoclipping = !IsNoclipping;
+				if ( !IsNoclipping )
+				{
+					CharacterController.Velocity = WishVelocity;
+				}
 			}
 
 			IsSprinting = Input.Down( "Run" );
@@ -125,6 +136,16 @@ public sealed class Player : Component
 
 	void Move()
 	{
+		if ( IsNoclipping )
+		{
+			var movement = Input.AnalogMove * Direction * 1000f;
+			if ( Input.Down( "Run" ) ) movement *= 3;
+			Transform.Position += movement * Time.Delta;
+			WishVelocity = movement;
+			CharacterController.Velocity = movement;
+			return;
+		}
+
 		var gravity = Scene.PhysicsWorld.Gravity;
 
 		if ( CharacterController.IsOnGround )
@@ -235,9 +256,10 @@ public sealed class Player : Component
 		if ( AnimationHelper is null ) return;
 
 		AnimationHelper.WithWishVelocity( WishVelocity );
-		AnimationHelper.WithVelocity( CharacterController.Velocity );
+		AnimationHelper.WithVelocity( IsProxy ? WishVelocity : CharacterController.Velocity );
 		AnimationHelper.AimAngle = Direction;
 		AnimationHelper.IsGrounded = CharacterController.IsOnGround;
+		AnimationHelper.IsNoclipping = IsNoclipping;
 		AnimationHelper.WithLook( Direction.Forward );
 		AnimationHelper.MoveStyle = CitizenAnimationHelper.MoveStyles.Run;
 		AnimationHelper.DuckLevel = IsCrouching ? 1f : 0f;

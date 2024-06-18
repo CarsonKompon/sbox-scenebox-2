@@ -14,7 +14,7 @@ public partial class GameManager : Component, Component.INetworkListener
     [Property, Group( "Prefabs" )] public GameObject RemoverDestroyParticle { get; set; }
     [Property, Group( "Prefabs" )] public GameObject ExplosionParticle { get; set; }
 
-    [Sync] public NetList<string> Packages { get; set; }
+
 
 
     protected override void OnAwake()

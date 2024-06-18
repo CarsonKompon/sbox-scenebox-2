@@ -26,6 +26,7 @@
           "go": "74540792-fda8-4954-9bf1-49793a404eff"
         },
         "Range": 2000,
+        "ReloadTime": 3,
         "Resource": "weapons/shotgun/shotgun.weapon",
         "ShootSound": "sounds/weapons/shotgun_medium.sound",
         "Spread": 3.5

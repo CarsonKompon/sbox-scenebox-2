@@ -10,8 +10,10 @@
       {
         "__type": "Scenebox.TraceWeapon",
         "__guid": "6162d819-2e16-42d9-bed0-dbce96a42c04",
+        "BulletCount": 1,
         "Cooldown": 0.55,
         "Damage": 50,
+        "Force": 20,
         "HoldType": "Pistol",
         "ModelRenderer": {
           "_type": "component",
@@ -24,8 +26,10 @@
           "go": "598d07d8-a03c-4f05-909e-03631cd09896"
         },
         "Range": 2000,
+        "ReloadTime": 3,
         "Resource": "weapons/revolver/revolver.weapon",
-        "ShootSound": "sounds/weapons/revolver_1.sound"
+        "ShootSound": "sounds/weapons/revolver_1.sound",
+        "Spread": 0
       }
     ],
     "Children": [

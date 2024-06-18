@@ -23,6 +23,22 @@ public sealed class UndoManager : Component
         }
     }
 
+    protected override void OnFixedUpdate()
+    {
+        for ( int i = Stack.Count - 1; i >= 0; i-- )
+        {
+            var entry = Stack[i];
+            foreach ( var id in entry.ids )
+            {
+                if ( !Scene.Directory.FindByGuid( id ).IsValid() )
+                {
+                    Stack.RemoveAt( i );
+                    continue; // Skip to the next entry
+                }
+            }
+        }
+    }
+
     public void Add( Guid id, Action undo )
     {
         Add( new List<Guid>() { id }, undo );
