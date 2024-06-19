@@ -5,7 +5,6 @@
       "__guid": "e0ed06a2-dba9-4b24-8feb-d675c8809ba8",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "149.1419,175.3588,-190.2746",
       "Tags": "maincamera",
       "Enabled": true,
       "NetworkMode": 2,
@@ -79,7 +78,7 @@
   },
   "Title": "menu",
   "Description": "",
-  "LastSaved": "2024-06-19T10:02:39.7319867-04:00",
+  "LastSaved": "2024-06-19T17:12:00.9613871-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

@@ -101,7 +101,7 @@
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "0c3d64c7-c757-493f-b482-37093117bacf",
-          "MapName": "facepunch.construct23",
+          "MapName": "facepunch.flatgrass",
           "UseMapFromLaunch": true
         }
       ],
@@ -180,135 +180,6 @@
           "Radius": 20
         }
       ]
-    },
-    {
-      "__guid": "6bd114d2-1bad-426b-9433-a8e50b2fcc0a",
-      "Flags": 0,
-      "Name": "Box",
-      "Position": "-1575.893,-6210.278,64",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
-      "Components": [
-        {
-          "__type": "Sandbox.MeshComponent",
-          "__guid": "e5acf885-7231-48e8-83fc-94aae5a07636",
-          "Collision": "Mesh",
-          "Color": "1,1,1,1",
-          "HideInGame": false,
-          "IsTrigger": false,
-          "Mesh": {
-            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
-            "Positions": [
-              "-644.2905,-849.915,313.8424",
-              "644.2905,-849.915,371.6848",
-              "644.2905,849.915,64",
-              "-644.2905,849.915,6.157623",
-              "-644.2905,849.915,-64",
-              "644.2905,849.915,-64",
-              "644.2905,-849.915,-64",
-              "-644.2905,-849.915,-64"
-            ],
-            "TextureCoord": [
-              "-6.96648,55.63996",
-              "-17.03352,-2.451894",
-              "-6.96648,42.36004",
-              "-54.63996,-2.903787",
-              "-17.03352,42.36004",
-              "7.96648,-0.5",
-              "-17.03352,55.63996",
-              "42.36004,-0.04810643",
-              "-6.96648,42.36004",
-              "18.03352,0.5",
-              "-6.96648,55.63996",
-              "-41.36004,0.5",
-              "-17.03352,55.63996",
-              "-6.96648,0.5",
-              "-17.03352,42.36004",
-              "55.63996,0.5",
-              "55.63996,-2.451894",
-              "-17.03352,0.5",
-              "42.36004,0.5",
-              "18.03352,-0.04810643",
-              "-54.63996,0.5",
-              "-6.96648,-2.903787",
-              "-41.36004,-0.5",
-              "7.96648,0.5"
-            ],
-            "TextureUAxis": [
-              "0.9990259,0.007859785,0.04342203",
-              "1,0,-0",
-              "0,-1,0",
-              "0,1,0",
-              "-1,0,0",
-              "1,-0,0"
-            ],
-            "TextureVAxis": [
-              "-0.007979472,-0.9840411,0.1777622",
-              "0,-1,0",
-              "0,0,-1",
-              "0,0,-1",
-              "0,0,-1",
-              "0,0,-1"
-            ],
-            "TextureScale": [
-              "0.2502438,0.2540544",
-              "0.25,0.25",
-              "0.25,0.25",
-              "0.25,0.2500001",
-              "0.25,0.25",
-              "0.25,0.2500001"
-            ],
-            "TextureOffset": [
-              "298.4648,294.9688",
-              "159.5713,246.8887",
-              "246.8887,256",
-              "265.1113,256",
-              "352.4285,256",
-              "159.5715,256"
-            ],
-            "MaterialIndex": [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            "EdgeFlags": [
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0,
-              0
-            ],
-            "Materials": [
-              "materials/dev/reflectivity_30.vmat"
-            ]
-          },
-          "SmoothingAngle": 40,
-          "Static": true
-        }
-      ]
     }
   ],
   "SceneProperties": {
@@ -334,7 +205,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-19T08:09:08.6121334-04:00",
+  "LastSaved": "2024-06-19T17:18:02.8870067-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1
