@@ -1,9 +1,10 @@
 namespace Scenebox.Tools;
 
 [Tool( "Remover", "Remove GameObjects", "Construction" )]
-[ToolControl( "Attack1", "Remove selected object" )]
 public class RemoverTool : BaseTool
 {
+    public override string Attack1Control => "Remove selected object";
+    
     public override void PrimaryUseStart()
     {
         var tr = Game.ActiveScene.Trace.Ray( new Ray( Toolgun.Player.Head.Transform.Position, Toolgun.Player.Direction.Forward ), 2000 )

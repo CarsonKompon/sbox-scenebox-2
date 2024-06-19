@@ -95,10 +95,10 @@
       "NetworkInterpolation": true,
       "Components": [
         {
-          "__type": "Scenebox.CustomMapInstance",
-          "__guid": "4388d134-3624-41a6-92c8-8796eda30dc0",
+          "__type": "Sandbox.MapInstance",
+          "__guid": "0c3d64c7-c757-493f-b482-37093117bacf",
           "MapName": "facepunch.construct23",
-          "UseMapFromLaunch": true
+          "UseMapFromLaunch": false
         }
       ],
       "Children": []
@@ -178,46 +178,141 @@
       ]
     },
     {
-      "__guid": "5d1ce2a4-ffde-49eb-b685-a22164635947",
+      "__guid": "6bd114d2-1bad-426b-9433-a8e50b2fcc0a",
       "Flags": 0,
-      "Name": "Explosion",
-      "Position": "-147.7069,1685.196,685.9749",
+      "Name": "Box",
+      "Position": "-1575.893,-6210.278,64",
       "Enabled": true,
-      "NetworkMode": 0,
+      "NetworkMode": 2,
       "NetworkInterpolation": true,
       "Components": [
         {
-          "__type": "Sandbox.SphereCollider",
-          "__guid": "569766d6-a887-4e76-baa8-798c5800c74e",
-          "Center": "0,0,0",
-          "IsTrigger": true,
-          "Radius": 200,
-          "Static": false
-        },
-        {
-          "__type": "Scenebox.Explosion",
-          "__guid": "37e9817e-01bb-4b84-b58d-984eb101c433"
-        },
-        {
-          "__type": "Scenebox.DestroyAfter",
-          "__guid": "4c8d43cb-4db2-48f5-ad99-9e2a10bbdb89",
-          "Time": 0.5
-        }
-      ],
-      "Children": [
-        {
-          "__guid": "0b675601-131c-40af-b760-1bda446e3d83",
-          "Flags": 0,
-          "Name": "particle_explosion",
-          "Position": "0,0,0",
-          "Tags": "particles",
-          "Enabled": true,
-          "NetworkMode": 0,
-          "NetworkInterpolation": true,
-          "__Prefab": "prefabs/particles/particle_explosion.prefab",
-          "__PrefabVariables": {}
+          "__type": "Sandbox.MeshComponent",
+          "__guid": "e5acf885-7231-48e8-83fc-94aae5a07636",
+          "Collision": "Mesh",
+          "Color": "1,1,1,1",
+          "HideInGame": false,
+          "IsTrigger": false,
+          "Mesh": {
+            "Topology": "H4sIAAAAAAAACl2Qiw6CUAxDh1flgg/wAfr/X2pP0iWLJA25W9t16xHxFc4C30E4\u002Bt2FWbgKd2Ew4NTvIZxcb9ZH4b5db\u002Bb9z/oUzVh8m7lPc9FOzjRYQ8ZXyXxxXvrw4e72wvtWdoEPdzMXj8We9OHDXcvO7EqdN396eKaeLHjkLciePeYxi4z0mMFtMisablFvRXZ2Tj158KQOF78f9WSROMQBAAA=",
+            "Positions": [
+              "-644.2905,-849.915,313.8424",
+              "644.2905,-849.915,371.6848",
+              "644.2905,849.915,64",
+              "-644.2905,849.915,6.157623",
+              "-644.2905,849.915,-64",
+              "644.2905,849.915,-64",
+              "644.2905,-849.915,-64",
+              "-644.2905,-849.915,-64"
+            ],
+            "TextureCoord": [
+              "-6.96648,55.63996",
+              "-17.03352,-2.451894",
+              "-6.96648,42.36004",
+              "-54.63996,-2.903787",
+              "-17.03352,42.36004",
+              "7.96648,-0.5",
+              "-17.03352,55.63996",
+              "42.36004,-0.04810643",
+              "-6.96648,42.36004",
+              "18.03352,0.5",
+              "-6.96648,55.63996",
+              "-41.36004,0.5",
+              "-17.03352,55.63996",
+              "-6.96648,0.5",
+              "-17.03352,42.36004",
+              "55.63996,0.5",
+              "55.63996,-2.451894",
+              "-17.03352,0.5",
+              "42.36004,0.5",
+              "18.03352,-0.04810643",
+              "-54.63996,0.5",
+              "-6.96648,-2.903787",
+              "-41.36004,-0.5",
+              "7.96648,0.5"
+            ],
+            "TextureUAxis": [
+              "0.9990259,0.007859785,0.04342203",
+              "1,0,-0",
+              "0,-1,0",
+              "0,1,0",
+              "-1,0,0",
+              "1,-0,0"
+            ],
+            "TextureVAxis": [
+              "-0.007979472,-0.9840411,0.1777622",
+              "0,-1,0",
+              "0,0,-1",
+              "0,0,-1",
+              "0,0,-1",
+              "0,0,-1"
+            ],
+            "TextureScale": [
+              "0.2502438,0.2540544",
+              "0.25,0.25",
+              "0.25,0.25",
+              "0.25,0.2500001",
+              "0.25,0.25",
+              "0.25,0.2500001"
+            ],
+            "TextureOffset": [
+              "298.4648,294.9688",
+              "159.5713,246.8887",
+              "246.8887,256",
+              "265.1113,256",
+              "352.4285,256",
+              "159.5715,256"
+            ],
+            "MaterialIndex": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "EdgeFlags": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "Materials": [
+              "materials/dev/reflectivity_30.vmat"
+            ]
+          },
+          "SmoothingAngle": 40,
+          "Static": true
         }
       ]
+    },
+    {
+      "__guid": "92a1a666-85cc-4de6-b74f-693f0d24406b",
+      "Flags": 0,
+      "Name": "GameObject",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true
     }
   ],
   "SceneProperties": {
@@ -243,7 +338,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-17T19:00:06.8259988-04:00",
+  "LastSaved": "2024-06-18T20:35:43.1404811-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

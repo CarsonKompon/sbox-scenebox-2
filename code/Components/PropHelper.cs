@@ -28,6 +28,11 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         _lastPosition = Prop?.Transform?.Position ?? Transform.Position;
         Velocity = 0;
 
+        // if ( Components.TryGet<SkinnedModelRenderer>( out var renderer ) )
+        // {
+        //     renderer.CreateBoneObjects = true;
+        // }
+
         InitCloudModel();
     }
 

@@ -197,6 +197,27 @@ public partial class GameManager : Component, Component.INetworkListener
     }
 
     [Broadcast]
+    public void BroadcastDestroyComponent( Guid componentId )
+    {
+        var component = Scene.Directory.FindByGuid( componentId );
+        if ( component.IsValid() )
+        {
+            component.Destroy();
+        }
+    }
+
+    [Broadcast]
+    public void BroadcastSetParent( Guid objectId, Guid parentId )
+    {
+        var obj = Scene.Directory.FindByGuid( objectId );
+        var parent = Scene.Directory.FindByGuid( parentId );
+        if ( obj.IsValid() && parent.IsValid() )
+        {
+            obj.SetParent( parent );
+        }
+    }
+
+    [Broadcast]
     public void BroadcastAddTag( Guid objectId, string tag )
     {
         Scene.Directory.FindByGuid( objectId )?.Tags?.Add( tag );

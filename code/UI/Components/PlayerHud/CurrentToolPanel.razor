@@ -18,8 +18,8 @@
                 @foreach (var control in controls)
                 {
                     <div class="control">
-                        <Image Texture=@Input.GetGlyph(control.Input, InputGlyphSize.Small, GlyphStyle.Light) />
-                        @control.Description
+                        <Image Texture=@Input.GetGlyph(control.Item1, InputGlyphSize.Small, GlyphStyle.Light) />
+                        @control.Item2
                     </div>
                 }
             }
@@ -30,6 +30,25 @@
 @code
 {
 
+    string GetTool()
+    {
+        if (Player.Local?.Inventory?.CurrentWeapon is Toolgun toolgun)
+        {
+            return toolgun.CurrentTool.GetName();
+        }
+        return "";
+    }
 
-    protected override int BuildHash() => System.HashCode.Combine("");
+    string GetControls()
+    {
+        if (Player.Local?.Inventory?.CurrentWeapon is Toolgun toolgun)
+        {
+            return toolgun?.CurrentTool?.Attack1Control + toolgun?.CurrentTool?.Attack2Control + toolgun?.CurrentTool?.ReloadControl;
+        }
+
+        return "";
+    }
+
+
+    protected override int BuildHash() => System.HashCode.Combine(GetTool(), GetControls());
 }

@@ -49,6 +49,12 @@ public class Toolgun : Weapon
         ToolMenu.Instance?.UpdateInspector();
     }
 
+    protected override void OnEquip()
+    {
+        base.OnEquip();
+        CurrentTool?.OnEquip();
+    }
+
     [Broadcast]
     public void BroadcastUseEffects( Vector3 hitPosition, Vector3 hitNormal = default )
     {

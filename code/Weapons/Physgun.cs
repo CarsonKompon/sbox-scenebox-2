@@ -195,6 +195,7 @@ public class Physgun : Weapon
         if ( body.BodyType == PhysicsBodyType.Static )
         {
             body.BodyType = PhysicsBodyType.Dynamic;
+            body.Sleeping = false;
         }
 
         if ( rootObject.Tags.Has( GrabbedTag ) ) return;

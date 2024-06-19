@@ -149,7 +149,6 @@ public sealed class AutoDspFilter : Component
                 {
                     return (OutsidePresets[size], OutsideMix);
                 }
-                break;
         }
     }
 }
