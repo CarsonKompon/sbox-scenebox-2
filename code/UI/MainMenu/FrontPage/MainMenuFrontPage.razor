@@ -1,0 +1,38 @@
+@using System;
+@using Sandbox;
+@using Sandbox.UI;
+@inherits Panel
+@attribute [StyleSheet]
+
+@namespace Scenebox.UI
+
+<root>
+    <div class="logo-container">
+        <div class="logo">&</div>
+        <label>carson's mod</label>
+    </div>
+
+    <div class="menu">
+        <a href="/play">Start New Game</a>
+        <a href="/play">Find Multiplayer Game</a>
+        <div class="gap" />
+        <a href="/settings">Options</a>
+        <div class="gap" />
+        @if (MainMenu.Instance.IsPauseMenu)
+        {
+            <label class="btn" onclick=@(() => Scene.Load(MainMenu.Instance.GameScene))>Quit to Main Menu</label>
+        }
+        else
+        {
+            <label class="btn" onclick=@Game.Close>Quit</label>
+        }
+    </div>
+</root>
+
+@code
+{
+    protected override void OnAfterTreeRender(bool firstTime)
+    {
+        base.OnAfterTreeRender(firstTime);
+    }
+}

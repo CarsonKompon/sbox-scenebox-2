@@ -1,0 +1,27 @@
+@using Sandbox;
+@using Sandbox.UI;
+@inherits PanelComponent
+@namespace Scenebox.UI
+
+<root>
+	@if (!IsPauseMenu)
+	{
+		<MainMenuBackgroundPanel />
+	}
+	<MainMenuPanel />
+</root>
+
+@code
+{
+	public static MainMenu Instance { get; private set; }
+
+	[Property] public bool IsPauseMenu { get; set; } = false;
+	[Property] public SceneFile GameScene { get; set; }
+
+	protected override void OnAwake()
+	{
+		Instance = this;
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine("");
+}

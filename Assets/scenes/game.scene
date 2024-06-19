@@ -102,7 +102,7 @@
           "__type": "Sandbox.MapInstance",
           "__guid": "0c3d64c7-c757-493f-b482-37093117bacf",
           "MapName": "facepunch.construct23",
-          "UseMapFromLaunch": false
+          "UseMapFromLaunch": true
         }
       ],
       "Children": []
@@ -334,7 +334,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-18T21:57:18.0684662-04:00",
+  "LastSaved": "2024-06-19T08:09:08.6121334-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

@@ -1,0 +1,46 @@
+MainMenu
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+MainMenuBackgroundPanel
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	Image
+	{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		opacity: 1;
+		animation: zoom-in 30s;
+		background-size: cover;
+		transition: opacity 1s;
+		z-index: 0;
+
+		&:outro
+		{
+			z-index: 10;
+			opacity: 0;
+		}
+	}
+}
+
+@keyframes zoom-in {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(1.2);
+	}
+}
