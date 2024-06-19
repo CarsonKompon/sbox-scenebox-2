@@ -439,7 +439,7 @@ SpawnMenu
 .tabs
 {
     margin: 0;
-    z-index: 1;
+    z-index: 10;
     gap: -2px;
     flex-shrink: 0;
 	font-family: Verdana;
@@ -472,6 +472,7 @@ SpawnMenu
 		{
 			background-color: darken($bg-grey, 0.1);
 			border-bottom: 0px;
+            padding-bottom: 3px;
 			color: white;
 			z-index: 1;
 		}
@@ -480,6 +481,7 @@ SpawnMenu
         {
             background-color: $bg-grey;
             border-bottom: 0px;
+            padding-bottom: 3px;
             color: white;
             z-index: 1;
         }
@@ -496,4 +498,30 @@ rootpanel .tooltip
     opacity: 1;
     display: flex;
     background-color: rgba(#fea, 0.95);
+}
+
+button.btn
+{
+    background-image: linear-gradient(270deg, #EAEAEA 0%, #EAEAEA 49%, #E2E2E2 51%, #E2E2E2 100%);
+    border: 1px solid $border-col;
+    border-radius: 2px;
+    padding: 2px 4px;
+    font-family: Verdana;
+    font-size: 12px;
+    color: #515151;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+
+    &:hover
+    {
+        background-image: linear-gradient(270deg, #eeeeee 0%, #eeeeee 49%, #EAEAEA 51%, #EAEAEA 100%);
+        color: #3376B5;
+    }
+
+    &:active
+    {
+        background-image: linear-gradient(270deg, #6DBEF7 0%, #6DBEF7 49%, #53B2F4 51%, #53B2F4 100%);
+        color: white;
+    }
 }

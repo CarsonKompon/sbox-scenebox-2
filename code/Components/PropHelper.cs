@@ -1,9 +1,12 @@
+using System;
+
 namespace Scenebox;
 
 public sealed class PropHelper : Component, Component.ICollisionListener
 {
     Prop Prop;
 
+    [Sync] public Guid CreatorId { get; set; } = Guid.Empty;
     [Sync] public float Health { get; set; } = 1;
     [Sync] NetDictionary<int, BodyInfo> NetworkedBodies { get; set; } = new();
     [Sync, Change( "InitCloudModel" )] string CloudModel { get; set; } = "";
@@ -27,11 +30,6 @@ public sealed class PropHelper : Component, Component.ICollisionListener
         Rigidbody = Components.Get<Rigidbody>();
         _lastPosition = Prop?.Transform?.Position ?? Transform.Position;
         Velocity = 0;
-
-        // if ( Components.TryGet<SkinnedModelRenderer>( out var renderer ) )
-        // {
-        //     renderer.CreateBoneObjects = true;
-        // }
 
         InitCloudModel();
     }

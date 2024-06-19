@@ -345,7 +345,7 @@
                                     "CurrentPanelScale": 0,
                                     "CurrentPanelScaleFromScreen": 0,
                                     "CurrentPanelScaleToScreen": 0,
-                                    "CurrentScreenSize": "1018,581",
+                                    "CurrentScreenSize": "1250,494",
                                     "CustomPanelBounds": {
                                       "Size": "256,256"
                                     },
@@ -372,15 +372,15 @@
                                   {
                                     "__guid": "fb9be05c-fe17-436a-8a17-3013be441f72",
                                     "Flags": 0,
-                                    "Name": "Object",
+                                    "Name": "Toolgun Screen",
                                     "Position": "0,0,0",
                                     "Enabled": true,
                                     "NetworkMode": 2,
                                     "NetworkInterpolation": true,
                                     "Components": [
                                       {
-                                        "__type": "Scenebox.ToolgunScreen",
-                                        "__guid": "05c6bf93-b888-4738-a868-62c518a77c0c"
+                                        "__type": "Scenebox.UI.ToolgunScreen",
+                                        "__guid": "4286ea81-5998-4b58-bafd-8e78cc620541"
                                       }
                                     ]
                                   }

@@ -1,7 +1,6 @@
 using System;
-using System.Net.Http;
-using Sandbox;
 using Sandbox.Citizen;
+using Scenebox.UI;
 
 namespace Scenebox;
 

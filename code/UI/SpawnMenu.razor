@@ -1,7 +1,7 @@
 @using Sandbox;
 @using Sandbox.UI;
 @inherits PanelComponent
-@namespace Scenebox
+@namespace Scenebox.UI
 
 <root class="@(IsVisible ? "open" : "")">
 	<div class="left">
@@ -38,7 +38,7 @@
 		</div>
 		<div class="body">
 			<ToolMenu @ref="ToolsPanel" />
-			<div @ref="UtilitiesPanel" />
+			<UtilitiesMenu @ref="UtilitiesPanel" />
 		</div>
 	</div>
 </root>

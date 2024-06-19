@@ -4,7 +4,7 @@
 @using Sandbox.UI;
 @using Scenebox.Tools;
 @inherits Panel
-@namespace Scenebox
+@namespace Scenebox.UI
 @attribute [StyleSheet]
 
 <root>
@@ -13,8 +13,9 @@
         <div class="toollist">
             @if (true)
             {
-                var tools = TypeLibrary.GetTypes<BaseTool>().Where(x => x.Name != "BaseTool");
-                foreach (var group in GetGroups(tools.ToList()))
+                var tools = GetTools();
+                var groups = GetGroups(tools);
+                foreach (var group in groups)
                 {
                     <label class="header">@group</label>
                     foreach (var tool in tools.Where(x => GetGroup(x.TargetType) == group))
@@ -52,6 +53,25 @@
         }
     }
 
+    List<TypeDescription> GetTools()
+    {
+        var tools = TypeLibrary.GetTypes<BaseTool>().Where(x => x.Name != "BaseTool");
+
+        if (!string.IsNullOrWhiteSpace(SearchEntry?.Text))
+        {
+
+            tools = tools.Where(x =>
+            {
+                var attr = TypeLibrary.GetAttribute<ToolAttribute>(x.TargetType);
+                var text = SearchEntry.Text.ToLower();
+                return attr.Title.ToLower().Contains(text)
+    || attr.Group.ToLower().Contains(text);
+            });
+        }
+
+        return tools.ToList();
+    }
+
     void GiveTool(TypeDescription tool)
     {
         var toolgun = Player.Local?.Components.Get<Toolgun>(FindMode.EverythingInSelfAndDescendants);
@@ -59,7 +79,6 @@
         {
             toolgun.SetTool(tool);
         }
-        Log.Info(toolgun);
         Player.Local?.Inventory?.EquipWeapon(toolgun);
     }
 

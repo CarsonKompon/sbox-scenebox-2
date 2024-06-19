@@ -1,7 +1,6 @@
-@using Sandbox;
 @using Sandbox.UI;
 @inherits Panel
-@namespace Scenebox
+@namespace Scenebox.UI
 
 <root class="cell" onclick=@Spawn>
     <label class="title">@Package.Title</label>
@@ -38,7 +37,6 @@
         var rotation = Rotation.From(0, localPlayer.Direction.yaw + 180, 0);
 
         var obj = GameManager.Instance.SpawnCloudModel(Package.FullIdent, position, rotation);
-        UndoManager.Instance.AddGameObject(obj.Id);
     }
 
     protected override int BuildHash() => System.HashCode.Combine(Package);

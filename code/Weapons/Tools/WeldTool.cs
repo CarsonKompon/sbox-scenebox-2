@@ -3,10 +3,15 @@ using System;
 namespace Scenebox.Tools;
 
 [Tool( "Weld", "Weld stuff together", "Constraints" )]
+[Description( "A weld created a fixed constraint between objects." )]
 public class WeldTool : BaseTool
 {
-    [Property, Range( 0, 1000 )] public float ForceLimit { get; set; } = 0;
-    [Property] public bool NoCollide { get; set; } = false;
+    [Property, Range( 0, 50000, 1 )]
+    [Title( "Force Limit" ), Description( "The constraint will break if the amount of force is greater than this. Set to 0 to not break. Unfortunately due to the way the physgun works, moving objects with a value greater than 0 will instantly break the joint." )]
+    public float ForceLimit { get; set; } = 0;
+
+    [Property, Title( "No Collide" )]
+    public bool NoCollide { get; set; } = false;
 
     public override string Attack1Control => SelectedObject.IsValid() ? "Attach the object with a Weld constraint" : "Select an object to begin a Weld constraint";
 
@@ -77,6 +82,8 @@ public class WeldTool : BaseTool
         weld.EnableCollision = !NoCollide;
         var rootObject = SelectedObject.Root;
         rootObject.Network.Refresh();
+
+        Log.Info( $"{ForceLimit} {NoCollide} {SelectedObject.Id} {obj.Id}" );
 
         UndoManager.Instance.Add( "Undone Weld", new List<Guid>() { SelectedObject.Id, obj.Id }, () =>
         {

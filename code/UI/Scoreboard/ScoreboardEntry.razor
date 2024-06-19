@@ -1,7 +1,7 @@
 @using Sandbox;
 @using Sandbox.UI;
 @inherits Panel
-@namespace Scenebox
+@namespace Scenebox.UI
 
 <root class="@(Connection == Connection.Local ? "isme" : "")">
     <img src=@($"avatar:" + @Connection.SteamId) />

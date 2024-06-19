@@ -55,16 +55,16 @@
           "ZIndex": 100
         },
         {
-          "__type": "Scenebox.SpawnMenu",
-          "__guid": "311c2f0e-89b0-43c1-b3fd-f2ca471ce901"
+          "__type": "Scenebox.UI.SpawnMenu",
+          "__guid": "6e43bd4a-b4ee-45fa-8d9f-74fcb4028e92"
         },
         {
-          "__type": "Scenebox.PlayerHud",
-          "__guid": "8881c500-240e-413f-a1ce-a13b85f9d54e"
+          "__type": "Scenebox.UI.Scoreboard",
+          "__guid": "0387219f-1e28-4a26-b78b-09a2c7246633"
         },
         {
-          "__type": "Scenebox.Scoreboard",
-          "__guid": "7dd8c7a5-9a94-4e55-998b-4974aaedd005"
+          "__type": "Scenebox.UI.PlayerHud",
+          "__guid": "5c45b843-a94c-4145-bbf0-d5658aaf1ebb"
         }
       ],
       "Children": [
@@ -78,12 +78,12 @@
           "NetworkInterpolation": true,
           "Components": [
             {
-              "__type": "Scenebox.Chatbox",
-              "__guid": "d4233a90-0255-48bf-a933-8e3279a444f9"
+              "__type": "Scenebox.UI.KillFeed",
+              "__guid": "89718d3c-11bb-4de1-a478-d85b8ce580e7"
             },
             {
-              "__type": "Scenebox.KillFeed",
-              "__guid": "9ede538a-bbac-4a7a-b4cc-bc07bb7c2070"
+              "__type": "Scenebox.UI.Chatbox",
+              "__guid": "a442125d-b5fe-42b6-80ef-eecd64f8e61a"
             }
           ]
         }
@@ -334,7 +334,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-18T21:33:24.7640643-04:00",
+  "LastSaved": "2024-06-18T21:57:18.0684662-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

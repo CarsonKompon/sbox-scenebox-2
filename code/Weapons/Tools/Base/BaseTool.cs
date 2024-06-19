@@ -58,6 +58,14 @@ public abstract class BaseTool
         return TypeLibrary.GetAttribute<ToolAttribute>( GetType() ).Description;
     }
 
+    public string GetLongDescription()
+    {
+        var attr = TypeLibrary.GetAttribute<DescriptionAttribute>( GetType() );
+        if ( string.IsNullOrWhiteSpace( attr?.Value ) )
+            return GetDescription();
+        return attr.Value;
+    }
+
     public string GetGroup()
     {
         return TypeLibrary.GetAttribute<ToolAttribute>( GetType() ).Group;

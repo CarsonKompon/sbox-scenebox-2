@@ -90,25 +90,29 @@ public partial class GameManager : Component, Component.INetworkListener
         gameObject.Transform.Position = position;
         gameObject.Transform.Rotation = rotation;
 
-        if ( model == null || model.Physics?.Parts.Count() > 0 )
-        {
-            var prop = gameObject.Components.Create<Prop>();
-            prop.Model = model;
-            gameObject.Components.Create<PropHelper>();
-        }
-        else
-        {
-            var renderer = gameObject.Components.Create<ModelRenderer>();
-            renderer.Model = model;
-            var collider = gameObject.Components.Create<BoxCollider>();
-            collider.Center = model.Bounds.Center;
-            collider.Scale = model.Bounds.Size;
-            gameObject.Components.Create<Rigidbody>();
-        }
+        // if ( model == null || model.Physics?.Parts.Count() > 0 )
+        // {
+        var prop = gameObject.Components.Create<Prop>();
+        prop.Model = model;
+        var helper = gameObject.Components.Create<PropHelper>();
+        helper.CreatorId = Connection.Local.Id;
+        // }
+        // else
+        // {
+        //     var renderer = gameObject.Components.Create<ModelRenderer>();
+        //     renderer.Model = model;
+        //     var collider = gameObject.Components.Create<BoxCollider>();
+        //     collider.Center = model.Bounds.Center;
+        //     collider.Scale = model.Bounds.Size;
+        //     gameObject.Components.Create<Rigidbody>();
+        // }
 
         gameObject.NetworkSpawn();
         gameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
         gameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+
+        bool isRagdoll = prop.Components.TryGet<ModelPhysics>( out var _ );
+        UndoManager.Instance.AddGameObject( gameObject.Id, isRagdoll ? "Undone Ragdoll" : "Undone Prop" );
 
         return gameObject;
     }

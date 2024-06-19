@@ -1,6 +1,5 @@
-
-using System;
 using Scenebox.Tools;
+using Scenebox.UI;
 
 namespace Scenebox;
 
@@ -36,6 +35,8 @@ public class Toolgun : Weapon
     {
         if ( CurrentTool != null )
         {
+            if ( CurrentTool.GetType() == toolDescription.TargetType ) return;
+
             CurrentTool?.OnUnequip();
             CurrentTool = null;
         }

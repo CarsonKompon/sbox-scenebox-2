@@ -1141,8 +1141,8 @@
                 "VerticalAlign": "Center"
               },
               {
-                "__type": "Scenebox.PlayerNametag",
-                "__guid": "39779b5a-2e4e-4d5f-b33a-283ee2ef0fa8"
+                "__type": "Scenebox.UI.PlayerNametag",
+                "__guid": "fc131733-958f-449b-94ba-ab8a05621cc3"
               }
             ]
           },

@@ -1,5 +1,6 @@
 using System;
 using Sandbox.Audio;
+using Scenebox.UI;
 
 namespace Scenebox;
 
@@ -49,9 +50,9 @@ public sealed class UndoManager : Component
         Stack.Add( new Entry( message, ids, undo ) );
     }
 
-    public void AddGameObject( Guid id )
+    public void AddGameObject( Guid id, string message = "Undone Prop" )
     {
-        Add( "Undone Prop", new List<Guid>() { id }, () => GameManager.Instance?.BroadcastDestroyObject( id ) );
+        Add( message, new List<Guid>() { id }, () => GameManager.Instance?.BroadcastDestroyObject( id ) );
     }
 
     public void Undo()
