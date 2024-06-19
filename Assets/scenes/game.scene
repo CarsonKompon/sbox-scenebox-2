@@ -61,6 +61,10 @@
         {
           "__type": "Scenebox.PlayerHud",
           "__guid": "8881c500-240e-413f-a1ce-a13b85f9d54e"
+        },
+        {
+          "__type": "Scenebox.Scoreboard",
+          "__guid": "7dd8c7a5-9a94-4e55-998b-4974aaedd005"
         }
       ],
       "Children": [
@@ -305,14 +309,6 @@
           "Static": true
         }
       ]
-    },
-    {
-      "__guid": "92a1a666-85cc-4de6-b74f-693f0d24406b",
-      "Flags": 0,
-      "Name": "GameObject",
-      "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true
     }
   ],
   "SceneProperties": {
@@ -338,7 +334,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-18T20:35:43.1404811-04:00",
+  "LastSaved": "2024-06-18T21:33:24.7640643-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

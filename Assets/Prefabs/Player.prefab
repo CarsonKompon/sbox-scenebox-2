@@ -90,13 +90,13 @@
         "UseCollisionRules": false
       },
       {
-        "__type": "Sandbox.Voice",
-        "__guid": "78d564ea-5929-4698-8b05-ea9cb996f854",
+        "__type": "Scenebox.PlayerVoiceComponent",
+        "__guid": "45681040-5faf-46f0-94d5-48e33e83d71e",
         "Loopback": false,
         "Mode": "PushToTalk",
         "MorphScale": 3,
         "MorphSmoothTime": 0.1,
-        "PushToTalkInput": "Voice",
+        "PushToTalkInput": "voice",
         "Renderer": {
           "_type": "component",
           "component_id": "2f1a9d0d-d0ae-42b9-96e7-754642749f65",

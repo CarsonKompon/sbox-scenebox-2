@@ -19,7 +19,7 @@
                     <label class="header">@group</label>
                     foreach (var tool in tools.Where(x => GetGroup(x.TargetType) == group))
                     {
-                        <div class="tool" onclick=@(() => GiveTool(tool))>
+                        <div class="tool @(IsCurrentTool(tool.TargetType) ? "active" : "")" onclick=@(() => GiveTool(tool))>
                             @(TypeLibrary.GetAttribute<ToolAttribute>(tool.TargetType)?.Title ?? "Missingtool.")
                         </div>
                     }
@@ -105,6 +105,16 @@
             defaultPanel.Toolgun = toolgun;
             InspectorPanel.AddChild(defaultPanel);
         }
+    }
+
+    bool IsCurrentTool(Type toolType)
+    {
+        var toolgun = Player.Local?.Components.Get<Toolgun>(FindMode.EverythingInSelfAndDescendants);
+        if (toolgun.IsValid())
+        {
+            return toolgun.CurrentTool.GetType() == toolType;
+        }
+        return false;
     }
 
     protected override int BuildHash() => System.HashCode.Combine(SearchEntry?.Text);

@@ -5,6 +5,9 @@ namespace Scenebox.Tools;
 [Tool( "Weld", "Weld stuff together", "Constraints" )]
 public class WeldTool : BaseTool
 {
+    [Property, Range( 0, 1000 )] public float ForceLimit { get; set; } = 0;
+    [Property] public bool NoCollide { get; set; } = false;
+
     public override string Attack1Control => SelectedObject.IsValid() ? "Attach the object with a Weld constraint" : "Select an object to begin a Weld constraint";
 
     GameObject SelectedObject = null;
@@ -70,6 +73,8 @@ public class WeldTool : BaseTool
 
         var weld = SelectedObject.Components.GetOrCreate<FixedJoint>();
         weld.Body = obj;
+        weld.BreakForce = ForceLimit;
+        weld.EnableCollision = !NoCollide;
         var rootObject = SelectedObject.Root;
         rootObject.Network.Refresh();
 
