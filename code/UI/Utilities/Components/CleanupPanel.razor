@@ -23,6 +23,10 @@
         {
             props = props.Where(x => x.CreatorId == Connection.Local.Id);
         }
+        else if (!Networking.IsHost)
+        {
+            return new List<PropHelper>();
+        }
         return props.ToList();
     }
 
