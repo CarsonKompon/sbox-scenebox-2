@@ -20,7 +20,7 @@
         <div class="gap" />
         @if (MainMenu.Instance.IsPauseMenu)
         {
-            <label class="btn" onclick=@(() => Scene.Load(MainMenu.Instance.GameScene))>Quit to Main Menu</label>
+            <label class="btn" onclick=@(() => Scene.Load(MainMenu.Instance.MenuScene))>Quit to Main Menu</label>
         }
         else
         {

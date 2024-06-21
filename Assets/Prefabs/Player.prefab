@@ -170,6 +170,7 @@
             "__enabled": false,
             "Locking": {},
             "Model": "models/citizen/citizen.vmdl",
+            "MotionEnabled": true,
             "Renderer": {
               "_type": "component",
               "component_id": "2f1a9d0d-d0ae-42b9-96e7-754642749f65",

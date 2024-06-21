@@ -50,7 +50,8 @@
           "__type": "Scenebox.UI.MainMenu",
           "__guid": "9d5bcb4e-a1a2-4675-bff8-1c2ed8a2fba2",
           "GameScene": "scenes/game.scene",
-          "IsPauseMenu": false
+          "IsPauseMenu": false,
+          "MenuScene": "scenes/menu.scene"
         }
       ]
     }
@@ -78,7 +79,7 @@
   },
   "Title": "menu",
   "Description": "",
-  "LastSaved": "2024-06-19T17:12:00.9613871-04:00",
+  "LastSaved": "2024-06-20T20:53:15.2561495-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

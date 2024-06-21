@@ -3,7 +3,7 @@
 @inherits PanelComponent
 @namespace Scenebox.UI
 
-<root>
+<root class="@((!IsOpen && IsPauseMenu) ? "hidden" : "")">
 	@if (!IsPauseMenu)
 	{
 		<MainMenuBackgroundPanel />
@@ -30,12 +30,25 @@
 	MainMenuPanel NavigationPanel { get; set; }
 
 	[Property] public bool IsPauseMenu { get; set; } = false;
+	[Property] public SceneFile MenuScene { get; set; }
 	[Property] public SceneFile GameScene { get; set; }
+
+	public bool IsOpen = false;
 
 	protected override void OnAwake()
 	{
 		Instance = this;
 	}
 
-	protected override int BuildHash() => System.HashCode.Combine(NavigationPanel?.CurrentUrl);
+	protected override void OnUpdate()
+	{
+		if (!IsPauseMenu) return;
+		if (Input.EscapePressed)
+		{
+			Input.EscapePressed = false;
+			IsOpen = !IsOpen;
+		}
+	}
+
+	protected override int BuildHash() => System.HashCode.Combine(IsOpen, NavigationPanel?.CurrentUrl);
 }

@@ -41,7 +41,7 @@
       "__guid": "151ad676-4df2-4350-993b-280843c300c0",
       "Flags": 0,
       "Name": "Screen Panel",
-      "Position": "154.1167,45.1605,-35.97688",
+      "Position": "154.1167,45.3605,-35.97688",
       "Enabled": true,
       "NetworkMode": 2,
       "NetworkInterpolation": true,
@@ -180,6 +180,31 @@
           "Radius": 20
         }
       ]
+    },
+    {
+      "__guid": "86b1fddd-e736-4b52-b2ca-e5e8d2f8c29c",
+      "Flags": 0,
+      "Name": "Pause Menu",
+      "Enabled": true,
+      "NetworkMode": 2,
+      "NetworkInterpolation": true,
+      "Components": [
+        {
+          "__type": "Sandbox.ScreenPanel",
+          "__guid": "7d97a953-dc46-415b-91be-09ba63842f10",
+          "AutoScreenScale": true,
+          "Opacity": 1,
+          "Scale": 1,
+          "ZIndex": 200
+        },
+        {
+          "__type": "Scenebox.UI.MainMenu",
+          "__guid": "92ba1061-0ecf-4928-a49f-2a570727ffd6",
+          "GameScene": "scenes/game.scene",
+          "IsPauseMenu": true,
+          "MenuScene": "scenes/menu.scene"
+        }
+      ]
     }
   ],
   "SceneProperties": {
@@ -205,7 +230,7 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-19T17:18:02.8870067-04:00",
+  "LastSaved": "2024-06-20T20:52:36.8803891-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

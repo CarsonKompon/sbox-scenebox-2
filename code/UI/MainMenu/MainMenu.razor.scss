@@ -58,6 +58,13 @@ MainMenu
 
 	.hidden
 	{
+		pointer-events: none;
+		display: none;
+	}
+
+	&.hidden
+	{
+		pointer-events: none;
 		display: none;
 	}
 }
