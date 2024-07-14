@@ -2,26 +2,38 @@
 
 Layer0
 {
-	shader "shaders/lcd.shader"
+	shader "shaders/complex.shader"
+
+	//---- Ambient Occlusion ----
+	g_flAmbientOcclusionDirectDiffuse "0.000"
+	g_flAmbientOcclusionDirectSpecular "0.000"
+	TextureAmbientOcclusion "materials/default/default_ao.tga"
+
+	//---- Color ----
+	g_flModelTintAmount "1.000"
+	g_vColorTint "[1.000000 1.000000 1.000000 0.000000]"
+	TextureColor "materials/default/default_color.tga"
+
+	//---- Fade ----
+	g_flFadeExponent "1.000"
 
 	//---- Fog ----
 	g_bFogEnabled "1"
 
-	//---- LCD Screen ----
-	ColorTexture "materials/default/default_color.tga"
-	g_bIsBroken "0"
-	g_flBrightnessMultiplier "8.000"
-	g_flFresnelExponent "5.000"
-	g_flFresnelReflectance "0.010"
-	g_flParallaxDistance "0.050"
-	g_flParallaxVignetteExponent "0.200"
-	g_flParallaxVignetteStrength "1.000"
-	g_flPixelBlendDistance "8.000"
-	g_flPixelBlendOffset "0.000"
-	g_flPixelOpacityMax "1.000"
-	g_flPixelOpacityMin "0.100"
-	g_vPixelSize "[1.000 1.000]"
-	g_vScreenResolution "[256.000 256.000]"
-	GlassRoughnessTexture "materials/default/default_rough.tga"
-	PixelTexture "Materials/lcd_overlay.png"
+	//---- Metalness ----
+	g_flMetalness "0.000"
+
+	//---- Normal ----
+	TextureNormal "materials/default/default_normal.tga"
+
+	//---- Roughness ----
+	g_flRoughnessScaleFactor "1.000"
+	TextureRoughness "materials/default/default_rough.tga"
+
+	//---- Texture Coordinates ----
+	g_nScaleTexCoordUByModelScaleAxis "0"
+	g_nScaleTexCoordVByModelScaleAxis "0"
+	g_vTexCoordOffset "[0.000 0.000]"
+	g_vTexCoordScale "[1.000 1.000]"
+	g_vTexCoordScrollSpeed "[0.000 0.000]"
 }
