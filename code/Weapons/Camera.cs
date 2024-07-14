@@ -89,7 +89,7 @@ public class Camera : Weapon, ICameraOverride
     [Broadcast]
     void BroadcastPhoto()
     {
-        var sound = Sound.Play( "ui.gmod.photo", Transform.Position );
+        var sound = Sound.Play( "camera.picture", Transform.Position );
         if ( Network.IsOwner )
         {
             sound.Volume = 0.1f;

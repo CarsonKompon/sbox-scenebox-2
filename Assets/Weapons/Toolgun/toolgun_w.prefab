@@ -5,8 +5,6 @@
     "Name": "toolgun_w",
     "Tags": "player,particles",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Scenebox.Toolgun",
@@ -33,7 +31,7 @@
           "go": "cf4feaa9-289a-4cbd-abda-1c5529cbf45a"
         },
         "Resource": "weapons/toolgun/toolgun.weapon",
-        "UseSound": "sounds/toolgun/gmod.toolgun.fire.sound"
+        "UseSound": "sounds/toolgun/toolgun.fire.sound"
       }
     ],
     "Children": [
@@ -43,8 +41,6 @@
         "Name": "Object",
         "Position": "-1.259136,-0.00000007505037,0.7452478",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
@@ -63,9 +59,7 @@
             "Flags": 0,
             "Name": "Muzzle",
             "Position": "13.86241,-0.00008153915,2.759946",
-            "Enabled": true,
-            "NetworkMode": 2,
-            "NetworkInterpolation": true
+            "Enabled": true
           }
         ]
       },
@@ -75,8 +69,6 @@
         "Name": "Beam Particle",
         "Scale": "0.5,0.5,0.5",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.LegacyParticleSystem",

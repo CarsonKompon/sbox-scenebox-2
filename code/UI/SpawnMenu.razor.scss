@@ -140,7 +140,7 @@ SpawnMenu
 
                         &:active
                         {
-                            sound-out: ui.gmod.button.release;
+                            sound-out: ui.button.press;
                             transform: scale(0.95);
                         }
                     }

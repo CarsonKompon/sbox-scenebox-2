@@ -63,13 +63,13 @@ MainMenuFrontPage
             &:active
             {
                 color: #FFFF94;
-                sound-out: ui.gmod.button.release;
+                sound-out: ui.button.press;
             }
 
             &:hover
             {
                 color: #FFFF94;
-                sound-in: ui.gmod.button.hover;
+                sound-in: ui.button.over;
             }
         }
     }

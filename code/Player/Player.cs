@@ -377,7 +377,7 @@ public sealed class Player : Component
 	[Broadcast]
 	void BroadcastFlashlightSound()
 	{
-		var sound = Sound.Play( "gmod.flashlight" );
+		var sound = Sound.Play( "flashlight.toggle" );
 		if ( !IsProxy )
 		{
 			sound.Volume = 0.4f;

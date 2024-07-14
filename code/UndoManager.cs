@@ -59,7 +59,7 @@ public sealed class UndoManager : Component
     {
         if ( Stack.Count == 0 ) return;
 
-        Sound.Play( "ui.gmod.undo" ).TargetMixer = Mixer.FindMixerByName( "UI" );
+        Sound.Play( "ui.undo" ).TargetMixer = Mixer.FindMixerByName( "UI" );
 
         var entry = Stack[Stack.Count - 1];
         NotificationPanel.Instance?.AddEntry( "undo", entry.message, 3f, false );

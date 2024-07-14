@@ -31,7 +31,7 @@
         entry.Entry = new Entry(icon, text, duration);
         AddChild(entry);
         StateHasChanged();
-        if (playSound) Sound.Play("ui.gmod.notification").TargetMixer = Mixer.FindMixerByName("UI");
+        if (playSound) Sound.Play("ui.notification").TargetMixer = Mixer.FindMixerByName("UI");
     }
 
     protected override int BuildHash() => System.HashCode.Combine("");

@@ -145,7 +145,7 @@ public partial class GameManager : Component, Component.INetworkListener
     public void SpawnExplosion( Vector3 position, float range, float force )
     {
         ExplosionParticle.Clone( position, Rotation.Identity );
-        Sound.Play( "gmod.explosion", position );
+        Sound.Play( "explosion.normal", position );
 
         if ( Connection.Local.Id != Rpc.CallerId ) return;
 

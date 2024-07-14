@@ -101,7 +101,7 @@
 
     void Notify(string message)
     {
-        Sound.Play("ui.gmod.undo").TargetMixer = Mixer.FindMixerByName("UI");
+        Sound.Play("ui.undo").TargetMixer = Mixer.FindMixerByName("UI");
         NotificationPanel.Instance.AddEntry("cleanup", message, 5f, false);
     }
 }
