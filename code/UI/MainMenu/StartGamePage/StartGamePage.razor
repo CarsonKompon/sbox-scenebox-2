@@ -12,7 +12,11 @@
     </div>
     <div class="right">
         <div class="options">
-
+            <label class="header">Settings</label>
+            <div class="option">
+                <label>Host Multiplayer</label>
+                <SwitchControl Value:bind=@SceneboxPreferences.Settings.HostMultiplayer />
+            </div>
         </div>
         <div class="bottom">
             <button class="start" onclick=@StartGame>Start Game</button>

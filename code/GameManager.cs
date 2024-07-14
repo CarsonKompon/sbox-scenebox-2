@@ -37,11 +37,18 @@ public partial class GameManager : Component, Component.INetworkListener
         if ( Scene.IsEditor )
             return;
 
-        if ( !GameNetworkSystem.IsActive )
+        if ( SceneboxPreferences.Settings.HostMultiplayer )
         {
-            LoadingScreen.Title = "Creating Lobby";
-            await Task.DelayRealtimeSeconds( 0.1f );
-            GameNetworkSystem.CreateLobby();
+            if ( !GameNetworkSystem.IsActive )
+            {
+                LoadingScreen.Title = "Creating Lobby";
+                await Task.DelayRealtimeSeconds( 0.1f );
+                GameNetworkSystem.CreateLobby();
+            }
+        }
+        else
+        {
+            SpawnPlayer( Connection.Local );
         }
     }
 

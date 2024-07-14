@@ -29,5 +29,7 @@ public static class SceneboxPreferences
 
 public class SceneboxSettings
 {
+    public bool HostMultiplayer { get; set; } = true;
+
     public float FieldOfView { get; set; } = 90f;
 }
