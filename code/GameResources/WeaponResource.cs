@@ -1,7 +1,7 @@
 
 namespace Scenebox;
 
-[GameResource( "CarsonsMod/Weapon", "weapon", "A basic weapon definition", IconBgColor = "#5877E0", Icon = "track_changes" )]
+[GameResource( "Sandbox/Weapon", "weapon", "A basic weapon definition", IconBgColor = "#5877E0", Icon = "track_changes" )]
 public partial class WeaponResource : GameResource
 {
     public static HashSet<WeaponResource> All { get; set; } = new();
