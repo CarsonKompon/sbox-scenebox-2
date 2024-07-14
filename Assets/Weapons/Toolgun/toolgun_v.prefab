@@ -3,7 +3,7 @@
     "__guid": "8a589723-0322-4c54-b3a5-bd743b1d0fc1",
     "Flags": 0,
     "Name": "toolgun_v",
-    "Tags": "player,viewmodel",
+    "Tags": "viewmodel,player",
     "Enabled": true,
     "NetworkMode": 0,
     "Components": [
@@ -286,7 +286,7 @@
                                       "go": "2b242031-1de2-40d8-b2f9-7a153dfb49f4",
                                       "component_type": "SkinnedModelRenderer"
                                     },
-                                    "ScreenMaterial": "materials/error.vmat"
+                                    "ScreenMaterial": "materials/toolgun_screen.vmat"
                                   },
                                   {
                                     "__type": "Scenebox.TexturePanel",
