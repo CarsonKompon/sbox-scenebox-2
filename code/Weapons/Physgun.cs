@@ -394,7 +394,7 @@ public class Physgun : Weapon
         if ( HoldDistance == 0 )
             BeamParticles.VectorPoints[1] = (startPos + endPos) / 2f;
         else
-            BeamParticles.VectorPoints[1] = startPos + Player.Direction.Forward * HoldDistance / 4f;
+            BeamParticles.VectorPoints[1] = startPos + Player.Direction.Forward * (HoldDistance * 0.9f);
         BeamParticles.VectorPoints[2] = endPos;
     }
 
