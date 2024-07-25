@@ -5,7 +5,7 @@
 
 <root>
     <label class="killer">@Entry.Killer</label>
-    <label class="object @GetObjectStyle()">@GetObject()</label>
+    <Image class="object" Texture=@GetTexture() />
     <label class="victim">@Entry.Victim</label>
 </root>
 
@@ -23,24 +23,32 @@
         }
     }
 
-    string GetObjectStyle()
+    Texture GetTexture()
     {
-        if (Entry.Object.StartsWith("h/"))
+        var val = Entry.DamageType;
+
+        if (val == 0)
         {
-            return "hl";
+            // Default damage type
+        }
+        else if (val == 1)
+        {
+            // Prop damage type
         }
 
-        return "";
-    }
-
-    string GetObject()
-    {
-        if (Entry.Object.StartsWith("h/"))
+        var resource = ResourceLibrary.Get<WeaponResource>(val);
+        if (resource is null)
         {
-            return Entry.Object.Substring(2);
+            return Texture.Invalid;
         }
 
-        return Entry.Object;
+        var icon = resource.DamageIcon;
+        if (string.IsNullOrEmpty(icon))
+        {
+            return ThumbnailCache.Get(resource.WorldModel);
+        }
+
+        return Texture.Load(FileSystem.Mounted, icon);
     }
 
     protected override int BuildHash() => System.HashCode.Combine("");

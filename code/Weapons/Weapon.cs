@@ -80,6 +80,7 @@ public class Weapon : Component
 
         IsEquipped = true;
         Player.CurrentHoldType = HoldType;
+        GameObject.Enabled = true;
 
         OnEquip();
     }
@@ -90,6 +91,7 @@ public class Weapon : Component
         if ( !IsEquipped ) return;
 
         IsEquipped = false;
+        GameObject.Enabled = false;
 
         OnUnequip();
     }
@@ -178,7 +180,7 @@ public class Weapon : Component
 
             if ( tr.GameObject?.Root?.Components?.TryGet<Player>( out var player ) ?? false )
             {
-                player.Damage( Damage, Resource.DamageCharacter );
+                player.Damage( Damage, Resource.ResourceId );
             }
 
             GameManager.Instance.SpawnDecal( decal, tr.HitPosition, tr.Normal, tr.GameObject?.Id ?? Guid.Empty );

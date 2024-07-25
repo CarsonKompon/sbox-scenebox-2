@@ -311,7 +311,7 @@ public sealed class Player : Component
 	}
 
 	[Broadcast]
-	public void Damage( float amount, string damageType = "C" )
+	public void Damage( float amount, int damageType = 0 )
 	{
 		if ( Health <= 0 ) return;
 		if ( IsProxy ) return;
@@ -328,7 +328,7 @@ public sealed class Player : Component
 	}
 
 	[Broadcast]
-	public void Kill( string damageType = "C", string killer = "", bool enableRagdoll = true )
+	public void Kill( int damageType = 0, string killer = "", bool enableRagdoll = true )
 	{
 		GameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
 		GameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );

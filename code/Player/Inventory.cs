@@ -9,7 +9,7 @@ namespace Scenebox;
 public sealed class Inventory : Component
 {
 	[RequireComponent] Player Player { get; set; }
-	public IEnumerable<Weapon> Weapons => Player.Components.GetAll<Weapon>( FindMode.EnabledInSelfAndDescendants );
+	public IEnumerable<Weapon> Weapons => Player.Components.GetAll<Weapon>( FindMode.EverythingInSelfAndDescendants );
 
 	[Property] public GameObject WeaponParent { get; set; }
 	[Property] List<WeaponResource> StartingWeapons { get; set; } = new();
@@ -118,7 +118,7 @@ public sealed class Inventory : Component
 
 		if ( weapons.Length == 1 && CurrentWeapon == weapons[0] )
 		{
-			// TODO: Holder weapon?
+			// TODO: Holster weapon?
 		}
 
 		var index = Array.IndexOf( weapons, HoveredWeapon );

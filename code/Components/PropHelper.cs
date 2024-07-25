@@ -193,7 +193,7 @@ public sealed class PropHelper : Component, Component.ICollisionListener
 
             if ( other.Other.GameObject.Root.Components.TryGet<Player>( out var player ) )
             {
-                player.Damage( dmg, "h/`" );
+                player.Damage( dmg, 1 );
             }
         }
     }

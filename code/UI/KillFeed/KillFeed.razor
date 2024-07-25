@@ -12,7 +12,7 @@
     public static KillFeed Instance { get; private set; }
     TimeSince timeSinceHurt = 10;
 
-    public record Entry(string Killer, string Object, string Victim);
+    public record Entry(string Killer, int DamageType, string Victim);
 
     protected override void OnStart()
     {
@@ -20,10 +20,10 @@
     }
 
     [Broadcast]
-    public void AddEntry(string killer, string obj, string victim)
+    public void AddEntry(string killer, int damageType, string victim)
     {
         var entry = new KillFeedEntry();
-        entry.Entry = new Entry((killer == victim) ? "" : killer, obj, victim);
+        entry.Entry = new Entry((killer == victim) ? "" : killer, damageType, victim);
         Panel.AddChild(entry);
         StateHasChanged();
     }
