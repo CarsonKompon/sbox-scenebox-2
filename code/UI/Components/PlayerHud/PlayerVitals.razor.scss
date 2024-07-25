@@ -33,6 +33,7 @@ PlayerVitals
 
         .header
         {
+            position: relative;
             font-family: Tahoma;
             font-weight: black;
             font-size: 16px;
@@ -45,12 +46,14 @@ PlayerVitals
         {
             font-family: HalfLife2;
             font-size: 64px;
-            width: 100px;
+            min-width: 100px;
+            width: auto;
             text-align: right;
 
             
             &.small
             {
+                position: relative;
                 font-size: 32px;
                 align-self: flex-end;
                 bottom: 4px;
