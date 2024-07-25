@@ -131,7 +131,7 @@
         var toolgun = Player.Local?.Components.Get<Toolgun>(FindMode.EverythingInSelfAndDescendants);
         if (toolgun.IsValid())
         {
-            return toolgun.CurrentTool.GetType() == toolType;
+            return toolgun?.CurrentTool?.GetType() == toolType;
         }
         return false;
     }
