@@ -136,10 +136,10 @@ public class Weapon : Component
 
     protected void UpdateRenderMode()
     {
-        if ( !IsProxy )
-            ModelRenderer.RenderType = Sandbox.ModelRenderer.ShadowRenderType.ShadowsOnly;
-        else
-            ModelRenderer.RenderType = Sandbox.ModelRenderer.ShadowRenderType.On;
+        foreach ( var renderer in Components.GetAll<ModelRenderer>() )
+        {
+            renderer.RenderType = IsProxy ? Sandbox.ModelRenderer.ShadowRenderType.On : Sandbox.ModelRenderer.ShadowRenderType.ShadowsOnly;
+        }
     }
 
     protected virtual void OnEquip()

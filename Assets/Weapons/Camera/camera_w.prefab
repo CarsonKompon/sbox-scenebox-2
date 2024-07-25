@@ -5,8 +5,6 @@
     "Name": "camera_w",
     "Tags": "player",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Scenebox.Camera",
@@ -16,35 +14,29 @@
         "HoldType": "HoldItem",
         "ModelRenderer": {
           "_type": "component",
-          "component_id": "48095363-89e0-45b7-a274-0bef66d3d673",
-          "go": "dfe85094-d61e-41a4-af87-34cbff10bb10",
+          "component_id": "75159716-da0e-4f6c-8d57-1f2eed674486",
+          "go": "f75daa0c-e771-4edc-a41a-fa2d9fee5982",
           "component_type": "SkinnedModelRenderer"
-        },
-        "Muzzle": {
-          "_type": "gameobject",
-          "go": "dfe85094-d61e-41a4-af87-34cbff10bb10"
         },
         "Resource": "weapons/camera/camera.weapon"
       }
     ],
     "Children": [
       {
-        "__guid": "dfe85094-d61e-41a4-af87-34cbff10bb10",
+        "__guid": "f75daa0c-e771-4edc-a41a-fa2d9fee5982",
         "Flags": 0,
         "Name": "Model",
-        "Position": "4.382543,3.853205,-1.384504",
+        "Position": "1.361838,6.102353,-5.698759",
         "Rotation": "-0.01346345,0.03985427,0.404689,0.9134879",
-        "Scale": "2.333501,2.333501,2.333501",
+        "Scale": "1.48724,1.48724,1.48724",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
-            "__guid": "48095363-89e0-45b7-a274-0bef66d3d673",
+            "__guid": "75159716-da0e-4f6c-8d57-1f2eed674486",
             "BodyGroups": 18446744073709551615,
             "CreateBoneObjects": false,
-            "Model": "models/3dmodelscc0/gadgetselectronics/digital_camera/digital_camera.vmdl",
+            "Model": "models/sbox_props/cctv/cctv.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
@@ -59,7 +51,7 @@
   "MenuIcon": null,
   "ResourceVersion": 1,
   "__references": [
-    "titanovsky.digital_camera"
+    "facepunch.cctv"
   ],
   "__version": 1
 }

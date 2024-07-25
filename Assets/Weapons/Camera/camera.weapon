@@ -3,9 +3,10 @@
   "Description": "Take-a da pictures",
   "Slot": 6,
   "IconCharacter": "ui/weapons/camera.png",
-  "DamageCharacter": "a",
+  "DamageIcon": null,
   "HasAmmo": false,
   "ClipSize": 16,
+  "StartingReserve": 32,
   "MainPrefab": {
     "_type": "gameobject",
     "prefab": "weapons/camera/camera_w.prefab"
@@ -14,9 +15,9 @@
     "_type": "gameobject",
     "prefab": "weapons/camera/camera_v.prefab"
   },
-  "WorldModel": "models/3dmodelscc0/gadgetselectronics/digital_camera/digital_camera.vmdl",
+  "WorldModel": "models/sbox_props/cctv/cctv.vmdl",
   "__references": [
-    "titanovsky.digital_camera"
+    "facepunch.cctv"
   ],
   "__version": 0
 }
