@@ -8,14 +8,15 @@
     @if (Weapon.IsValid())
     {
         <label class="item-name">@Weapon.Resource.Name</label>
-        @if (Weapon.Resource.IconCharacter.Contains("/"))
-        {
-            <img class="item-icon" src=@Weapon.Resource.IconCharacter />
-        }
-        else
-        {
-            <label class="item-icon">@Weapon.Resource.IconCharacter</label>
-        }
+        <Image class="item-icon" Texture=@(ThumbnailCache.Get(Weapon.Resource.WorldModel)) />
+        @* @if (Weapon.Resource.IconCharacter.Contains("/"))
+    {
+    <img class="item-icon" src=@Weapon.Resource.IconCharacter />
+    }
+    else
+    {
+    <label class="item-icon">@Weapon.Resource.IconCharacter</label>
+    } *@
     }
 </root>
 
