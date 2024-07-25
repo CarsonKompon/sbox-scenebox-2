@@ -24,13 +24,13 @@
         },
         "Muzzle": {
           "_type": "gameobject",
-          "go": "386f39af-fc65-482e-908a-c153d8c1a4b2"
+          "go": "943dddc1-098f-4614-8d59-4bd615941600"
         }
       },
       {
         "__type": "Sandbox.SkinnedModelRenderer",
         "__guid": "1d9e3841-ac90-4825-9169-86d69c1483cd",
-        "BodyGroups": 0,
+        "BodyGroups": 17685,
         "CreateBoneObjects": true,
         "Model": "models/weapons/sbox_pistol_usp/v_usp.vmdl",
         "RenderType": "Off",
@@ -166,6 +166,75 @@
                 ]
               }
             ]
+          },
+          {
+            "__guid": "6cc7fa8a-f95f-47b8-a6bf-2ca0161276cc",
+            "Flags": 0,
+            "Name": "TV",
+            "Position": "-0.433089,0.000002072975,0.523699",
+            "Rotation": "0.1305262,-0.00000002541439,0.9914449,0.0000001930414",
+            "Scale": "0.1084927,0.1084927,0.1084927",
+            "Enabled": true,
+            "Components": [
+              {
+                "__type": "Sandbox.ModelRenderer",
+                "__guid": "de01468f-89db-4c67-ae1a-b862dd9fd6d9",
+                "BodyGroups": 18446744073709551615,
+                "Model": "models/sbox_props/tv/tv.vmdl",
+                "RenderType": "On",
+                "Tint": "1,1,1,1"
+              },
+              {
+                "__type": "Scenebox.MonitorComponent",
+                "__guid": "31407fa4-f124-4d2a-950a-eb7a759546f3",
+                "AttributeName": "",
+                "DebugDraw": false,
+                "MaterialName": "tv_surface",
+                "MaxUpdatesPerSecond": 15,
+                "Model": {
+                  "_type": "component",
+                  "component_id": "de01468f-89db-4c67-ae1a-b862dd9fd6d9",
+                  "go": "6cc7fa8a-f95f-47b8-a6bf-2ca0161276cc",
+                  "component_type": "ModelRenderer"
+                },
+                "ScreenMaterial": "materials/toolgun_screen.vmat"
+              },
+              {
+                "__type": "Scenebox.TexturePanel",
+                "__guid": "a62f1d75-0b12-47b4-9a58-797c66cecdba",
+                "CurrentPanelBounds": {},
+                "CurrentPanelScale": 0,
+                "CurrentPanelScaleFromScreen": 0,
+                "CurrentPanelScaleToScreen": 0,
+                "CurrentScreenSize": "1009,494",
+                "CustomPanelBounds": {
+                  "Size": "256,256"
+                },
+                "MarginPercent": 0,
+                "TextureTarget": {
+                  "_type": "component",
+                  "component_id": "31407fa4-f124-4d2a-950a-eb7a759546f3",
+                  "go": "6cc7fa8a-f95f-47b8-a6bf-2ca0161276cc",
+                  "component_type": "MonitorComponent"
+                },
+                "UseScreenBounds": false
+              }
+            ],
+            "Children": [
+              {
+                "__guid": "fb9be05c-fe17-436a-8a17-3013be441f72",
+                "Flags": 0,
+                "Name": "Toolgun Screen",
+                "Position": "0,0,0",
+                "Enabled": true,
+                "Components": [
+                  {
+                    "__type": "Scenebox.UI.ToolgunScreen",
+                    "__guid": "4286ea81-5998-4b58-bafd-8e78cc620541"
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
@@ -252,87 +321,7 @@
                             "Name": "hold_R",
                             "Position": "2.13184,-0.1289272,-2.895817",
                             "Rotation": "-0.3298893,0.6145929,0.4724822,0.5387107",
-                            "Enabled": true,
-                            "Children": [
-                              {
-                                "__guid": "2b242031-1de2-40d8-b2f9-7a153dfb49f4",
-                                "Flags": 0,
-                                "Name": "Object",
-                                "Position": "-2.277367,1.536247,0.9093319",
-                                "Rotation": "-0.1076683,-0.1130861,-0.6969213,0.6999435",
-                                "Scale": "0.8,0.8,0.8",
-                                "Enabled": true,
-                                "Components": [
-                                  {
-                                    "__type": "Sandbox.SkinnedModelRenderer",
-                                    "__guid": "483dd8a2-1428-4ab4-934f-eed8d3822e5b",
-                                    "BodyGroups": 18446744073709551615,
-                                    "CreateBoneObjects": false,
-                                    "Model": "models/weapons/toolgun.vmdl",
-                                    "RenderType": "Off",
-                                    "Tint": "1,1,1,1",
-                                    "UseAnimGraph": true
-                                  },
-                                  {
-                                    "__type": "Scenebox.MonitorComponent",
-                                    "__guid": "d934f851-2d46-4f87-8516-eb97f39cdf96",
-                                    "AttributeName": "",
-                                    "DebugDraw": false,
-                                    "MaterialName": "screen_fp",
-                                    "MaxUpdatesPerSecond": 15,
-                                    "Model": {
-                                      "_type": "component",
-                                      "component_id": "483dd8a2-1428-4ab4-934f-eed8d3822e5b",
-                                      "go": "2b242031-1de2-40d8-b2f9-7a153dfb49f4",
-                                      "component_type": "SkinnedModelRenderer"
-                                    },
-                                    "ScreenMaterial": "materials/toolgun_screen.vmat"
-                                  },
-                                  {
-                                    "__type": "Scenebox.TexturePanel",
-                                    "__guid": "6f65b5f5-622a-46e9-b2da-83e928bbeea7",
-                                    "CurrentPanelBounds": {},
-                                    "CurrentPanelScale": 0,
-                                    "CurrentPanelScaleFromScreen": 0,
-                                    "CurrentPanelScaleToScreen": 0,
-                                    "CurrentScreenSize": "1214,494",
-                                    "CustomPanelBounds": {
-                                      "Size": "256,256"
-                                    },
-                                    "MarginPercent": 0,
-                                    "TextureTarget": {
-                                      "_type": "component",
-                                      "component_id": "d934f851-2d46-4f87-8516-eb97f39cdf96",
-                                      "go": "2b242031-1de2-40d8-b2f9-7a153dfb49f4",
-                                      "component_type": "MonitorComponent"
-                                    },
-                                    "UseScreenBounds": false
-                                  }
-                                ],
-                                "Children": [
-                                  {
-                                    "__guid": "386f39af-fc65-482e-908a-c153d8c1a4b2",
-                                    "Flags": 0,
-                                    "Name": "Muzzle",
-                                    "Position": "13.86241,-0.00008153915,2.759946",
-                                    "Enabled": true
-                                  },
-                                  {
-                                    "__guid": "fb9be05c-fe17-436a-8a17-3013be441f72",
-                                    "Flags": 0,
-                                    "Name": "Toolgun Screen",
-                                    "Position": "0,0,0",
-                                    "Enabled": true,
-                                    "Components": [
-                                      {
-                                        "__type": "Scenebox.UI.ToolgunScreen",
-                                        "__guid": "4286ea81-5998-4b58-bafd-8e78cc620541"
-                                      }
-                                    ]
-                                  }
-                                ]
-                              }
-                            ]
+                            "Enabled": true
                           },
                           {
                             "__guid": "eaeb5e65-5841-41db-ba78-de985c0f9666",
@@ -845,8 +834,8 @@
   "MenuIcon": null,
   "ResourceVersion": 1,
   "__references": [
-    "facepunch.v_usp",
-    "mdlresrc.toolgun"
+    "facepunch.tv",
+    "facepunch.v_usp"
   ],
   "__version": 1
 }

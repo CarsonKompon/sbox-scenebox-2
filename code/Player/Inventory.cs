@@ -190,6 +190,8 @@ public sealed class Inventory : Component
 
 		if ( !resource.MainPrefab.IsValid() )
 		{
+			Log.Info( resource.ResourceName );
+			Log.Info( resource.ResourcePath );
 			Log.Error( $"Weapon {resource.Name} has no MainPrefab" );
 			return null;
 		}
