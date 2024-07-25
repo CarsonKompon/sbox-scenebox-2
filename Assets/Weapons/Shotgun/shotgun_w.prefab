@@ -4,8 +4,6 @@
     "Flags": 0,
     "Name": "shotgun_w",
     "Enabled": true,
-    "NetworkMode": 2,
-    "NetworkInterpolation": true,
     "Components": [
       {
         "__type": "Scenebox.TraceWeapon",
@@ -37,19 +35,16 @@
         "__guid": "131955dc-db0f-421c-8a3c-82ac73c12ba5",
         "Flags": 0,
         "Name": "Body",
-        "Position": "-4.956769,0.006860911,-8.218204",
-        "Rotation": "0.000000005036823,0.000000009065626,1,-0.00000004371139",
+        "Position": "6.850192,0.3517741,-8.395621",
         "Scale": "1.36468,1.36468,1.36468",
         "Enabled": true,
-        "NetworkMode": 2,
-        "NetworkInterpolation": true,
         "Components": [
           {
             "__type": "Sandbox.SkinnedModelRenderer",
             "__guid": "a04fe41c-20e8-44c0-98ef-fad39c3b64fd",
-            "BodyGroups": 9493,
+            "BodyGroups": 3,
             "CreateBoneObjects": false,
-            "Model": "models/weapons/w_shotgun.vmdl",
+            "Model": "models/weapons/sbox_shotgun_spaghellim4/w_spaghellim4.vmdl",
             "RenderType": "On",
             "Tint": "1,1,1,1",
             "UseAnimGraph": true
@@ -60,11 +55,8 @@
             "__guid": "74540792-fda8-4954-9bf1-49793a404eff",
             "Flags": 0,
             "Name": "Bullet Spawn",
-            "Position": "-28.52426,0.000007791919,6.439966",
-            "Rotation": "0,0,1,-0.00000004371139",
-            "Enabled": true,
-            "NetworkMode": 2,
-            "NetworkInterpolation": true
+            "Position": "20.75325,0.00001211326,6.276853",
+            "Enabled": true
           }
         ]
       }
@@ -76,7 +68,7 @@
   "MenuIcon": null,
   "ResourceVersion": 1,
   "__references": [
-    "gok.w_shotgun"
+    "facepunch.w_spaghellim4"
   ],
   "__version": 1
 }
