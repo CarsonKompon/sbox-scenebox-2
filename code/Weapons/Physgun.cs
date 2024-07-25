@@ -5,7 +5,7 @@ namespace Scenebox;
 
 public class Physgun : Weapon
 {
-    [Property] LegacyParticleSystem BeamParticles { get; set; }
+    [Property] LineRenderer BeamParticles { get; set; }
     [Property, Group( "Prefabs" )] public GameObject FreezeParticles { get; set; }
 
     public PhysicsBody HeldBody { get; private set; }
@@ -390,13 +390,12 @@ public class Physgun : Weapon
             }
         }
 
-        var fcp = BeamParticles.ControlPoints[0];
-        fcp.VectorValue = startPos;
-        BeamParticles.ControlPoints[0] = fcp;
-
-        var ecp = BeamParticles.ControlPoints[1];
-        ecp.VectorValue = endPos;
-        BeamParticles.ControlPoints[1] = ecp;
+        BeamParticles.VectorPoints[0] = startPos;
+        if ( HoldDistance == 0 )
+            BeamParticles.VectorPoints[1] = (startPos + endPos) / 2f;
+        else
+            BeamParticles.VectorPoints[1] = startPos + Player.Direction.Forward * HoldDistance / 4f;
+        BeamParticles.VectorPoints[2] = endPos;
     }
 
     [Broadcast]
