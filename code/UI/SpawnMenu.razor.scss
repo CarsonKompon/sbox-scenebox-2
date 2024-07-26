@@ -7,7 +7,7 @@ $border-col: #3B3B3B;
 SpawnMenu
 {
     opacity: 0;
-    backdrop-filter: blur(0px) contrast( 100% ) saturate( 100% ) brightness( 100% );
+    backdrop-filter: blur(0px);
     background-color: rgba(white, 0);
     margin: 0;
     padding: 16;
@@ -22,7 +22,7 @@ SpawnMenu
 
 	z-index: 1000;
 
-	font-family: Verdana;
+	font-family: Poppins;
 
     .left, .right
     {
@@ -34,9 +34,8 @@ SpawnMenu
 
         .body
         {
-            border: 1px solid $border-col;
             border-radius: 0px 5px 5px 5px;
-            background-image: radial-gradient(rgba(#9DA1A5,0.3),rgba(#9DA1A5,0.5), $bg-grey, $bg-grey, $bg-grey);
+            background-color: rgba($bg-grey, 0.5);
             flex-grow: 1;
         }
     }
@@ -56,11 +55,11 @@ SpawnMenu
             textentry
             {
                 background-color: white;
-                border: 1px solid $border-col;
                 color: black;
-                font-family: Verdana;
+                font-family: Poppins;
                 font-size: 14px;
                 flex-shrink: 0;
+                border-radius: 4px;
 
                 label
                 {
@@ -90,7 +89,7 @@ SpawnMenu
                         border: 2px solid $border-col;
                         border-radius: 2px;
                         justify-content: flex-end;
-                        font-family: Verdana;
+                        font-family: Poppins;
                         width: 150px;
                         height: 150px;
 
@@ -162,7 +161,6 @@ SpawnMenu
                     {
                         padding: 2px;
                         background-color: #F1F1F1;
-                        border: 1px solid $border-col;
                         border-radius: 5px;
                         flex-grow: 1;
                         flex-direction: column;
@@ -186,12 +184,6 @@ SpawnMenu
                                 background-size: contain;
                                 background-repeat: no-repeat;
                                 background-position: center;
-                                background-image: url("/ui/silkicons/folder.png");
-
-                                &.all-models
-                                {
-                                    background-image: url("/ui/silkicons/bricks.png");
-                                }
                             }
 
                             &.active
@@ -321,12 +313,11 @@ SpawnMenu
                 background-color: $bg-blue;
                 border-radius: 4px 4px 0px 0px;
                 flex-shrink: 0;
-                font-family: Tahoma;
+                font-family: Poppins;
                 font-weight: black;
                 font-size: 13px;
                 padding: 2px 4px;
                 color: white;
-                text-shadow: 0px 1px rgba(black, 0.6);
             }
 
             .listcontainer
@@ -339,13 +330,13 @@ SpawnMenu
                 textentry
                 {
                     background-color: white;
-                    border: 1px solid $border-col;
                     color: black;
-                    font-family: Verdana;
+                    font-family: Poppins;
                     font-size: 12px;
                     max-width: 100%;
                     padding: 2px;
                     flex-shrink: 0;
+                    border-radius: 4px;
 
                     .content-label
                     {
@@ -369,7 +360,6 @@ SpawnMenu
                 .toollist
                 {
                     background-color: white;
-                    border: 1px solid $border-col;
                     border-radius: 5px;
                     flex-direction: column;
                     width: 100%;
@@ -382,7 +372,7 @@ SpawnMenu
                     .tool
                     {
                         padding: 3px 10px;
-                        font-family: Verdana;
+                        font-family: Poppins;
                         background-color: rgb(240, 240, 240);
                         cursor: pointer;
 
@@ -420,7 +410,6 @@ SpawnMenu
             .inspector
             {
                 background-color: white;
-                border: 1px solid $border-col;
                 flex-grow: 1;
                 border-radius: 5px;
                 flex-direction: column;
@@ -440,37 +429,46 @@ SpawnMenu
 {
     margin: 0;
     z-index: 10;
-    gap: -2px;
+    gap: 2px;
     flex-shrink: 0;
-	font-family: Verdana;
+	font-family: Poppins;
 
-    button
+    .btn
     {
-        text-transform: capitalize;
-        background-color: $bg-dk-grey;
+        background-color: rgba(black, 0.5);
         opacity: 1;
         top: 1px;
         border-radius: 4px 4px 0px 0px;
-        border: 1px solid $border-col;
         font-size: 14px;
         padding: 2px 8px;
-        font-weight: normal;
         color: rgba(white, 0.75);
 		cursor: pointer;
+        gap: 4px;
+        align-items: center;
 
-        img
+        i
         {
-            width: 16px;
-            height: 16px;
-            margin-right: 4px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
+            font-family: Material Icons;
         }
+
+        label
+        {
+            text-transform: capitalize;
+        }
+
+        // img
+        // {
+        //     width: 16px;
+        //     height: 16px;
+        //     margin-right: 4px;
+        //     background-size: contain;
+        //     background-repeat: no-repeat;
+        //     background-position: center;
+        // }
 
 		&:hover
 		{
-			background-color: darken($bg-grey, 0.1);
+			background-color: darken(rgba(black, 0.5), 0.1);
 			border-bottom: 0px;
             padding-bottom: 3px;
 			color: white;
@@ -479,7 +477,7 @@ SpawnMenu
 
         &.active
         {
-            background-color: $bg-grey;
+            background-color: rgba(rgb(172, 172, 172), 0.5);
             border-bottom: 0px;
             padding-bottom: 3px;
             color: white;
@@ -503,10 +501,9 @@ rootpanel .tooltip
 button.btn
 {
     background-image: linear-gradient(270deg, #EAEAEA 0%, #EAEAEA 49%, #E2E2E2 51%, #E2E2E2 100%);
-    border: 1px solid $border-col;
     border-radius: 2px;
     padding: 2px 4px;
-    font-family: Verdana;
+    font-family: Poppins;
     font-size: 12px;
     color: #515151;
     cursor: pointer;

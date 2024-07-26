@@ -1,6 +1,6 @@
 FileTree, FileTreeEntry
 {
-    font-family: Verdana;
+    font-family: Poppins;
     font-size: 14px;
     flex-direction: column;
     flex-shrink: 0;
@@ -15,6 +15,7 @@ FileTree, FileTreeEntry
         flex-shrink: 0;
         text-overflow: ellipsis;
         white-space: nowrap;
+        align-items: center;
         
         gap: 4px;
         

@@ -33,6 +33,7 @@
 
         > .track
         {
+            position: relative;
             background-color: #888;
             height: 1px;
             margin: 8px;
@@ -50,6 +51,7 @@
 
             > .thumb
             {
+                position: absolute;
                 background-image: url("ui/controls/slider-knob.png");
                 width: 12px;
                 height: 16px;

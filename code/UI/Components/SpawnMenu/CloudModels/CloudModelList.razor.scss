@@ -1,163 +1,58 @@
 CloudModelList
 {
     flex-grow: 1;
-    font-family: Verdana;
+    font-family: Poppins;
     font-size: 14px;
 
-    .folderlist
-    {
-        .entry
-        {
-            flex-shrink: 0;
-            gap: 4px;
-            pointer-events: all;
-            cursor: pointer;
-
-            img
-            {
-                background-position: center;
-                background-size: contain;
-                background-repeat: no-repeat;
-            }
-
-            &:hover
-            {
-                background-color: rgba(grey, 0.1);
-            }
-
-            &.selected
-            {
-                background-color: rgba(blue, 0.3);
-            }
-        }
-    }
-
-    .canvas
+    AssetList
     {
         flex-direction: row;
-        flex-grow: 1;
-        flex-wrap: wrap;
-        overflow-x: hidden;
-        overflow-y: scroll;
-        gap: 16px;
+        justify-content: space-between;
 
-        .cell
+        > .left
         {
-            width: 150px;
-            height: 150px;
+            flex-grow: 0;
             flex-shrink: 0;
-            background-color: #FEFEFE;
-            border-radius: 4px;
-            border: 1px solid #737679;
-            box-shadow: 0 0 3px rgba(black, 1);
-            overflow: hidden;
-            padding: 3px;
-            flex-direction: column;
-            font-family: Coolvetica Rg;
-            cursor: pointer;
-            
-            .title
-            {
-                margin-bottom: 2px;
-                font-size: 13px;
-                font-weight: 700;
-                flex-shrink: 0;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                color: #666;
-            }
+            max-width: 300px;
+        }
 
-            .author
-            {
-                position: absolute;
-                bottom: 0px;
-                right: 0px;
-                max-width: 90%;
-                text-align: right;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                background-color: white;
-                border-radius: 4px 0px 0px 0px;
-                padding: 2px 4px;
-                font-weight: 700;
-                font-size: 10px;
-                color: #333;
-                z-index: 100;
-                transition: right 0.2s ease;
-            }
+        > .right
+        {
+            flex-grow: 1;
+            width: 50%;
+            max-width: 100%;;
 
-            .hover-panel
+            AssetCard
             {
-                opacity: 0;
-                transition: opacity 0.2s ease;
-                position: absolute;
-                top: 22;
-                left: 3;
-                right: 3;
-                bottom: 3;
-                background-color: #44ADEF;
-                overflow: hidden;
-                padding: 6px;
-                color: white;
-                font-size: 12px;
-                flex-direction: column;
+                min-width: 150px;
+                max-width: 150px;
 
-                .description
+                .package-card-body
                 {
-                    flex-grow: 1;
-                }
+                    gap: 4px;
+                    margin-top: 4px;
 
-                button
-                {
-                    align-self: flex-end;
-                    background-color: #F5FF80;
-                    color: black;
-                    border-radius: 2px;
-                    padding: 1px 3px;
-                    box-shadow: 1px 1px 4px black;
-                    top: 200px;
-                    transition: top 0.2s ease;
-                }
-            }
-
-            Image
-            {
-                width: 100%;
-                height: 100%;
-                
-            }
-
-            &:hover
-            {
-                border: 1px solid #53B1FE;
-
-                .author
-                {
-                    right: -200px;
-                }
-
-                .hover-panel
-                {
-                    opacity: 1;
-
-                    button
+                    .body-content
                     {
-                        top: 0px;
+                        gap: 0px;
+                        font-size: 12px;
+                    }
+                }
+
+                .org-image
+                {
+                    position: relative;
+                    top: 2px;
+                    width: 12px;
+
+                    .img
+                    {
+                        width: 12px;
+                        height: 12px;
+                        border-radius: 2px;
                     }
                 }
             }
-
-            &:active
-            {
-                sound-out: ui.button.press;
-
-                .icon
-                {
-                    transform: scale(0.95);
-                }
-            }
         }
-
     }
 }

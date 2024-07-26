@@ -5,7 +5,7 @@ MainMenuFrontPage
     padding: 128px;
     flex-direction: column;
     gap: 64px;
-    font-family: Helvetica;
+    font-family: Poppins;
     color: white;
     font-size: 24px;
 
@@ -14,13 +14,12 @@ MainMenuFrontPage
         width: 400px;
         height: 92px;
         background-color: rgba(black, 0.5);
-        border: 1px solid #575D5F;
         border-radius: 6px;
         align-items: center;
         padding-left: 24px;
         padding-right: 18px;
         gap: 24px;
-        font-family: Coolvetica;
+        font-weight: 700;
         font-size: 36px;
 
         .logo
@@ -47,7 +46,7 @@ MainMenuFrontPage
         flex-direction: column;
         gap: 8px;
         font-size: 32px;
-        font-weight: 600;
+        font-weight: 700;
         text-shadow: 2px 2px 0px black;
         width: 400px;
 

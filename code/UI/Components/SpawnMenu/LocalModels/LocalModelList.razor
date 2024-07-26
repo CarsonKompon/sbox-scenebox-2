@@ -9,7 +9,7 @@
         <TextEntry @ref="SearchEntry" OnTextEdited=@Search Placeholder="Search..." />
         <div class="folderlist">
             <div class="entry @(SelectedFolder == "" ? "selected" : "")" onclick=@ResetFolder>
-                <img src="ui/silkicons/bricks.png" />
+                <i>category</i>
                 All Models
             </div>
             <FileTree class="root-file-tree" FileFilter="*.vmdl_c" Selected=@(SelectedFolder) Root=@(true) FileSystem=@(FileSystem.Mounted) Path=@("") ShowFiles=@(false) OnFolderSelect=@OnFolderSelect />

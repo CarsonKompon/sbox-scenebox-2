@@ -6,18 +6,14 @@
 <root class="@(IsVisible ? "open" : "")">
 	<div class="left">
 		<div class="tabs">
-			<button onclick=@(() => SetActiveLeft(LocalModelsPanel)) class="@(SelectedPanelLeft == LocalModelsPanel ? "active" : "")">
-				<img src="ui/silkicons/application_view_tile.png" />
+			<div onclick=@(() => SetActiveLeft(LocalModelsPanel)) class="btn @(SelectedPanelLeft == LocalModelsPanel ? "active" : "")">
+				<i>category</i>
 				Local Models
-			</button>
-			<button onclick=@(() => SetActiveLeft(CloudModelsPanel)) class="@(SelectedPanelLeft == CloudModelsPanel ? "active" : "")">
-				<img src="ui/silkicons/brick.png" />
+			</div>
+			<div onclick=@(() => SetActiveLeft(CloudModelsPanel)) class="btn @(SelectedPanelLeft == CloudModelsPanel ? "active" : "")">
+				<i>cloud_download</i>
 				Cloud Models
-			</button>
-			@* <button onclick=@(() => SetActiveLeft(CloudPrefabsPanel)) class="@(SelectedPanelLeft == CloudPrefabsPanel ? "active" : "")">
-			<img src="ui/silkicons/bricks.png" />
-			Cloud Prefabs
-			</button> *@
+			</div>
 		</div>
 		<div class="body">
 			<LocalModelList @ref="LocalModelsPanel" />
@@ -27,14 +23,14 @@
 	</div>
 	<div class="right">
 		<div class="tabs">
-			<button onclick=@(() => SetActiveRight(ToolsPanel)) class="@(SelectedPanelRight == ToolsPanel ? "active" : "")">
-				<img src="ui/silkicons/wrench.png" />
+			<div onclick=@(() => SetActiveRight(ToolsPanel)) class="btn @(SelectedPanelRight == ToolsPanel ? "active" : "")">
+				<i>construction</i>
 				Tools
-			</button>
-			<button onclick=@(() => SetActiveRight(UtilitiesPanel)) class="@(SelectedPanelRight == UtilitiesPanel ? "active" : "")">
-				<img src="ui/silkicons/page_white_wrench.png" />
+			</div>
+			<div onclick=@(() => SetActiveRight(UtilitiesPanel)) class="btn @(SelectedPanelRight == UtilitiesPanel ? "active" : "")">
+				<i>find_in_page</i>
 				Utilities
-			</button>
+			</div>
 		</div>
 		<div class="body">
 			<ToolMenu @ref="ToolsPanel" />

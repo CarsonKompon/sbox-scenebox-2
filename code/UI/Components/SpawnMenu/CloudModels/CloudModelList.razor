@@ -6,101 +6,39 @@
 @attribute [StyleSheet]
 
 <root class="spawnpage columned">
-    <div class="search-container">
-        <TextEntry @ref="SearchEntry" OnTextEdited=@Search Placeholder="Search..." />
-
-    </div>
-    @if (FoundPackages == null) return;
-    <div class="canvas">
-        @foreach (var group in FoundPackages.GroupBy(GroupBy).OrderBy(x => x.Key))
-        {
-            if (!string.IsNullOrEmpty(group.Key))
-            {
-                <h1>@group.Key[2..]</h1>
-            }
-
-            foreach (var package in group)
-            {
-                if (package == null) continue;
-                <CloudModelEntry Package=@package />
-            }
-        }
-    </div>
+    <AssetList @ref="AssetList" Query="type:model sort:popular" />
 </root>
 
 @code
 {
-    TextEntry SearchEntry;
-    string SelectedFolder = "";
-    string SearchQuery = "";
-    string Group = "";
-    public int Take = 100;
-    public int Skip = 0;
-    public Package[] FoundPackages { get; set; }
+    AssetList AssetList;
 
     protected override void OnAfterTreeRender(bool firstTime)
     {
         if (firstTime)
         {
-            Search("");
+            AssetList.OnSelected += Spawn;
         }
     }
 
-    void OnFolderSelect(string folderPath)
+    void Spawn(Package package)
     {
-        SelectedFolder = folderPath;
-        Search(SearchQuery);
-    }
+        var localPlayer = Player.Local;
+        if (!localPlayer.IsValid())
+            return;
 
-    void ResetFolder()
-    {
-        SelectedFolder = "";
-        Search(SearchQuery);
-    }
+        var tr = Scene.Trace.Ray(new Ray(localPlayer.Head.Transform.Position, localPlayer.Direction.Forward), 10_000)
+        .IgnoreGameObject(localPlayer.GameObject.Root)
+        .WithoutTags("trigger")
+        .Run();
 
-    void Search(string value)
-    {
-        SearchQuery = value;
+        var mins = package.GetMeta("RenderMins", Vector3.Zero);
+        var maxs = package.GetMeta("RenderMaxs", Vector3.One);
+        var bounds = new BBox(mins, maxs);
 
-        RunQuery();
-    }
+        var position = tr.Hit ? (tr.HitPosition + tr.Normal * bounds.Size.Length / 2f) : tr.EndPosition;
+        var rotation = Rotation.From(0, localPlayer.Direction.yaw + 180, 0);
 
-    async void RunQuery()
-    {
-        var myQuery = "type:model " + SearchQuery;
-        var query = myQuery;
-
-        var result = await Package.FindAsync(query, Take, Skip);
-
-        if (query != myQuery) return;
-
-        List<Package> packages = new();
-        if (result != null)
-        {
-            packages = result.Packages.ToList();
-        }
-
-        var split = myQuery.Split(' ');
-        var ident = split.FirstOrDefault(x => !x.Contains(":") && x.Contains("."));
-        if (ident != null)
-        {
-            packages.Add(await Package.FetchAsync(ident, true));
-        }
-
-        FoundPackages = packages.ToArray();
-        StateHasChanged();
-    }
-
-    string GroupBy(Package p)
-    {
-        if (Group == "state")
-        {
-            if (p.Interaction.Favourite) return "0 You Love";
-            if (p.Interaction.FirstUsed == null) return "1 You haven't played";
-            if (p.Updated > p.Interaction.LastUsed) return "2 Updated since you last played";
-            return "3 Everything Else";
-        }
-
-        return "";
+        var obj = Scenebox.GameManager.Instance.SpawnCloudModel(package.FullIdent, position, rotation);
     }
 }

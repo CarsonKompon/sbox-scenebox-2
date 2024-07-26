@@ -90,11 +90,6 @@ return;
             name = sender;
         }
 
-        if (steamId == 76561198031113835)
-        {
-            styles += " rainbow";
-        }
-
         var entry = new ChatEntry();
         entry.Entry = new Entry(steamId, name, message, styles, 0);
         ChatCanvas.AddChild(entry);

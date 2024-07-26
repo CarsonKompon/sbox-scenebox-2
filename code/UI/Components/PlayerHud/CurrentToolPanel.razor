@@ -7,6 +7,7 @@
 <root>
     @if (Player.Local?.Inventory?.CurrentWeapon is Toolgun toolgun)
     {
+        if (toolgun.CurrentTool is null) return;
         <div class="header">
             <label class="title">@toolgun.CurrentTool.GetName()</label>
             <label class="description">@toolgun.CurrentTool.GetDescription()</label>
@@ -34,7 +35,7 @@
     {
         if (Player.Local?.Inventory?.CurrentWeapon is Toolgun toolgun)
         {
-            return toolgun.CurrentTool.GetName();
+            return toolgun?.CurrentTool?.GetName();
         }
         return "";
     }

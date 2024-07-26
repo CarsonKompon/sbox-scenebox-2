@@ -25,16 +25,16 @@ PlayerVitals
         justify-content: center;
         align-items: center;
         padding: 4px 12px;
-        color: yellow;
+        color: rgb(223, 240, 255);
         background-color: rgba(black, 0.35);
         border-radius: 8px;
         gap: 12px;
-        text-shadow: 0 0 4px rgb(112, 112, 0);
+        text-shadow: 0 0 4px rgba(255, 255, 255, 0.4);
 
         .header
         {
             position: relative;
-            font-family: Tahoma;
+            font-family: Poppins;
             font-weight: black;
             font-size: 16px;
             align-self: flex-end;
@@ -44,7 +44,7 @@ PlayerVitals
 
         .value
         {
-            font-family: HalfLife2;
+            font-family: Tahoma;
             font-size: 64px;
             min-width: 100px;
             width: auto;

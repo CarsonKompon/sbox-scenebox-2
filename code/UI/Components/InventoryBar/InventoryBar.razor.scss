@@ -8,8 +8,8 @@ InventoryBar
     justify-content: center;
     z-index: 100;
     transition: all 0.2s ease;
-    font-family: Verdana;
-    color: #FFDD00;
+    font-family: Poppins;
+    color: white;
     font-weight: black;
     opacity: 1;
 
@@ -106,7 +106,7 @@ InventoryBar
 
         .item-icon
         {
-            font-family: HalfLife2;
+            font-family: Poppins;
             font-size: 32px;
             position: absolute;
             top: 0;
@@ -130,7 +130,7 @@ InventoryBar
 
         &.active
         {
-            background-color: rgba(black, 0.5);
+            background-color: rgba(rgb(19, 113, 255), 0.5);
             height: 180px;
             transition: all 0.1s ease-out;
 
