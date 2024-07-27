@@ -15,7 +15,8 @@ public class Toolgun : Weapon
 
     protected override void OnStart()
     {
-        SetTool( TypeLibrary.GetType<BaseTool>( "Scenebox.Tools.RemoverTool" ) );
+        if ( CurrentTool == null )
+            SetTool( TypeLibrary.GetType<BaseTool>( "Scenebox.Tools.RemoverTool" ) );
     }
 
     public override void Update()
