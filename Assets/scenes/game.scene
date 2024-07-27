@@ -8,7 +8,6 @@
       "Position": "-131.6942,-107.1172,-4.868141",
       "Enabled": true,
       "NetworkMode": 1,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Scenebox.GameManager",
@@ -43,8 +42,6 @@
       "Name": "Screen Panel",
       "Position": "154.1167,45.3605,-35.97688",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.ScreenPanel",
@@ -75,7 +72,6 @@
           "Position": "0,0,0",
           "Enabled": true,
           "NetworkMode": 1,
-          "NetworkInterpolation": true,
           "Components": [
             {
               "__type": "Scenebox.UI.KillFeed",
@@ -95,13 +91,14 @@
       "Name": "Map Instance",
       "Tags": "map",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.MapInstance",
           "__guid": "0c3d64c7-c757-493f-b482-37093117bacf",
+          "__version": 1,
+          "EnableCollision": true,
           "MapName": "facepunch.flatgrass",
+          "NoOrigin": true,
           "UseMapFromLaunch": true
         }
       ],
@@ -111,11 +108,10 @@
       "__guid": "016021fd-f3f1-4fbd-843a-b387f6081efe",
       "Flags": 0,
       "Name": "Camera",
-      "Position": "-0.4023438,69.371,301.2031",
+      "Position": "108.252,-625.7141,64.03125",
+      "Rotation": "-0.06491296,0.0965289,0.5542424,0.8241868",
       "Tags": "maincamera",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.CameraComponent",
@@ -175,6 +171,7 @@
         {
           "__type": "Sandbox.AmbientOcclusion",
           "__guid": "a390629f-4cbf-4b0c-b245-b36390a2e294",
+          "FalloffDistance": 1,
           "Intensity": 8,
           "Quality": "Medium",
           "Radius": 20
@@ -186,8 +183,6 @@
       "Flags": 0,
       "Name": "Pause Menu",
       "Enabled": true,
-      "NetworkMode": 2,
-      "NetworkInterpolation": true,
       "Components": [
         {
           "__type": "Sandbox.ScreenPanel",
@@ -230,7 +225,6 @@
   },
   "Title": "Read this text to die instantly",
   "Description": "",
-  "LastSaved": "2024-06-20T20:52:36.8803891-04:00",
   "ResourceVersion": 1,
   "__references": [],
   "__version": 1

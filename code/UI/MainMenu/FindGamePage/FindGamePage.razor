@@ -28,11 +28,13 @@
                 </div>
 
                 <div class="server-list">
+                    <div class="server">
+                    </div>
                     @if (!refreshing && list.Count > 0)
                     {
                         @foreach (var lobby in list)
                         {
-                            <div class="server">
+                            <div class="server" onclick=@(() => JoinLobby(lobby))>
                                 <label class="server-name">@lobby.Name</label>
                                 <label class="map-name">@lobby.Map</label>
                                 <label class="players">@lobby.Members / @lobby.MaxMembers</label>
@@ -85,7 +87,7 @@
         StateHasChanged();
     }
 
-    void OpenLobby(LobbyInformation lobby)
+    void JoinLobby(LobbyInformation lobby)
     {
         GameNetworkSystem.Connect(lobby.LobbyId);
     }

@@ -12,7 +12,7 @@
     </div>
     <div class="right">
         <div class="options">
-            <label class="header">Settings</label>
+            <label class="header" onclick=@(() => Game.Overlay.ShowBinds())>Settings</label>
             <div class="option">
                 <label>Host Multiplayer</label>
                 <SwitchControl Value:bind=@SceneboxPreferences.Settings.HostMultiplayer />

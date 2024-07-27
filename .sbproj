@@ -1,8 +1,8 @@
 {
-  "Title": "Scenebox 2",
+  "Title": "Scenebox (Sandbox Gamemode)",
   "Type": "game",
   "Org": "carsonk",
-  "Ident": "scenebox_2",
+  "Ident": "talker",
   "Schema": 1,
   "IncludeSourceFiles": false,
   "Resources": "/fonts/*\nui/*",

@@ -147,7 +147,7 @@ public class Physgun : Weapon
             var body = physicsGroup.GetBody( i );
             if ( !body.IsValid() ) continue;
 
-            if ( body.BodyType == PhysicsBodyType.Static )
+            if ( body.BodyType != PhysicsBodyType.Dynamic )
             {
                 body.BodyType = PhysicsBodyType.Dynamic;
                 unfrozen = true;
@@ -192,7 +192,7 @@ public class Physgun : Weapon
         if ( body.BodyType == PhysicsBodyType.Keyframed && !rootObject.Tags.Has( "player" ) ) return;
 
         // Unfreeze
-        if ( body.BodyType == PhysicsBodyType.Static )
+        if ( body.BodyType != PhysicsBodyType.Dynamic )
         {
             body.BodyType = PhysicsBodyType.Dynamic;
             body.Sleeping = false;

@@ -15,11 +15,11 @@ public class Weapon : Component
     [Property] protected float Force { get; set; } = 20f;
 
 
-    [Property, Group( "Sounds" )] public SoundEvent EquipSound { get; set; }
+    [Property, Group("Sounds")] public SoundEvent EquipSound { get; set; }
 
-    [Property, Group( "References" )] public GameObject Muzzle { get; set; }
+    [Property, Group("References")] public GameObject Muzzle { get; set; }
 
-    public Player Player => Components.Get<Player>( FindMode.EverythingInAncestors );
+    public Player Player => Components.Get<Player>(FindMode.EverythingInAncestors);
 
     [Sync]
     public bool IsEquipped
@@ -29,7 +29,8 @@ public class Weapon : Component
         {
             _isEquipped = value;
 
-            ModelRenderer.Enabled = _isEquipped;
+            if (ModelRenderer.IsValid())
+                ModelRenderer.Enabled = _isEquipped;
         }
     }
     bool _isEquipped;
@@ -44,7 +45,7 @@ public class Weapon : Component
         {
             _viewModel = value;
 
-            if ( _viewModel.IsValid() )
+            if (_viewModel.IsValid())
             {
                 _viewModel.Weapon = this;
             }
@@ -54,7 +55,7 @@ public class Weapon : Component
 
     protected override void OnStart()
     {
-        if ( IsEquipped )
+        if (IsEquipped)
             OnEquip();
         else
             OnUnequip();
@@ -66,13 +67,13 @@ public class Weapon : Component
     [Authority]
     public void Equip()
     {
-        if ( IsEquipped ) return;
+        if (IsEquipped) return;
 
-        if ( Player.IsValid() )
+        if (Player.IsValid())
         {
             var weapons = Player.Inventory.Weapons.ToList();
 
-            foreach ( var weapon in weapons )
+            foreach (var weapon in weapons)
             {
                 weapon.Unequip();
             }
@@ -88,7 +89,7 @@ public class Weapon : Component
     [Authority]
     public void Unequip()
     {
-        if ( !IsEquipped ) return;
+        if (!IsEquipped) return;
 
         IsEquipped = false;
         GameObject.Enabled = false;
@@ -98,45 +99,45 @@ public class Weapon : Component
 
     public void ClearViewModel()
     {
-        if ( ViewModel.IsValid() )
+        if (ViewModel.IsValid())
         {
             ViewModel.GameObject.Destroy();
         }
     }
 
-    public void CreateViewModel( bool playEquipEffects = true )
+    public void CreateViewModel(bool playEquipEffects = true)
     {
-        if ( !Player.IsValid() ) return;
+        if (!Player.IsValid()) return;
 
         ClearViewModel();
         UpdateRenderMode();
 
-        if ( Resource.ViewModelPrefab.IsValid() )
+        if (Resource.ViewModelPrefab.IsValid())
         {
-            var viewModelGameObject = Resource.ViewModelPrefab.Clone( new CloneConfig()
+            var viewModelGameObject = Resource.ViewModelPrefab.Clone(new CloneConfig()
             {
                 Transform = new(),
                 Parent = Player.FirstPersonView,
                 StartEnabled = true
-            } );
+            });
 
             var viewModelComponent = viewModelGameObject.Components.Get<ViewModel>();
             ViewModel = viewModelComponent;
             viewModelGameObject.BreakFromPrefab();
         }
 
-        if ( !playEquipEffects ) return;
-        if ( EquipSound is null ) return;
+        if (!playEquipEffects) return;
+        if (EquipSound is null) return;
 
-        var sound = Sound.Play( EquipSound, Transform.Position );
-        if ( !sound.IsValid() ) return;
+        var sound = Sound.Play(EquipSound, Transform.Position);
+        if (!sound.IsValid()) return;
 
         sound.ListenLocal = !IsProxy;
     }
 
     protected void UpdateRenderMode()
     {
-        foreach ( var renderer in Components.GetAll<ModelRenderer>() )
+        foreach (var renderer in Components.GetAll<ModelRenderer>())
         {
             renderer.RenderType = IsProxy ? Sandbox.ModelRenderer.ShadowRenderType.On : Sandbox.ModelRenderer.ShadowRenderType.ShadowsOnly;
         }
@@ -144,15 +145,15 @@ public class Weapon : Component
 
     protected virtual void OnEquip()
     {
-        if ( Player.IsValid() && Player.IsFirstPerson )
+        if (Player.IsValid() && Player.IsFirstPerson)
             CreateViewModel();
 
-        BroadcastSetVisible( true );
+        BroadcastSetVisible(true);
     }
 
     protected virtual void OnUnequip()
     {
-        BroadcastSetVisible( false );
+        BroadcastSetVisible(false);
 
         ClearViewModel();
     }
@@ -162,54 +163,54 @@ public class Weapon : Component
         ClearViewModel();
     }
 
-    protected virtual void Attack( SceneTraceResult tr )
+    protected virtual void Attack(SceneTraceResult tr)
     {
-        if ( tr.Hit )
+        if (tr.Hit)
         {
-            Sound.Play( tr.Surface.Sounds.ImpactHard, tr.HitPosition );
+            Sound.Play(tr.Surface.Sounds.ImpactHard, tr.HitPosition);
             string decal = "";
             var decals = tr.Surface.ImpactEffects.BulletDecal;
-            if ( (decals?.Count() ?? 0) > 0 )
-                decal = decals.OrderBy( x => Random.Shared.Float() ).FirstOrDefault();
+            if ((decals?.Count() ?? 0) > 0)
+                decal = decals.OrderBy(x => Random.Shared.Float()).FirstOrDefault();
 
-            if ( tr.GameObject?.Components?.TryGet<PropHelper>( out var propHelper ) ?? false )
+            if (tr.GameObject?.Components?.TryGet<PropHelper>(out var propHelper) ?? false)
             {
-                propHelper.BroadcastAddForce( tr.Body.GroupIndex, tr.Direction * 80000f * (Force / 10f) );
-                propHelper.Damage( Damage );
+                propHelper.BroadcastAddForce(tr.Body.GroupIndex, tr.Direction * 80000f * (Force / 10f));
+                propHelper.Damage(Damage);
             }
 
-            if ( tr.GameObject?.Root?.Components?.TryGet<Player>( out var player ) ?? false )
+            if (tr.GameObject?.Root?.Components?.TryGet<Player>(out var player) ?? false)
             {
-                player.Damage( Damage, Resource.ResourceId );
+                player.Damage(Damage, Resource.ResourceId);
             }
 
-            GameManager.Instance.SpawnDecal( decal, tr.HitPosition, tr.Normal, tr.GameObject?.Id ?? Guid.Empty );
+            GameManager.Instance.SpawnDecal(decal, tr.HitPosition, tr.Normal, tr.GameObject?.Id ?? Guid.Empty);
         }
     }
 
     [Broadcast]
-    void BroadcastSetVisible( bool visible )
+    void BroadcastSetVisible(bool visible)
     {
-        if ( ModelRenderer.IsValid() ) ModelRenderer.Enabled = visible;
+        if (ModelRenderer.IsValid()) ModelRenderer.Enabled = visible;
     }
 
     [Broadcast]
-    protected void BroadcastBulletTrail( Vector3 startPos, Vector3 endPos, float distance, int count )
+    protected void BroadcastBulletTrail(Vector3 startPos, Vector3 endPos, float distance, int count)
     {
-        if ( !IsNearby( startPos ) || !IsNearby( endPos ) ) return;
+        if (!IsNearby(startPos) || !IsNearby(endPos)) return;
 
         var effectPath = "particles/bullet_trails/trail_smoke.vpcf";
-        if ( count > 0 ) effectPath = "particles/bullet_trails/rico_trail_smoke.vpcf";
+        if (count > 0) effectPath = "particles/bullet_trails/rico_trail_smoke.vpcf";
 
         var origin = count == 0 ? (Player.ViewModel?.Muzzle?.Transform.Position ?? Muzzle.Transform.Position) : startPos;
-        var ps = GameManager.Instance.CreateParticleSystem( effectPath, origin, Rotation.Identity, 1f );
-        ps.SceneObject.SetControlPoint( 0, origin );
-        ps.SceneObject.SetControlPoint( 1, endPos );
-        ps.SceneObject.SetControlPoint( 2, distance );
+        var ps = GameManager.Instance.CreateParticleSystem(effectPath, origin, Rotation.Identity, 1f);
+        ps.SceneObject.SetControlPoint(0, origin);
+        ps.SceneObject.SetControlPoint(1, endPos);
+        ps.SceneObject.SetControlPoint(2, distance);
     }
 
-    private bool IsNearby( Vector3 position )
+    private bool IsNearby(Vector3 position)
     {
-        return position.DistanceSquared( Scene.Camera.Transform.Position ) < 4194304f;
+        return position.DistanceSquared(Scene.Camera.Transform.Position) < 4194304f;
     }
 }

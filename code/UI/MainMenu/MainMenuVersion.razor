@@ -24,8 +24,7 @@
 
     async void GetVersion()
     {
-        var ident = Project.Current.Package.FullIdent.Replace("#local", "");
-        var versions = await Package.FetchVersions(ident);
+        var versions = await Package.FetchVersions("carsonk.talker");
         var version = versions.FirstOrDefault();
         VersionString = version.Created.ToString("yyyy.MM.dd");
     }
