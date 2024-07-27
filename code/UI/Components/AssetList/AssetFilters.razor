@@ -12,6 +12,11 @@
 
 <root>
 
+    <div class="bottom">
+        <TextEntry placeholder="Search.." OnTextEdited=@OnSearchEdited></TextEntry>
+        @* <AssetFilterOrder Orders="@Result.Orders" Value="@filterOrder" OnChange="@OnOrderChanged"></AssetFilterOrder> *@
+    </div>
+
     <div class="top">
 
         @foreach (var facet in Result.Facets)
@@ -21,11 +26,6 @@
             <AssetFilterFacet Facet="@facet" Value="@value" OnChange="@OnFacetChanged"></AssetFilterFacet>
         }
 
-    </div>
-
-    <div class="bottom">
-        <TextEntry placeholder="Search.." OnTextEdited=@OnSearchEdited></TextEntry>
-        @* <AssetFilterOrder Orders="@Result.Orders" Value="@filterOrder" OnChange="@OnOrderChanged"></AssetFilterOrder> *@
     </div>
 
 </root>

@@ -16,7 +16,7 @@
         <a href="/start">Start New Game</a>
         <a href="/find">Find Multiplayer Game</a>
         <div class="gap" />
-        <a href="/settings">Options</a>
+        <label class="btn" onclick=@(() => Game.Overlay.ShowBinds())>Options</label>
         <div class="gap" />
         @if (MainMenu.Instance.IsPauseMenu)
         {

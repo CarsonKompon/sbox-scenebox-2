@@ -6,13 +6,13 @@
 <root class="@(IsVisible ? "open" : "")">
 	<div class="left">
 		<div class="tabs">
-			<div onclick=@(() => SetActiveLeft(LocalModelsPanel)) class="btn @(SelectedPanelLeft == LocalModelsPanel ? "active" : "")">
-				<i>category</i>
-				Local Models
-			</div>
 			<div onclick=@(() => SetActiveLeft(CloudModelsPanel)) class="btn @(SelectedPanelLeft == CloudModelsPanel ? "active" : "")">
 				<i>cloud_download</i>
 				Cloud Models
+			</div>
+			<div onclick=@(() => SetActiveLeft(LocalModelsPanel)) class="btn @(SelectedPanelLeft == LocalModelsPanel ? "active" : "")">
+				<i>category</i>
+				Local Models
 			</div>
 		</div>
 		<div class="body">
@@ -56,7 +56,7 @@
 
 	protected override void OnTreeFirstBuilt()
 	{
-		SetActiveLeft(LocalModelsPanel);
+		SetActiveLeft(CloudModelsPanel);
 		SetActiveRight(ToolsPanel);
 	}
 

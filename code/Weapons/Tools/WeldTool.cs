@@ -76,7 +76,11 @@ public class WeldTool : BaseTool
             }
         }
 
-        var weld = SelectedObject.Components.GetOrCreate<FixedJoint>();
+        FixedJoint weld = SelectedObject.Components.GetAll<FixedJoint>().FirstOrDefault( x => x.Body == obj );
+        if ( !weld.IsValid() )
+        {
+            weld = SelectedObject.Components.Create<FixedJoint>();
+        }
         weld.Body = obj;
         weld.BreakForce = ForceLimit;
         weld.EnableCollision = !NoCollide;
