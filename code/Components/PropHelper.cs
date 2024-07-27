@@ -215,10 +215,13 @@ public sealed class PropHelper : Component, Component.ICollisionListener
             Prop.Enabled = true;
         }
 
-        var renderer = Components.Get<Renderer>();
-        if ( renderer.IsValid() )
+        if ( this?.IsValid ?? false )
         {
-            renderer.Enabled = true;
+            var renderer = Components.Get<Renderer>();
+            if ( renderer?.IsValid ?? false )
+            {
+                renderer.Enabled = true;
+            }
         }
     }
 

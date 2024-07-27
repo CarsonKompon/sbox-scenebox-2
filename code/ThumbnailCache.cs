@@ -37,6 +37,12 @@ public static class ThumbnailCache
 
     public static void GenerateTexture( Model model )
     {
+        if ( model is null || model.IsError )
+        {
+            cache[model] = Texture.Invalid;
+            return;
+        }
+
         var sceneWorld = new SceneWorld();
         var sceneModel = new SceneModel( sceneWorld, model, new() );
         var sceneCamera = new SceneCamera();

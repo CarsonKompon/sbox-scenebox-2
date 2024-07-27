@@ -92,11 +92,14 @@ public class TraceWeapon : Weapon
         var playerRenderer = Player?.Body?.Components?.Get<SkinnedModelRenderer>();
         playerRenderer?.Set( "b_attack", true );
         Player?.ViewModel?.ModelRenderer?.Set( "b_attack", true );
-        var sound = Sound.Play( ShootSound, Transform.Position );
-        if ( Connection.Local.Id == Rpc.CallerId )
+        if ( ShootSound is not null )
         {
-            sound.Volume = 0.25f;
-            sound.ListenLocal = true;
+            var sound = Sound.Play( ShootSound, Transform.Position );
+            if ( Connection.Local.Id == Rpc.CallerId )
+            {
+                sound.Volume = 0.25f;
+                sound.ListenLocal = true;
+            }
         }
     }
 

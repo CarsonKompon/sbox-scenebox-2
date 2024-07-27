@@ -34,7 +34,7 @@ public sealed class UndoManager : Component
                 if ( !Scene.Directory.FindByGuid( id ).IsValid() )
                 {
                     Stack.RemoveAt( i );
-                    continue; // Skip to the next entry
+                    break; // Skip to the next entry
                 }
             }
         }

@@ -18,19 +18,19 @@
         get
         {
             var player = Scene.GetAllComponents<Player>().FirstOrDefault(x => x.Network.OwnerId == Connection.Id);
-            return player.Components.Get<PlayerVoiceComponent>()?.IsMuted ?? false;
+            return player?.Components?.Get<PlayerVoiceComponent>()?.IsMuted ?? false;
         }
         set
         {
             var player = Scene.GetAllComponents<Player>().FirstOrDefault(x => x.Network.OwnerId == Connection.Id);
-            player.Components.Get<PlayerVoiceComponent>().IsMuted = value;
+            var voice = player.Components.Get<PlayerVoiceComponent>();
+            if (voice is not null) voice.IsMuted = value;
         }
     }
 
 
     protected override int BuildHash() => System.HashCode.Combine(
-    Connection,
-    IsMuted
+    Connection
     );
 
 }

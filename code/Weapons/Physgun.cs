@@ -347,6 +347,7 @@ public class Physgun : Weapon
     void UpdateBeam()
     {
         if ( !IsEquipped ) return;
+        if ( !Player.IsValid() ) return;
 
         var startPos = Muzzle.Transform.Position;
 
