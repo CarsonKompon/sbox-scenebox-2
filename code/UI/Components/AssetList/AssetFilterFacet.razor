@@ -32,8 +32,6 @@
     public string Value { get; set; }
     public Action<Package.Facet, string> OnChange { get; set; }
 
-    Popup menu;
-
     void SwitchTo(Package.Facet.Entry entry)
     {
         if (entry == null || Value == entry.Name)

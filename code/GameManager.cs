@@ -39,11 +39,11 @@ public partial class GameManager : Component, Component.INetworkListener
 
         if ( SceneboxPreferences.Settings.HostMultiplayer )
         {
-            if ( !GameNetworkSystem.IsActive )
+            if ( !Networking.IsActive )
             {
                 LoadingScreen.Title = "Creating Lobby";
                 await Task.DelayRealtimeSeconds( 0.1f );
-                GameNetworkSystem.CreateLobby();
+                Networking.CreateLobby();
             }
         }
         else

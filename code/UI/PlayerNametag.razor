@@ -9,6 +9,6 @@
 
 @code
 {
-	string Name => GameObject?.Root?.Components?.Get<Player>()?.Network.OwnerConnection?.DisplayName ?? "Missingname.";
+	string Name => GameObject?.Root?.Components?.Get<Player>()?.Network.Owner?.DisplayName ?? "Missingname.";
 	protected override int BuildHash() => System.HashCode.Combine(Name);
 }

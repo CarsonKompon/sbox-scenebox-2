@@ -6,26 +6,26 @@ namespace Scenebox;
 
 public sealed class Player : Component
 {
-	public static Player Local => Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault(x => x.Network.IsOwner);
+	public static Player Local => Game.ActiveScene.GetAllComponents<Player>().FirstOrDefault( x => x.Network.IsOwner );
 
 	[RequireComponent] public CharacterController CharacterController { get; set; }
 	[RequireComponent] public Inventory Inventory { get; set; }
 
-	[Property, Group("References")] public GameObject Head { get; set; }
-	[Property, Group("References")] public GameObject Body { get; set; }
-	[Property, Group("References")] public GameObject FirstPersonView { get; set; }
-	[Property, Group("References")] public CitizenAnimationHelper AnimationHelper { get; set; }
-	[Property, Group("References")] public ModelPhysics ModelPhysics { get; set; }
-	[Property, Group("References")] public Collider PlayerBoxCollider { get; set; }
-	[Property, Group("References")] public GameObject NametagObject { get; set; }
-	[Property, Group("References")] public GameObject FlashlightObject { get; set; }
+	[Property, Group( "References" )] public GameObject Head { get; set; }
+	[Property, Group( "References" )] public GameObject Body { get; set; }
+	[Property, Group( "References" )] public GameObject FirstPersonView { get; set; }
+	[Property, Group( "References" )] public CitizenAnimationHelper AnimationHelper { get; set; }
+	[Property, Group( "References" )] public ModelPhysics ModelPhysics { get; set; }
+	[Property, Group( "References" )] public Collider PlayerBoxCollider { get; set; }
+	[Property, Group( "References" )] public GameObject NametagObject { get; set; }
+	[Property, Group( "References" )] public GameObject FlashlightObject { get; set; }
 
-	[Property, Group("Movement")] public float GroundControl { get; set; } = 4.0f;
-	[Property, Group("Movement")] public float AirControl { get; set; } = 0.1f;
-	[Property, Group("Movement")] public float Speed { get; set; } = 160f;
-	[Property, Group("Movement")] public float RunSpeed { get; set; } = 290f;
-	[Property, Group("Movement")] public float WalkSpeed { get; set; } = 90f;
-	[Property, Group("Movement")] public float JumpForce { get; set; } = 400f;
+	[Property, Group( "Movement" )] public float GroundControl { get; set; } = 4.0f;
+	[Property, Group( "Movement" )] public float AirControl { get; set; } = 0.1f;
+	[Property, Group( "Movement" )] public float Speed { get; set; } = 160f;
+	[Property, Group( "Movement" )] public float RunSpeed { get; set; } = 290f;
+	[Property, Group( "Movement" )] public float WalkSpeed { get; set; } = 90f;
+	[Property, Group( "Movement" )] public float JumpForce { get; set; } = 400f;
 
 	public Action OnJump;
 
@@ -39,8 +39,8 @@ public sealed class Player : Component
 		{
 			_isFirstPerson = value;
 
-			ShowBodyParts(!_isFirstPerson);
-			if (_isFirstPerson) Inventory?.CurrentWeapon?.CreateViewModel();
+			ShowBodyParts( !_isFirstPerson );
+			if ( _isFirstPerson ) Inventory?.CurrentWeapon?.CreateViewModel();
 			else Inventory?.CurrentWeapon?.ClearViewModel();
 		}
 	}
@@ -57,7 +57,7 @@ public sealed class Player : Component
 	public int Health { get; set; } = 100;
 
 	public bool CanMoveHead = true;
-	public ViewModel ViewModel => Components.Get<ViewModel>(FindMode.EverythingInSelfAndDescendants);
+	public ViewModel ViewModel => Components.Get<ViewModel>( FindMode.EverythingInSelfAndDescendants );
 
 	protected override void OnStart()
 	{
@@ -67,35 +67,35 @@ public sealed class Player : Component
 
 	protected override void OnUpdate()
 	{
-		if (!IsProxy)
+		if ( !IsProxy )
 		{
-			if (Input.Pressed("Flashlight"))
+			if ( Input.Pressed( "Flashlight" ) )
 			{
 				IsFlashlightOn = !IsFlashlightOn;
 				BroadcastFlashlightSound();
 			}
 
-			if (Input.Pressed("Noclip"))
+			if ( Input.Pressed( "Noclip" ) )
 			{
 				IsNoclipping = !IsNoclipping;
-				if (!IsNoclipping)
+				if ( !IsNoclipping )
 				{
 					CharacterController.Velocity = WishVelocity;
 				}
 			}
 
-			IsSprinting = Input.Down("Run");
-			if (Input.Pressed("Jump")) Jump();
+			IsSprinting = Input.Down( "Run" );
+			if ( Input.Pressed( "Jump" ) ) Jump();
 
 			Inventory.CheckWeaponConfirm();
-			if (Inventory.CurrentWeapon.IsValid())
+			if ( Inventory.CurrentWeapon.IsValid() )
 			{
 				Inventory.CurrentWeapon.Update();
 			}
 			Inventory.CheckWeaponSwap();
 
-			var cameraComponent = Scene.GetAllComponents<ICameraOverride>().Where(x => x.IsActive)?.FirstOrDefault();
-			if (cameraComponent is not null)
+			var cameraComponent = Scene.GetAllComponents<ICameraOverride>().Where( x => x.IsActive )?.FirstOrDefault();
+			if ( cameraComponent is not null )
 				cameraComponent.UpdateCamera();
 			else
 				UpdateCamera();
@@ -115,11 +115,11 @@ public sealed class Player : Component
 	{
 		CharacterController.Height = CrouchHeight * Height;
 
-		if (!IsProxy)
+		if ( !IsProxy )
 		{
-			if (Input.Pressed("View")) IsFirstPerson = !IsFirstPerson;
+			if ( Input.Pressed( "View" ) ) IsFirstPerson = !IsFirstPerson;
 
-			if (Inventory.CurrentWeapon.IsValid())
+			if ( Inventory.CurrentWeapon.IsValid() )
 			{
 				Inventory.CurrentWeapon.FixedUpdate();
 			}
@@ -135,10 +135,10 @@ public sealed class Player : Component
 
 	void Move()
 	{
-		if (IsNoclipping)
+		if ( IsNoclipping )
 		{
 			var movement = Input.AnalogMove * Direction * 1000f;
-			if (Input.Down("Run")) movement *= 3;
+			if ( Input.Down( "Run" ) ) movement *= 3;
 			Transform.Position += movement * Time.Delta;
 			WishVelocity = movement;
 			CharacterController.Velocity = movement;
@@ -147,24 +147,24 @@ public sealed class Player : Component
 
 		var gravity = Scene.PhysicsWorld.Gravity;
 
-		if (CharacterController.IsOnGround)
+		if ( CharacterController.IsOnGround )
 		{
-			CharacterController.Velocity = CharacterController.Velocity.WithZ(0);
-			CharacterController.Accelerate(WishVelocity);
-			CharacterController.ApplyFriction(GroundControl);
+			CharacterController.Velocity = CharacterController.Velocity.WithZ( 0 );
+			CharacterController.Accelerate( WishVelocity );
+			CharacterController.ApplyFriction( GroundControl );
 		}
 		else
 		{
 			CharacterController.Velocity += gravity * Time.Delta * 0.5f;
-			CharacterController.Accelerate(WishVelocity);
-			CharacterController.ApplyFriction(AirControl);
+			CharacterController.Accelerate( WishVelocity );
+			CharacterController.ApplyFriction( AirControl );
 		}
 
 		CharacterController.Move();
 
-		if (CharacterController.IsOnGround)
+		if ( CharacterController.IsOnGround )
 		{
-			CharacterController.Velocity = CharacterController.Velocity.WithZ(0);
+			CharacterController.Velocity = CharacterController.Velocity.WithZ( 0 );
 		}
 		else
 		{
@@ -174,9 +174,9 @@ public sealed class Player : Component
 
 	void Jump()
 	{
-		if (!CharacterController.IsOnGround) return;
+		if ( !CharacterController.IsOnGround ) return;
 
-		CharacterController.Punch(Vector3.Up * JumpForce);
+		CharacterController.Punch( Vector3.Up * JumpForce );
 		OnJump?.Invoke();
 		BroadcastJumpAnimation();
 	}
@@ -186,17 +186,17 @@ public sealed class Player : Component
 		Vector3 wishVelocity = 0;
 
 		var rot = Head.Transform.Rotation;
-		if (Input.Down("Forward")) wishVelocity += rot.Forward;
-		if (Input.Down("Backward")) wishVelocity += rot.Backward;
-		if (Input.Down("Left")) wishVelocity += rot.Left;
-		if (Input.Down("Right")) wishVelocity += rot.Right;
+		if ( Input.Down( "Forward" ) ) wishVelocity += rot.Forward;
+		if ( Input.Down( "Backward" ) ) wishVelocity += rot.Backward;
+		if ( Input.Down( "Left" ) ) wishVelocity += rot.Left;
+		if ( Input.Down( "Right" ) ) wishVelocity += rot.Right;
 
-		wishVelocity = wishVelocity.WithZ(0);
+		wishVelocity = wishVelocity.WithZ( 0 );
 
-		if (!wishVelocity.IsNearZeroLength) wishVelocity = wishVelocity.Normal;
+		if ( !wishVelocity.IsNearZeroLength ) wishVelocity = wishVelocity.Normal;
 
-		if (IsCrouching) wishVelocity *= WalkSpeed;
-		else if (IsSprinting) wishVelocity *= RunSpeed;
+		if ( IsCrouching ) wishVelocity *= WalkSpeed;
+		else if ( IsSprinting ) wishVelocity *= RunSpeed;
 		else wishVelocity *= Speed;
 
 		WishVelocity = wishVelocity;
@@ -206,24 +206,24 @@ public sealed class Player : Component
 	{
 		var eyeAngles = Head.Transform.Rotation.Angles();
 		var sens = Preferences.Sensitivity;
-		if (CanMoveHead)
+		if ( CanMoveHead )
 		{
 			eyeAngles.pitch += Input.MouseDelta.y * sens / 100f;
 			eyeAngles.yaw -= Input.MouseDelta.x * sens / 100f;
 		}
 		eyeAngles.roll = 0f;
-		eyeAngles.pitch = eyeAngles.pitch.Clamp(-89.9f, 89.9f);
+		eyeAngles.pitch = eyeAngles.pitch.Clamp( -89.9f, 89.9f );
 		Head.Transform.Rotation = eyeAngles;
 
 		var camPos = Head.Transform.Position;
-		if (!IsFirstPerson)
+		if ( !IsFirstPerson )
 		{
 			var camForward = eyeAngles.Forward;
-			var camTrace = Scene.Trace.Ray(camPos, camPos - (camForward * 150))
-				.WithoutTags("player", "trigger")
+			var camTrace = Scene.Trace.Ray( camPos, camPos - (camForward * 150) )
+				.WithoutTags( "player", "trigger" )
 				.Run();
 
-			if (camTrace.Hit)
+			if ( camTrace.Hit )
 			{
 				camPos = camTrace.HitPosition + camTrace.Normal;
 			}
@@ -241,25 +241,25 @@ public sealed class Player : Component
 
 	void UpdateCrouch()
 	{
-		if (!IsProxy)
+		if ( !IsProxy )
 		{
-			IsCrouching = Input.Down("Duck");
+			IsCrouching = Input.Down( "Duck" );
 		}
 
-		CrouchHeight = CrouchHeight.LerpTo(IsCrouching ? 32f : 64f, 1f - MathF.Pow(0.5f, Time.Delta * 25f));
-		Head.Transform.LocalPosition = Head.Transform.LocalPosition.WithZ(CrouchHeight);
+		CrouchHeight = CrouchHeight.LerpTo( IsCrouching ? 32f : 64f, 1f - MathF.Pow( 0.5f, Time.Delta * 25f ) );
+		Head.Transform.LocalPosition = Head.Transform.LocalPosition.WithZ( CrouchHeight );
 	}
 
 	void UpdateAnimations()
 	{
-		if (AnimationHelper is null) return;
+		if ( AnimationHelper is null ) return;
 
-		AnimationHelper.WithWishVelocity(WishVelocity);
-		AnimationHelper.WithVelocity(IsProxy ? WishVelocity : CharacterController.Velocity);
+		AnimationHelper.WithWishVelocity( WishVelocity );
+		AnimationHelper.WithVelocity( IsProxy ? WishVelocity : CharacterController.Velocity );
 		AnimationHelper.AimAngle = Direction;
 		AnimationHelper.IsGrounded = CharacterController.IsOnGround;
 		AnimationHelper.IsNoclipping = IsNoclipping;
-		AnimationHelper.WithLook(Direction.Forward);
+		AnimationHelper.WithLook( Direction.Forward );
 		AnimationHelper.MoveStyle = CitizenAnimationHelper.MoveStyles.Run;
 		AnimationHelper.DuckLevel = IsCrouching ? 1f : 0f;
 
@@ -268,14 +268,14 @@ public sealed class Player : Component
 
 	void RotateBody()
 	{
-		if (Body is null) return;
+		if ( Body is null ) return;
 
-		var targetAngle = new Angles(0, Direction.yaw, 0).ToRotation();
-		float rotateDiff = Body.Transform.Rotation.Distance(targetAngle);
+		var targetAngle = new Angles( 0, Direction.yaw, 0 ).ToRotation();
+		float rotateDiff = Body.Transform.Rotation.Distance( targetAngle );
 
-		if (rotateDiff > 50f || CharacterController.Velocity.Length > 10f)
+		if ( rotateDiff > 50f || CharacterController.Velocity.Length > 10f )
 		{
-			Body.Transform.Rotation = Rotation.Lerp(Body.Transform.Rotation, targetAngle, Time.Delta * 10f);
+			Body.Transform.Rotation = Rotation.Lerp( Body.Transform.Rotation, targetAngle, Time.Delta * 10f );
 		}
 		else
 		{
@@ -283,58 +283,58 @@ public sealed class Player : Component
 		}
 	}
 
-	void ShowBodyParts(bool show)
+	void ShowBodyParts( bool show )
 	{
-		var renderers = AnimationHelper.GameObject.Components.GetAll<ModelRenderer>(FindMode.EverythingInSelfAndDescendants);
-		foreach (var renderer in renderers)
+		var renderers = AnimationHelper.GameObject.Components.GetAll<ModelRenderer>( FindMode.EverythingInSelfAndDescendants );
+		foreach ( var renderer in renderers )
 		{
 			renderer.RenderType = show ? ModelRenderer.ShadowRenderType.On : ModelRenderer.ShadowRenderType.ShadowsOnly;
 		}
 	}
 
-	void SetRagdoll(bool enabled)
+	void SetRagdoll( bool enabled )
 	{
 		ModelPhysics.Enabled = enabled;
 		AnimationHelper.Target.UseAnimGraph = !enabled;
 
-		GameManager.Instance.BroadcastSetTag(GameObject.Id, "ragdoll", enabled);
+		GameManager.Instance.BroadcastSetTag( GameObject.Id, "ragdoll", enabled );
 
-		if (!enabled)
+		if ( !enabled )
 		{
 			GameObject.Transform.LocalPosition = Vector3.Zero;
 			GameObject.Transform.LocalRotation = Rotation.Identity;
 		}
 
-		ShowBodyParts(enabled);
+		ShowBodyParts( enabled );
 
 		Transform.ClearInterpolation();
 	}
 
 	[Broadcast]
-	public void Damage(float amount, int damageType = 0)
+	public void Damage( float amount, int damageType = 0 )
 	{
-		if (Health <= 0) return;
-		if (IsProxy) return;
+		if ( Health <= 0 ) return;
+		if ( IsProxy ) return;
 
 		HurtOverlay.Instance?.Hurt();
-		var sound = Sound.Play("impact-melee-flesh");
+		var sound = Sound.Play( "impact-melee-flesh" );
 		sound.ListenLocal = true;
 
 		Health -= (int)amount;
-		if (Health <= 0)
+		if ( Health <= 0 )
 		{
-			Kill(damageType, Rpc.Caller?.DisplayName ?? "");
+			Kill( damageType, Rpc.Caller?.DisplayName ?? "" );
 		}
 	}
 
 	[Broadcast]
-	public void Kill(int damageType = 0, string killer = "", bool enableRagdoll = true)
+	public void Kill( int damageType = 0, string killer = "", bool enableRagdoll = true )
 	{
-		GameObject.Network.SetOwnerTransfer(OwnerTransfer.Takeover);
-		GameObject.Network.SetOrphanedMode(NetworkOrphaned.Host);
-		if (enableRagdoll)
+		GameObject.Network.SetOwnerTransfer( OwnerTransfer.Takeover );
+		GameObject.Network.SetOrphanedMode( NetworkOrphaned.Host );
+		if ( enableRagdoll )
 		{
-			SetRagdoll(true);
+			SetRagdoll( true );
 			PlayerBoxCollider.Enabled = false;
 			var fadeAfter = Components.GetOrCreate<FadeAfter>();
 			fadeAfter.Time = 10f;
@@ -342,23 +342,23 @@ public sealed class Player : Component
 		}
 		else
 		{
-			GameObject.Tags.Set("invisible", true);
-			SetRagdoll(false);
+			GameObject.Tags.Set( "invisible", true );
+			SetRagdoll( false );
 		}
 		NametagObject.Enabled = false;
 
-		if (IsProxy) return;
+		if ( IsProxy ) return;
 		Health = 0;
-		KillFeed.Instance?.AddEntry(killer, damageType, Network.OwnerConnection.DisplayName);
+		KillFeed.Instance?.AddEntry( killer, damageType, Network.Owner.DisplayName );
 
 		Inventory.HolsterWeapon();
-		BroadcastDestroy(GameObject.Id);
+		BroadcastDestroy( GameObject.Id );
 	}
 
 	[Broadcast]
-	public void BroadcastSetVelocity(Vector3 velocity)
+	public void BroadcastSetVelocity( Vector3 velocity )
 	{
-		if (IsProxy) return;
+		if ( IsProxy ) return;
 		CharacterController.Velocity = velocity;
 	}
 
@@ -371,14 +371,14 @@ public sealed class Player : Component
 	[Broadcast]
 	internal void BroadcastAttackAnimation()
 	{
-		AnimationHelper?.Target?.Set("b_attack", true);
+		AnimationHelper?.Target?.Set( "b_attack", true );
 	}
 
 	[Broadcast]
 	void BroadcastFlashlightSound()
 	{
-		var sound = Sound.Play("flashlight.toggle");
-		if (!IsProxy)
+		var sound = Sound.Play( "flashlight.toggle" );
+		if ( !IsProxy )
 		{
 			sound.Volume = 0.4f;
 			sound.ListenLocal = true;
@@ -386,10 +386,10 @@ public sealed class Player : Component
 	}
 
 	[Broadcast]
-	void BroadcastDestroy(Guid id)
+	void BroadcastDestroy( Guid id )
 	{
-		var gameObject = Scene.Directory.FindByGuid(id);
-		if (gameObject.IsValid())
+		var gameObject = Scene.Directory.FindByGuid( id );
+		if ( gameObject.IsValid() )
 		{
 			AnimationHelper.Components.GetOrCreate<PropHelper>();
 			Components.Get<Inventory>()?.Destroy();
