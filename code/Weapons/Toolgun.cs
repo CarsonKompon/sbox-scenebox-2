@@ -30,6 +30,10 @@ public class Toolgun : Weapon
         if ( Input.Pressed( "attack2" ) ) CurrentTool?.SecondaryUseStart();
         if ( Input.Down( "attack2" ) ) CurrentTool?.SecondaryUseUpdate();
         if ( Input.Released( "attack2" ) ) CurrentTool?.SecondaryUseEnd();
+
+        if ( Input.Pressed( "reload" ) ) CurrentTool?.ReloadUseStart();
+        if ( Input.Down( "reload" ) ) CurrentTool?.ReloadUseUpdate();
+        if ( Input.Released( "reload" ) ) CurrentTool?.ReloadUseEnd();
     }
 
     public void SetTool( TypeDescription toolDescription )

@@ -64,6 +64,15 @@ AssetFilterFacet
             border-radius: 4px;
             gap: 4px;
             cursor: pointer;
+            
+            i
+            {
+                max-width: 32px;
+                max-height: 32px;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+            }
 
             .title
             {

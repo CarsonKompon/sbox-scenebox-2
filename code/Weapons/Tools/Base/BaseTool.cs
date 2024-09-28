@@ -48,6 +48,21 @@ public abstract class BaseTool
 
     }
 
+    public virtual void ReloadUseStart()
+    {
+
+    }
+
+    public virtual void ReloadUseUpdate()
+    {
+
+    }
+
+    public virtual void ReloadUseEnd()
+    {
+
+    }
+
     public string GetName()
     {
         return TypeLibrary.GetAttribute<ToolAttribute>( GetType() ).Title;

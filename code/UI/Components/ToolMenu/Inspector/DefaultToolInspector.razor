@@ -39,6 +39,10 @@
                     {
 
                     }
+                    @* else if (property.PropertyType == typeof(Model))
+                {
+                <AssetList Query="type:model sort:popular" />
+                } *@
                 </div>
                 @if (property.TryGetAttribute<DescriptionAttribute>(out var description))
                 {

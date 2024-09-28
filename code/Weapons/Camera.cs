@@ -60,6 +60,7 @@ public class Camera : Weapon, ICameraOverride
 
     void TakePhoto()
     {
+        Game.TakeScreenshot();
         // if ( !FileSystem.Data.DirectoryExists( "photos" ) )
         // {
         //     FileSystem.Data.CreateDirectory( "photos" );

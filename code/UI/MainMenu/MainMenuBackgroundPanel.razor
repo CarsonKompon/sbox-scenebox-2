@@ -27,9 +27,10 @@
             {
                 photo = Random.Shared.Int(1, PhotoCount);
             } while (photo == currentPhoto);
+            currentPhoto = photo;
 
             var img = new Image();
-            img.SetTexture("ui/backgrounds/" + photo + ".jpg");
+            img.SetTexture("ui/backgrounds/" + currentPhoto + ".jpg");
             AddChild(img);
 
             timeSinceLastPhoto = 0f;
